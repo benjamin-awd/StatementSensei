@@ -13,12 +13,12 @@ def parse_bank_statement(file_path: str, password: str = None):
     st.dataframe(transformed_df, use_container_width=True)
 
 
-uploaded_file = st.file_uploader("Choose a .pdf file", type="pdf")
+uploaded_file = st.file_uploader("Upload a bank statement", type="pdf")
 
 if uploaded_file:
     try:
         with NamedTemporaryFile(dir=".", suffix=".pdf") as file:
-            file.write(uploaded_file.getbuffer())
+            file.write(uploaded_file.read())
             parse_bank_statement(file.name)
     except ValueError:
         password = st.text_input(
