@@ -1,7 +1,6 @@
 from tempfile import NamedTemporaryFile
 
 import streamlit as st
-from uuid import uuid4
 from monopoly.processors import detect_processor
 from pydantic import SecretStr
 
@@ -10,7 +9,9 @@ def parse_bank_statement(file_path: str, password: str = None):
     processor = detect_processor(file_path, [SecretStr(password)])
     statement = processor.extract()
     transformed_df = processor.transform(statement)
+    transformed_df.columns = ["Transaction Date", "Description", "Amount"]
     st.dataframe(transformed_df, use_container_width=True)
+
 
 uploaded_file = st.file_uploader("Choose a .pdf file", type="pdf")
 
