@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "monopoly-streamlit"
+version = "0.1.0"
+description = ""
+authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+monopoly-sg = "^0.7.4"
+streamlit = "^1.33.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.0"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.isort]
+profile = "black"
