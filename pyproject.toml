@@ -7,13 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
-monopoly-sg = "^0.7.4"
+monopoly-sg = "^0.7.5"
 streamlit = "^1.33.0"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.0"
 isort = "^5.13.2"
+ipykernel = "^6.29.4"
 
 [build-system]
 requires = ["poetry-core"]
