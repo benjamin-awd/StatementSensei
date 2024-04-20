@@ -1,6 +1,7 @@
 from tempfile import NamedTemporaryFile
 
 import streamlit as st
+import pandas as pd
 from monopoly.processors import detect_processor, UnsupportedBankError
 from monopoly.pdf import WrongPasswordError, MissingPasswordError
 from pydantic import SecretStr
@@ -10,8 +11,9 @@ def parse_bank_statement(file_path: str, password: str = None):
     processor = detect_processor(file_path, [SecretStr(password)])
     statement = processor.extract()
     df = processor.transform(statement)
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.date
     df.columns = ["Transaction Date", "Description", "Amount"]
-    st.dataframe(df, use_container_width=True)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
 
 uploaded_file = st.file_uploader("Upload a bank statement", type="pdf")
