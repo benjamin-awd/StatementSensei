@@ -15,6 +15,11 @@ def parse_bank_statement(file_path: str, password: str = None):
     df.columns = ["Transaction Date", "Description", "Amount"]
     st.dataframe(df, use_container_width=True, hide_index=True)
 
+st.set_page_config(page_title="Monopoly", layout="wide")
+
+st.image("./logo.svg", width=400)
+
+st.markdown("Convert bank statements to CSV")
 
 uploaded_file = st.file_uploader("Upload a bank statement", type="pdf")
 
