@@ -16,6 +16,7 @@ streamlit-extras = "^0.4.2"
 black = "^24.4.0"
 isort = "^5.13.2"
 ipykernel = "^6.29.4"
+pylint = "^3.1.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -24,3 +25,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
 profile = "black"
+
+[tool.pylint]
+max-line-length=120
+disable = [
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "missing-class-docstring",
+    "logging-fstring-interpolation"
+]

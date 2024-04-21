@@ -1,0 +1,43 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 24.1.1
+    hooks:
+      - id: black
+        name: black
+        entry: black
+        language: python
+        require_serial: true
+        types_or: [python, pyi]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+    - id: isort
+      name: isort
+      entry: isort
+      require_serial: true
+      language: python
+      types_or: [cython, pyi, python]
+      args: ['--filter-files']
+
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.17.5
+    hooks:
+    - id: pylint
+      name: pylint
+      entry: pylint
+      language: system
+      types: [python]
+      require_serial: true
+
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.7.1
+    hooks:
+    - id: poetry-export
+      args: ["-f", "requirements.txt", "--output", "requirements.txt"]
