@@ -14,6 +14,8 @@ def parse_bank_statement(file_path: str, password: str = None):
     df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.date
     df.columns = ["Transaction Date", "Description", "Amount"]
     st.dataframe(df, use_container_width=True, hide_index=True)
+    total_balance = df["Amount"].sum()
+    st.write(f"Total Balance: ${total_balance:.2f}")
 
 st.set_page_config(page_title="Monopoly", layout="wide")
 
