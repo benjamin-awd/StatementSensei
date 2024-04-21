@@ -22,7 +22,7 @@ uploaded_file = st.file_uploader(
 if uploaded_file:
     file_bytes = uploaded_file.read()
     document = fitz.Document(stream=file_bytes)
-    document.name = uploaded_file.name
+    document.pdf_file_name = uploaded_file.name
 
     if document.is_encrypted:  # pylint: disable=no-member
         password = st.text_input(

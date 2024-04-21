@@ -22,6 +22,6 @@ def parse_bank_statement(document: Document, password: str = None) -> None:
     st.download_button(
         label="Download CSV",
         data=csv,
-        file_name=f"{document.name.split('.')[0]}.csv",
+        file_name=f"{document.pdf_file_name.split('.')[0]}.csv",
         mime="text/csv",
     )
