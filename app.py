@@ -9,9 +9,11 @@ st.set_page_config(page_title="Monopoly", layout="wide")
 
 st.image("./logo.svg", width=350)
 
-st.markdown("## Convert bank statements to CSV")
+st.markdown("""## Convert bank statements to CSV
+Effortlessly extract transactions from PDF bank statements.
+""")
 
-uploaded_file = st.file_uploader("Upload a bank statement", type="pdf")
+uploaded_file = st.file_uploader(label="Upload a bank statement", type="pdf", label_visibility="hidden")
 
 if uploaded_file:
     file_bytes = uploaded_file.read()
@@ -45,4 +47,7 @@ if uploaded_file:
                 except UnsupportedBankError:
                     st.error("This bank is not currently supported")
     else:
-        parse_bank_statement(document)
+        try:
+            parse_bank_statement(document)
+        except UnsupportedBankError:
+            st.error("This bank is not currently supported")

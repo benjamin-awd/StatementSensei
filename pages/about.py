@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_extras.switch_page_button import switch_page 
 
 st.markdown("# About")
 
@@ -20,6 +21,11 @@ st.markdown("""Currently supported banks:
 """)
 
 st.write("\n")
+
+st.markdown("# Usage")
+switch_page_button = st.button("Convert a bank statement")
+if switch_page_button:
+    switch_page("app")
 
 st.markdown("# Contact")
 st.markdown("""

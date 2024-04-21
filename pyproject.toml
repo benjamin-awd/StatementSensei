@@ -9,6 +9,7 @@ readme = "README.md"
 python = ">=3.11,<3.12"
 monopoly-sg = "^0.7.8"
 streamlit = "^1.33.0"
+streamlit-extras = "^0.4.2"
 
 
 [tool.poetry.group.dev.dependencies]
