@@ -5,11 +5,11 @@ st.markdown("# About")
 
 st.markdown("""
 Monopoly is a Python library that converts Singapore bank statement PDFs to CSV using pdftotext.
-            
-I started this project because I got tired of having to manually extract my transactions from 
-poorly formatted PDF bank statements.
+
+I started this project because I wanted to have a simple and convenient way of comparing all of my transactions
+across multiple banks each month.
 """)
- 
+
 st.markdown("""Currently supported banks:
 | Bank                | Credit Statement    | Debit Statement     |
 | --------------------| --------------------| --------------------|
