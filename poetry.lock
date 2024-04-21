@@ -846,20 +846,20 @@ files = [
 
 [[package]]
 name = "monopoly-sg"
-version = "0.7.5"
+version = "0.7.8"
 description = "PDF parsing for Singaporean banks"
 optional = false
 python-versions = "<3.12,>=3.11"
 files = [
-    {file = "monopoly_sg-0.7.5-py3-none-any.whl", hash = "sha256:54a5a2d6e986dc6b26c3ebf8e69c9c24e3feb1f82d983d19f261efa19428f0b9"},
-    {file = "monopoly_sg-0.7.5.tar.gz", hash = "sha256:7bdcf26c015e7851475b750e1c269b792465bc1b7e4bc7c3a8fcc8ae03c4371b"},
+    {file = "monopoly_sg-0.7.8-py3-none-any.whl", hash = "sha256:2f83cebcadc472aa38e24e8526139ed3f169b2b3c8e8fe55ffe0f7b09a2112d5"},
+    {file = "monopoly_sg-0.7.8.tar.gz", hash = "sha256:a6c112fdaa7f1198763e312bb22910b83d73141b9ebb5801d749e0457dea08ad"},
 ]
 
 [package.dependencies]
 click = ">=8.1.7,<9.0.0"
 mypy = ">=1.7.1,<2.0.0"
 pandas = ">=2.1.3,<3.0.0"
-pdf2john = ">=0.1.10,<0.2.0"
+pdf2john = ">=0.2.0,<0.3.0"
 pdftotext = ">=2.2.2,<3.0.0"
 pydantic = ">=2.5.2,<3.0.0"
 pydantic-settings = ">=2.0.3,<3.0.0"
@@ -1102,17 +1102,17 @@ files = [
 
 [[package]]
 name = "pdf2john"
-version = "0.1.10"
+version = "0.2.0"
 description = "A modern refactoring of the legacy pdf2john library"
 optional = false
-python-versions = ">=3.11,<4.0"
+python-versions = "<4.0,>=3.11"
 files = [
-    {file = "pdf2john-0.1.10-py3-none-any.whl", hash = "sha256:76f806658a9709dfe65aa2b2c1981ba8bfc86f782e11b625aed7426164102e52"},
-    {file = "pdf2john-0.1.10.tar.gz", hash = "sha256:dc65d58d77f44e0821a82086b8939f8fcaa58aa3cbddde720f9eef527d477b29"},
+    {file = "pdf2john-0.2.0-py3-none-any.whl", hash = "sha256:48de4ee6c68d5ee3f1f3cbd3dac7a21c71ec833d18bb8f109446eeccb2d37756"},
+    {file = "pdf2john-0.2.0.tar.gz", hash = "sha256:f13595aece0f29bc9418b2761f37e89cd1ac297f5c0f0f0820b7be575c38b48d"},
 ]
 
 [package.dependencies]
-pyhanko = ">=0.21.0,<0.22.0"
+pyhanko = ">=0.21,<0.24"
 
 [[package]]
 name = "pdftotext"
@@ -2385,4 +2385,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "3c37dbd0660148635a1e8f02bb0bb42d61e7ba0f21256700199764acb0188e24"
+content-hash = "2f0380fea6e6c2b385c3f26837c8fd55713af4b6d15a4eb430441653a2e115a9"
