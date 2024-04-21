@@ -11,9 +11,11 @@ def parse_bank_statement(document: Document, password: str = None) -> None:
     statement = processor.extract()
     df = processor.transform(statement)
     df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.date
-    df.columns = ["Transaction Date", "Description", "Amount"]
+    total_balance = df["amount"].sum()
+
+    # cosmetic changes
+    df.columns = ["Transaction Date", "Description", "Amount (SGD)"]
     st.dataframe(df, use_container_width=True, hide_index=True)
-    total_balance = df["Amount"].sum()
     st.write(f"Total Balance: ${total_balance:.2f}")
     csv = df.to_csv(index=False).encode("utf-8")
     st.download_button(
