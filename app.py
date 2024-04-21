@@ -17,9 +17,9 @@ def parse_bank_statement(file_path: str, password: str = None):
 
 st.set_page_config(page_title="Monopoly", layout="wide")
 
-st.image("./logo.svg", width=400)
+st.image("./logo.svg", width=350)
 
-st.markdown("Convert bank statements to CSV")
+st.markdown("## Convert bank statements to CSV")
 
 uploaded_file = st.file_uploader("Upload a bank statement", type="pdf")
 
