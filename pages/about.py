@@ -20,4 +20,10 @@ st.markdown("""Currently supported banks:
 """)
 
 st.write("\n")
+
+st.markdown("# Contact")
+st.markdown("""
+    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/benjamin-awd/monopoly)
+    [![Linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjamindornel/)
+""")
 st.markdown("If you need support for a bank/statement type or run into any bugs, feel free to [contact me](mailto:benjamindornel@gmail.com).")
