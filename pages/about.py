@@ -31,12 +31,12 @@ if switch_page_button:
     switch_page("app")
 
 st.markdown("# Contact")
+
+# pylint: disable=line-too-long
 st.markdown(
     """
-    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)]
-    (https://github.com/benjamin-awd/monopoly)
-    [![Linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)]
-    (https://www.linkedin.com/in/benjamindornel/)
+    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/benjamin-awd/monopoly)
+    [![Linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjamindornel/)
 """
 )
 st.markdown(
