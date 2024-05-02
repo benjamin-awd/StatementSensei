@@ -1,6 +1,6 @@
-altair==5.3.0 ; python_version >= "3.11" and python_version < "3.12" \
-    --hash=sha256:5a268b1a0983b23d8f9129f819f956174aa7aea2719ed55a52eba9979b9f6675 \
-    --hash=sha256:7084a1dab4d83c5e7e5246b92dc1b4451a6c68fd057f3716ee9d315c8980e59a
+altair==4.2.2 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:39399a267c49b30d102c10411e67ab26374156a84b1aeb9fcd15140429ba49c5 \
+    --hash=sha256:8b45ebeaf8557f2d760c5c77b79f02ae12aee7c46c27c06014febab6f849bc87
 annotated-types==0.6.0 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:0641064de18ba7a25dee8f96403ebc39113d0cb953a01429249d5c7564666a43 \
     --hash=sha256:563339e807e53ffd9c267e99fc6d9ea23eb8443c08f112651963e24e22f84a5d
@@ -1078,6 +1078,9 @@ pypng==0.20220715.0 ; python_version >= "3.11" and python_version < "3.12" \
 python-dateutil==2.9.0.post0 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3 \
     --hash=sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
+python-decouple==3.8 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f \
+    --hash=sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66
 python-dotenv==1.0.1 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca \
     --hash=sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a
@@ -1260,6 +1263,9 @@ soupsieve==2.5 ; python_version >= "3.11" and python_version < "3.12" \
 st-annotated-text==4.0.1 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:0a2a72903a5752a55c0acef71bdf92cd225a23a8ae4135cfc213c4538bed432f \
     --hash=sha256:a8ccb9a35c078ef22c6ebb244a9a0605ce27f1fd699f55939497669081b79630
+streamlit-aggrid==1.0.4.post3 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:5e2762df79d8318238bdbbdfe0f56edcb46dd410fad97a9fbc0a49bb06ddf7f8 \
+    --hash=sha256:e4576eb1e42789c097ee7d27e5cbfa4a6fe6c3b6253a3298f1d60b753d456e82
 streamlit-camera-input-live==0.2.0 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:20ceb952b98410084176fcfeb9148e02ea29033a88d4a923161ac7890cedae0f \
     --hash=sha256:dacb56cdedbb0d6c07e35a66b755b9145b5023e5c855c64193c3d3e73198e9be
