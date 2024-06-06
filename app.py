@@ -1,7 +1,6 @@
 import fitz
 import streamlit as st
 from monopoly.pdf import WrongPasswordError
-from monopoly.processors import UnsupportedBankError
 
 from helpers import parse_bank_statement
 
@@ -47,11 +46,5 @@ if uploaded_file:
 
                 except (TypeError, WrongPasswordError):
                     st.error("Wrong password. Please try again.")
-
-                except UnsupportedBankError:
-                    st.error("This bank is not currently supported")
     else:
-        try:
-            parse_bank_statement(document)
-        except UnsupportedBankError:
-            st.error("This bank is not currently supported")
+        parse_bank_statement(document)
