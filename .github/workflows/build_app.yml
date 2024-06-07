@@ -1,0 +1,49 @@
+name: Create Monopoly App with Nativefier
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Nativefier
+        run: npm install -g nativefier
+
+      - name: Get version from pyproject.toml
+        id: get-version
+        run: |
+          version=$(grep -m 1 version pyproject.toml | awk -F' = ' '{print $2}' | tr -d '"')
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Create Monopoly App
+        run: |
+          sudo apt install wine
+          nativefier --name 'monopoly' 'https://monopoly.streamlit.app/' --platform 'darwin' --arch 'arm64'
+          nativefier --name 'monopoly' 'https://monopoly.streamlit.app/' --platform 'windows' --arch 'x64'
+
+      - name: Zip Artifacts
+        run: |
+          zip -r monopoly-v${{ steps.get-version.outputs.version }}-darwin-arm64.zip ./monopoly-darwin-arm64
+          zip -r monopoly-v${{ steps.get-version.outputs.version }}-win32-x64.zip ./monopoly-win32-x64
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get-version.outputs.version }}
+          files: |
+            ./monopoly-v${{ steps.get-version.outputs.version }}-darwin-arm64.zip
+            ./monopoly-v${{ steps.get-version.outputs.version }}-win32-x64.zip
+
+permissions:
+  contents: write
