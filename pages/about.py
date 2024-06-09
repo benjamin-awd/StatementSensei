@@ -4,11 +4,12 @@ from streamlit_extras.switch_page_button import switch_page
 st.markdown("# About")
 
 st.markdown(
-    """Monopoly is a Python library that converts Singapore bank statement PDFs to CSV using pdftotext.
+    "[![Release](https://img.shields.io/github/v/release/benjamin-awd/monopoly-streamlit)]"
+    "(https://github.com/benjamin-awd/monopoly-streamlit/releases)"
+)
 
-I started this project because I wanted to have a simple and convenient way of comparing all of my transactions
-across multiple banks each month.
-"""
+st.markdown(
+    """Monopoly is a Python library that converts bank statement PDFs to CSV using pdftotext."""
 )
 
 st.markdown(
@@ -79,7 +80,7 @@ at a specific point in time.
 Despite all the security measures listed above, uploading sensitive data to the internet always comes with a risk.
 
 With that in mind, here are some measures for a better security posture:
-- Use the [offline](https://github.com/benjamin-awd/monopoly) version of Monopoly
+- Use the monopoly [CLI](https://github.com/benjamin-awd/monopoly), or the [offline](https://github.com/benjamin-awd/monopoly-streamlit/releases) version of the app
 - Redact any sensitive information in transactions e.g. card numbers, names etc.
 - Change the default password of your bank statement PDFs (i.e. not NRIC/DOB)
 """
