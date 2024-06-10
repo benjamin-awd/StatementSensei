@@ -29,12 +29,10 @@ jobs:
       - name: Create Monopoly App
         run: |
           sudo apt install wine
-          nativefier --name 'monopoly' 'https://monopoly.streamlit.app/' --platform 'darwin' --arch 'arm64'
           nativefier --name 'monopoly' 'https://monopoly.streamlit.app/' --platform 'windows' --arch 'x64'
 
       - name: Zip Artifacts
         run: |
-          zip -r monopoly-v${{ steps.get-version.outputs.version }}-darwin-arm64.zip ./monopoly-darwin-arm64
           zip -r monopoly-v${{ steps.get-version.outputs.version }}-win32-x64.zip ./monopoly-win32-x64
 
       - name: Create release
@@ -42,7 +40,6 @@ jobs:
         with:
           tag_name: v${{ steps.get-version.outputs.version }}
           files: |
-            ./monopoly-v${{ steps.get-version.outputs.version }}-darwin-arm64.zip
             ./monopoly-v${{ steps.get-version.outputs.version }}-win32-x64.zip
 
 permissions:
