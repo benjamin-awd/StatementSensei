@@ -2,8 +2,8 @@ name: Create Monopoly App with Nativefier
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
