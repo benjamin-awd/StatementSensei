@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "monopoly-streamlit"
-version = "0.9.2-rc.1"
+version = "0.9.4"
 description = "Streamlit deployment of Monopoly"
 authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
 readme = "README.md"
@@ -9,7 +9,7 @@ readme = "README.md"
 python = ">=3.11,<3.12"
 streamlit = "^1.33.0"
 streamlit-extras = "^0.4.2"
-monopoly-core = "0.9.2"
+monopoly-core = "^0.9.4"
 
 
 [tool.poetry.group.dev.dependencies]
