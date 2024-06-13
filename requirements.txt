@@ -602,9 +602,9 @@ matplotlib==3.8.4 ; python_version >= "3.11" and python_version < "3.12" \
 mdurl==0.1.2 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8 \
     --hash=sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba
-monopoly-core==0.9.2 ; python_version >= "3.11" and python_version < "3.12" \
-    --hash=sha256:3ed73514cc33e67ff58ce4c4868288259e36ed3d597c203372b3e5a8ade5fd0f \
-    --hash=sha256:cae287ce8e22806367ce54d001845c8e2728de3dafdb2d263bf30b31df0a60f9
+monopoly-core==0.9.4 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:bf98f1f8e2c42f2d2844f8903990aa43485fb523f39df0808553fa49c8d2fa44 \
+    --hash=sha256:f7992e371a79dd29600de573ca0552568673ec3161237191c4d5d93d7bc8d9da
 more-itertools==10.2.0 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:686b06abe565edfab151cb8fd385a05651e1fdf8f0a14191e4439283421f8684 \
     --hash=sha256:8fccb480c43d3e99a00087634c06dd02b0d50fbf088b380de5a41a015ec239e1
