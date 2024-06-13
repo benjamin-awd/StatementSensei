@@ -1,0 +1,186 @@
+name: Build App With Pake CLI
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'platform'
+        required: true
+        default: 'macos-latest'
+        type: choice
+        options:
+          - 'windows-latest'
+          - 'macos-latest'
+          - 'ubuntu-20.04'
+      url:
+        description: '[URL]'
+        required: true
+      name:
+        description: '[Name]'
+        required: true
+      icon:
+        description: '[Icon, Optional]'
+        required: false
+      width:
+        description: '[Width, Optional]'
+        required: false
+        default: '1200'
+      height:
+        description: '[Height, Optional]'
+        required: false
+        default: '780'
+      transparent:
+        description: '[Transparent, Optional, MacOS only]'
+        required: false
+        type: boolean
+        default: false
+      multi_arch:
+        description: '[MultiArch, Optional, MacOS only]'
+        required: false
+        type: boolean
+        default: false
+      targets:
+        description: '[Targets, Optional, Linux only]'
+        required: false
+        default: 'deb'
+        type: choice
+        options:
+          - 'deb'
+          - 'appimage'
+          - 'all'
+
+jobs:
+  build:
+    name: ${{ inputs.platform }}
+    runs-on: ${{ inputs.platform }}
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: streamlit
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: tw93/pake
+          path: pake
+
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Rust for ubuntu-20.04
+        if: inputs.platform == 'ubuntu-20.04'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          target: x86_64-unknown-linux-musl
+
+      - name: Install Rust for windows-latest
+        if: inputs.platform == 'windows-latest'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable-x86_64-msvc
+          target: x86_64-pc-windows-msvc
+
+      - name: Install Rust for macos-latest
+        if: inputs.platform == 'macos-latest'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          target: x86_64-apple-darwin
+
+      - name: Install dependencies (ubuntu only)
+        if: inputs.platform == 'ubuntu-20.04'
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev gnome-video-effects gnome-video-effects-extra
+          version: 1.1
+
+      - name: Install pake-cli local
+        working-directory: pake
+        shell: bash
+        run: |
+          echo "install pake on local"
+          npm install pake-cli
+      - name: Rust cache restore
+        uses: actions/cache/restore@v3
+        id: cache_store
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            node_modules/pake-cli/src-tauri/target/
+          key: ${{ inputs.platform }}-cargo-${{ hashFiles('node_modules/pake-cli/src-tauri/Cargo.lock') }}
+
+      - name: Install dependencies
+        working-directory: pake
+        run: |
+          npm install shelljs
+          npm install axios
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Monopoly dependencies (mac)
+        if: inputs.platform == 'macos-latest'
+        working-directory: streamlit
+        run: |
+          brew install poppler
+          pip install -r requirements.txt
+
+      - name: Setup Conda (windows)
+        if: inputs.platform == 'windows-latest'
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ''
+
+      - name: Install Monopoly dependencies (windows)
+        if: inputs.platform == 'windows-latest'
+        working-directory: streamlit
+        run: |
+          conda install -c conda-forge poppler
+          pip install -r requirements.txt
+
+      - name: Build with pake-cli
+        working-directory: pake
+        run: |
+          streamlit run ../streamlit/app.py & node ./script/build_with_pake_cli.js
+        env:
+          URL: ${{ inputs.url }}
+          NAME: ${{ inputs.name }}
+          ICON: ${{ inputs.icon }}
+          HEIGHT: ${{ inputs.height }}
+          WIDTH: ${{ inputs.width }}
+          TRANSPARENT: ${{ inputs.transparent }}
+          FULLSCREEN: ${{ inputs.fullscreen }}
+          RESIZE: ${{ inputs.resize }}
+          MULTI_ARCH: ${{ inputs.multi_arch }}
+          TARGETS: ${{ inputs.targets }}
+
+      - name: Upload archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-${{ inputs.platform }}.zip
+          path: pake/node_modules/pake-cli/output/*
+          retention-days: 3
+
+      - name: Rust cache store
+        uses: actions/cache/save@v3
+        if: steps.cache_store.outputs.cache-hit != 'true'
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            node_modules/pake-cli/src-tauri/target/
+          key: ${{ inputs.platform }}-cargo-${{ hashFiles('node_modules/pake-cli/src-tauri/Cargo.lock') }}
