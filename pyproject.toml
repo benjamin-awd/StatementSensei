@@ -17,6 +17,7 @@ black = "^24.4.0"
 isort = "^5.13.2"
 ipykernel = "^6.29.4"
 pylint = "^3.1.0"
+git-cliff = "^2.3.0"
 
 [build-system]
 requires = ["poetry-core"]
