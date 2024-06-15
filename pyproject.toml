@@ -6,10 +6,10 @@ authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
+python = "^3.10"
 streamlit = "^1.33.0"
 streamlit-extras = "^0.4.2"
-monopoly-core = "^0.9.4"
+monopoly-core = "0.9.5-rc.1"
 
 
 [tool.poetry.group.dev.dependencies]

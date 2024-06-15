@@ -40,4 +40,4 @@ repos:
     rev: 1.7.1
     hooks:
     - id: poetry-export
-      args: ["-f", "requirements.txt", "--output", "requirements.txt"]
+      args: ["-f", "requirements.txt", "--output", "requirements.txt", "--without", "dev"]
