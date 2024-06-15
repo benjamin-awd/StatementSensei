@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.10"
 streamlit = "^1.33.0"
 streamlit-extras = "^0.4.2"
-monopoly-core = "0.9.5-rc.1"
+monopoly-core = "0.9.5-rc.2"
 
 
 [tool.poetry.group.dev.dependencies]
