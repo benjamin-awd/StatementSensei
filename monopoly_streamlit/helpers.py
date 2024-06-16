@@ -1,7 +1,7 @@
 # pylint: disable=unsubscriptable-object
 import pandas as pd
 import streamlit as st
-from fitz import Document
+from pymupdf import Document
 from monopoly.pipeline import Pipeline
 from pydantic import SecretStr
 

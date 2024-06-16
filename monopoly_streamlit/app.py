@@ -1,22 +1,24 @@
-import fitz
+from pymupdf import Document
 import pandas as pd
 import streamlit as st
 from monopoly.pdf import WrongPasswordError
 
-from helpers import format_df, parse_bank_statement
-
-st.set_page_config(page_title="Monopoly", layout="wide")
-
-st.image("./logo.svg", width=350)
-
-st.markdown(
-    """## Convert bank statements to CSV
-Effortlessly extract transactions from PDF bank statements.
-"""
-)
+from monopoly_streamlit.helpers import format_df, parse_bank_statement
+from monopoly_streamlit.logo import logo
 
 
 def app() -> None:
+    st.set_page_config(page_title="Monopoly", layout="wide")
+
+    st.image(logo, width=350)
+
+    st.markdown(
+        """
+        ## Convert bank statements to CSV
+    Effortlessly extract transactions from PDF bank statements.
+    """
+    )
+
     uploaded_files = st.file_uploader(
         label="Upload a bank statement",
         type="pdf",
@@ -30,7 +32,7 @@ def app() -> None:
         if file:
             df = None
             file_bytes = file.read()
-            document = fitz.Document(stream=file_bytes)
+            document = Document(stream=file_bytes)
 
             if document.is_encrypted:  # pylint: disable=no-member
                 password_container = st.empty()
