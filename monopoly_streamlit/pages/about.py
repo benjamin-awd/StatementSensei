@@ -1,5 +1,6 @@
 import streamlit as st
-from streamlit_extras.switch_page_button import switch_page
+
+from monopoly_streamlit.helpers import switch_page
 
 st.markdown("# About")
 

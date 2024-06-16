@@ -1,7 +1,7 @@
-from pymupdf import Document
 import pandas as pd
 import streamlit as st
 from monopoly.pdf import WrongPasswordError
+from pymupdf import Document
 
 from monopoly_streamlit.helpers import format_df, parse_bank_statement
 from monopoly_streamlit.logo import logo
@@ -31,7 +31,7 @@ def app() -> None:
     for file in uploaded_files:
         if file:
             df = None
-            file_bytes = file.read()
+            file_bytes = file.getvalue()
             document = Document(stream=file_bytes)
 
             if document.is_encrypted:  # pylint: disable=no-member
