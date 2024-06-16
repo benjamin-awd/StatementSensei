@@ -1,46 +1,141 @@
-name: Create Monopoly App with Nativefier
+name: Build App & Release
 
 on:
   push:
     tags:
       - "v*.*.*"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os-target.os }}
+    strategy:
+      matrix:
+        os-target:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+          - os: macos-latest
+            target: x86_64-apple-darwin
+          - os: macos-latest
+            target: aarch64-apple-darwin
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Conda (windows)
+        if: matrix.os-target.os == 'windows-latest'
+        uses: s-weigand/setup-conda@v1
         with:
-          node-version: 20
+          activate-conda: false
 
-      - name: Install Nativefier
-        run: npm install -g nativefier
-
-      - name: Get version from pyproject.toml
-        id: get-version
+      - name: Install pdftotext dependencies (windows)
+        if: matrix.os-target.os == 'windows-latest'
         run: |
-          version=$(grep -m 1 version pyproject.toml | awk -F' = ' '{print $2}' | tr -d '"')
-          echo "version=$version" >> $GITHUB_OUTPUT
+          conda install -c conda-forge poppler
 
-      - name: Create Monopoly App
+      - name: Setup brew (mac)
+        if: matrix.os-target.os == 'macos-latest'
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install pdftotext dependencies (mac)
+        if: matrix.os-target.os == 'macos-latest'
+        run: brew install poppler
+
+      - name: Install pdftotext dependencies (ubuntu)
+        if: matrix.os-target.os == 'ubuntu-latest'
+        uses: daaku/gh-action-apt-install@v4
+        with:
+          packages: build-essential libpoppler-cpp-dev pkg-config
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          target: ${{ matrix.os-target.target }}
+
+      - name: Install Monopoly dependencies
+        uses: ./.github/actions/setup-python-poetry
+        with:
+          python-version: "3.11"
+          poetry-version: "1.8.3"
+
+      - name: Create executable with pyinstaller
+        run: poetry run pyinstaller entrypoint.spec
+
+      - name: Copy executable to tauri binaries
+        run: cp ./dist/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+          workspaces: tauri/src-tauri
+
+      - name: Install tauri dependencies (ubuntu)
+        if: matrix.os-target.os == 'ubuntu-latest'
         run: |
-          sudo apt install wine
-          nativefier --name 'monopoly' 'https://monopoly.streamlit.app/' --platform 'windows' --arch 'x64'
+          sudo apt-get update
+          sudo apt-get install -y javascriptcoregtk-4.1 libsoup-3.0 webkit2gtk-4.1
 
-      - name: Zip Artifacts
-        run: |
-          zip -r monopoly-v${{ steps.get-version.outputs.version }}-win32-x64.zip ./monopoly-win32-x64
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.6
+          run_install: false
 
-      - name: Create release
+      - name: Install tauri
+        working-directory: tauri
+        run: pnpm install
+
+      - name: Build tauri app
+        working-directory: tauri/src-tauri/
+        run: pnpm tauri build -t ${{ matrix.os-target.target }}
+
+      - name: Upload tauri app
+        id: artifact_upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: monopoly-${{ matrix.os-target.target }}
+          path: |
+            tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/appimage/*.AppImage
+            tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/nsis/
+            tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/dmg/
+          compression-level: 9
+
+  create_release:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python & Poetry
+        uses: ./.github/actions/setup-python-poetry
+        with:
+          python-version: "3.11"
+          poetry-version: "1.8.3"
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+          merge-multiple: true
+
+      - name: Get monopoly version
+        id: monopoly_version
+        run: echo "monopoly_version=$(poetry version --short)" >> $GITHUB_OUTPUT
+
+      - name: Create a Github Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.get-version.outputs.version }}
-          files: |
-            ./monopoly-v${{ steps.get-version.outputs.version }}-win32-x64.zip
-
-permissions:
-  contents: write
+          tag_name: v${{ steps.monopoly_version.outputs.monopoly_version }}
+          target_commitish: main
+          body_path: CHANGELOG.md
+          files: ./artifacts/**/monopoly*

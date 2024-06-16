@@ -1,0 +1,49 @@
+{
+  "productName": "monopoly",
+  "version": "0.1.0",
+  "identifier": "monopoly.streamlit.app",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "Monopoly",
+        "width": 1200,
+        "height": 900,
+        "resizable": true,
+        "fullscreen": false,
+        "label": "main",
+        "visible": false
+      },
+      {
+        "title": "Monopoly",
+        "width": 1200,
+        "height": 900,
+        "label": "splashscreen",
+        "url": "splashscreen.html"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "externalBin": [
+      "binaries/monopoly"
+    ]
+  }
+}

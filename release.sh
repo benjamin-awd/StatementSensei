@@ -6,14 +6,20 @@ if [ -z "$1" ]; then
 	exit
 fi
 
-echo "Preparing $1..."
+new_version=$1
+echo "Preparing $new_version..."
 
 # update the version
 msg="# managed by release.sh"
-grep -m 1 version pyproject.toml | awk -F' = ' '{print $2}' | tr -d '"'
 
 # update the pyproject version
-poetry version $1
+poetry version $new_version
+
+# update the Cargo.toml version
+sed -i "s/^version = \".*\"/version = \"$new_version\"/" tauri/src-tauri/Cargo.toml
+
+# update the tauri.conf.json version
+jq --arg new_version "$new_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
 # update the changelog
 git cliff --unreleased --tag $(poetry version --short) --prepend CHANGELOG.md
