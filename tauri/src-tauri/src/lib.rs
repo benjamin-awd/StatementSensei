@@ -3,11 +3,11 @@ use std::env;
 use killport::cli::Mode;
 use killport::killport::{Killport, KillportOperations};
 use killport::signal::KillportSignal;
-use tauri::{Manager, WindowEvent};
+use reqwest::Client;
 use std::time::Duration;
-use tokio::time::sleep;
-use reqwest::{Client};
+use tauri::{Manager, WindowEvent};
 use tauri_plugin_shell::ShellExt;
+use tokio::time::sleep;
 
 pub fn run() {
     tauri::Builder::default()
@@ -17,7 +17,7 @@ pub fn run() {
             let main_window = app.get_webview_window("main").unwrap();
             let sidecar = app.shell().sidecar("monopoly").unwrap();
 
-            tauri::async_runtime::spawn(async move{
+            tauri::async_runtime::spawn(async move {
                 let (_rx, _child) = sidecar.spawn().expect("Failed to spawn sidecar");
                 let client = Client::new();
 
@@ -34,8 +34,8 @@ pub fn run() {
                     }
                 }
                 main_window
-                .eval("window.location.replace('http://localhost:8501');")
-                .expect("Failed to load the URL in the main window");
+                    .eval("window.location.replace('http://localhost:8501');")
+                    .expect("Failed to load the URL in the main window");
 
                 sleep(Duration::from_millis(250)).await;
                 splash_window.hide().unwrap();
@@ -46,13 +46,13 @@ pub fn run() {
         })
         .on_window_event(|window, event| match event {
             #[allow(unused_variables)]
-            WindowEvent::CloseRequested {api, ..} => {
+            WindowEvent::CloseRequested { api, .. } => {
                 if window.label() == "splashscreen" {
                     println!("Close requested - exiting app");
                     kill_monopoly(8501);
                     window.app_handle().exit(0);
                 }
-            },
+            }
             WindowEvent::Destroyed => {
                 if window.label() == "main" {
                     println!("Window destroyed - exiting app");
