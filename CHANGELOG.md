@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.2] - 2024-06-23
+
+### 🚜 Refactor
+
+- *(streamlit)* Split up file and password handling
+
+### ⚙️ Miscellaneous Tasks
+
+- *(tauri)* Add publisher
+- *(tauri)* Include license
+
+### Build
+
+- *(deps)* Bump streamlit to 1.36.0
+
 ## [0.3.1] - 2024-06-23
 
 ### ⚙️ Miscellaneous Tasks
