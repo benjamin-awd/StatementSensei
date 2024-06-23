@@ -2,7 +2,7 @@
 name = "monopoly-app"
 version = "0.3.1"
 description = "Tauri wrapper for Monopoly"
-authors = ["you"]
+authors = ["Benjamin Dornel"]
 license = ""
 repository = ""
 edition = "2021"

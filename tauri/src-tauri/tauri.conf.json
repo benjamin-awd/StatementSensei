@@ -33,6 +33,7 @@
     }
   },
   "bundle": {
+    "publisher": "Benjamin Dornel",
     "active": true,
     "targets": "all",
     "icon": [
