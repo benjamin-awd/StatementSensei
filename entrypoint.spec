@@ -1,17 +1,22 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_submodules
 
 datas = [("./monopoly_streamlit/*.py", "monopoly_streamlit")]
+
+hiddenimports = []
+hiddenimports += collect_submodules("monopoly_streamlit")
+hiddenimports += collect_submodules("pybadges")
 
 a = Analysis(
     ["entrypoint.py"],
     pathex=[],
     binaries=[],
     datas=datas,
-    hiddenimports=[],
+    hiddenimports=hiddenimports,
     hookspath=["./hooks"],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=["tkinter", "altair", "matplotlib", "bokeh", "graphviz"],
+    excludes=["tkinter", "altair", "matplotlib", "bokeh", "graphviz", "tensorflow"],
     noarchive=False,
     optimize=1,
 )
