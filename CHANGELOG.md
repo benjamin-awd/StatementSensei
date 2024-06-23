@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.3] - 2024-06-23
+
+### 🛠️ Bug Fixes
+
+- Use forked pybadges to address jinja2 bug
+
+### 📚 Documentation
+
+- *(README)* Re-order info about offline app
+- *(README)* Add list of currently supported banks
+
 ## [0.3.2] - 2024-06-23
 
 ### 🚜 Refactor

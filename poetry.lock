@@ -1390,7 +1390,7 @@ requests = ">=2.22.0,<3"
 type = "git"
 url = "https://github.com/benjamin-awd/pybadges"
 reference = "HEAD"
-resolved_reference = "c04a869441e19295ca6ca7c677686da72b4c7eaf"
+resolved_reference = "e8562d7a82fe042e22e0e0ff3175a80969b81c22"
 
 [[package]]
 name = "pycparser"

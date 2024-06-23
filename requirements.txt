@@ -395,7 +395,7 @@ pyarrow==15.0.2 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:f5e81dfb4e519baa6b4c80410421528c214427e77ca0ea9461eb4097c328fa33 \
     --hash=sha256:f639c059035011db8c0497e541a8a45d98a58dbe34dc8fadd0ef128f2cee46e5 \
     --hash=sha256:f7a197f3670606a960ddc12adbe8075cea5f707ad7bf0dffa09637fdbb89f76c
-pybadges @ git+https://github.com/benjamin-awd/pybadges@c04a869441e19295ca6ca7c677686da72b4c7eaf ; python_version >= "3.10" and python_version < "3.13"
+pybadges @ git+https://github.com/benjamin-awd/pybadges@e8562d7a82fe042e22e0e0ff3175a80969b81c22 ; python_version >= "3.10" and python_version < "3.13"
 pydantic-core==2.18.4 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:01dd777215e2aa86dfd664daed5957704b769e726626393438f9c87690ce78c3 \
     --hash=sha256:0eb2a4f660fcd8e2b1c90ad566db2b98d7f3f4717c64fe0a83e0adb39766d5b8 \
