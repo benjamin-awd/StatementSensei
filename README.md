@@ -19,6 +19,16 @@ Monopoly is available as both a web application, and an offline application.
 
 The offline application runs Streamlit locally, and uses a [WebView](https://tauri.app/v1/references/webview-versions/) window to view the browser frontend at http://localhost:8501.
 
+Currently supported banks:
+| Bank                | Credit Statement    | Debit Statement     |
+| --------------------| --------------------| --------------------|
+| Citibank            | ✅                 | ❌                  |
+| DBS/POSB            | ✅                 | ✅                  |
+| HSBC                | ✅                 | ❌                  |
+| Maybank             | ✅                 | ✅                  |
+| OCBC                | ✅                 | ✅                  |
+| Standard Chartered  | ✅                 | ❌                  |
+
 # Development
 
 Install dependencies with Poetry:
