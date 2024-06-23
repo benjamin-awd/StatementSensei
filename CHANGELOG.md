@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2024-06-23
+
+### ⛰️ Features
+
+- Create pyinstaller + tauri app
+
+### 🚜 Refactor
+
+- Move streamlit app logic to monopoly_streamlit dir
+- *(streamlit)* Generate app version offline
+- *(streamlit)* Add support for logo dark mode
+- *(tauri)* Make response loop tighter
+
+### 📚 Documentation
+
+- *(README)* Add about, installation, usage
+
+### ⚙️ Miscellaneous Tasks
+
+- *(streamlit)* Disable telemetry, add viewer mode
+- Add pre-commit hook for cargo fmt
+
 ## [0.2.0] - 2024-06-22
 
 ### ⛰️ Features
