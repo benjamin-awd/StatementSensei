@@ -9,6 +9,7 @@ readme = "README.md"
 python = ">=3.10,<3.13"
 streamlit = "^1.33.0"
 monopoly-core = "0.9.5-rc.2"
+pybadges = "^3.0.1"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,13 +1,23 @@
+# pylint: disable=line-too-long
+from importlib.metadata import version
+
+import pybadges
 import streamlit as st
 
 from monopoly_streamlit.helpers import switch_page
 
 st.markdown("# About")
 
-st.markdown(
-    "[![Release](https://img.shields.io/github/v/release/benjamin-awd/monopoly-streamlit)]"
-    "(https://github.com/benjamin-awd/monopoly-streamlit/releases)"
+app_version = version("monopoly-streamlit")
+
+app_version_badge = pybadges.badge(
+    left_text="app",
+    right_text=f"v{app_version}",
+    left_color="#555",
+    right_color="#007ec6",
 )
+
+st.image(app_version_badge)
 
 st.markdown(
     """Monopoly is a Python library that converts bank statement PDFs to CSV using pdftotext."""
@@ -31,20 +41,6 @@ st.markdown("# Usage")
 switch_page_button = st.button("Convert a bank statement")
 if switch_page_button:
     switch_page("app")
-
-st.markdown("# Contact")
-
-# pylint: disable=line-too-long
-st.markdown(
-    """
-    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/benjamin-awd/monopoly)
-    [![Linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjamindornel/)
-"""
-)
-st.markdown(
-    """If you need support for a bank/statement type or run into any bugs,
-    feel free to [contact me](mailto:benjamindornel@gmail.com)."""
-)
 
 st.markdown(
     """
@@ -85,4 +81,17 @@ With that in mind, here are some measures for a better security posture:
 - Redact any sensitive information in transactions e.g. card numbers, names etc.
 - Change the default password of your bank statement PDFs (i.e. not NRIC/DOB)
 """
+)
+
+st.markdown("# Contact")
+
+st.markdown(
+    """
+    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/benjamin-awd/monopoly)
+    [![Linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjamindornel/)
+"""
+)
+st.markdown(
+    """If you need support for a bank/statement type or run into any bugs,
+    feel free to [contact me](mailto:benjamindornel@gmail.com)."""
 )
