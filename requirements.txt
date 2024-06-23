@@ -201,9 +201,9 @@ markupsafe==2.1.5 ; python_version >= "3.10" and python_version < "3.13" \
 mdurl==0.1.2 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8 \
     --hash=sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba
-monopoly-core==0.9.5rc2 ; python_version >= "3.10" and python_version < "3.13" \
-    --hash=sha256:62fb1fab70139603a02a4909da84d4ba87ee3ebfe496d70228d2a2c4cf787900 \
-    --hash=sha256:cea8e3c3036a9348a6bf0870c8bc83ea290e1865cdf3850eb47a3f4050a5b1cd
+monopoly-core==0.9.5 ; python_version >= "3.10" and python_version < "3.13" \
+    --hash=sha256:29617e98998fb04cb95f69415af7a8561dd4ae6b66c9b99da57d6a50da5f3354 \
+    --hash=sha256:ac6f271efeb00e08c06775b059e1cf488836f80a6fc8d3b69328d8419abf3fb3
 numpy==1.26.4 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:03a8c78d01d9781b28a6989f6fa1bb2c4f2d51201cf99d3dd875df6fbd96b23b \
     --hash=sha256:08beddf13648eb95f8d867350f6a018a4be2e5ad54c8d8caed89ebca558b2818 \
