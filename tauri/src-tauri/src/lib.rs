@@ -25,20 +25,20 @@ pub fn run() {
                     match client.get("http://localhost:8501").send().await {
                         Ok(response) if response.status().is_success() => {
                             println!("Streamlit server loaded");
-                            sleep(Duration::from_secs(1)).await;
+                            sleep(Duration::from_millis(500)).await;
                             break;
                         }
                         _ => {
-                            sleep(Duration::from_secs(1)).await;
+                            sleep(Duration::from_millis(500)).await;
                         }
                     }
                 }
-                splash_window.hide().unwrap();
-
                 main_window
-                    .eval("window.location.replace('http://localhost:8501');")
-                    .expect("Failed to load the URL in the main window");
+                .eval("window.location.replace('http://localhost:8501');")
+                .expect("Failed to load the URL in the main window");
 
+                sleep(Duration::from_millis(250)).await;
+                splash_window.hide().unwrap();
                 main_window.show().unwrap();
             });
 
