@@ -734,9 +734,9 @@ six==1.16.0 ; python_version >= "3.10" and python_version < "3.13" \
 smmap==5.0.1 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:dceeb6c0028fdb6734471eb07c0cd2aae706ccaecab45965ee83f11c8d3b1f62 \
     --hash=sha256:e6d8668fa5f93e706934a62d7b4db19c8d9eb8cf2adbb75ef1b675aa332b69da
-streamlit==1.33.0 ; python_version >= "3.10" and python_version < "3.13" \
-    --hash=sha256:a8da8ff46f5b948c56d2dc7aca7a61cf8d995f4f21744cf82258ae75e63004ba \
-    --hash=sha256:bfacb5d1edefcf803c2040b051a21b4c81317a9865448e6767d0a0c6aae7edae
+streamlit==1.36.0 ; python_version >= "3.10" and python_version < "3.13" \
+    --hash=sha256:3399a33ea5faa26c05dd433d142eefe68ade67e9189a9e1d47a1731ae30a1c42 \
+    --hash=sha256:a12af9f0eb61ab5832f438336257b1ec20eb29d8e0e0c6b40a79116ba939bc9c
 strenum==0.4.15 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:878fb5ab705442070e4dd1929bb5e2249511c0bcf2b0eeacf3bcd80875c82eff \
     --hash=sha256:a30cda4af7cc6b5bf52c8055bc4bf4b2b6b14a93b574626da33df53cf7740659
