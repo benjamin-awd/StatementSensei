@@ -24,8 +24,10 @@ if __name__ == "__main__":
         "streamlit",
         "run",
         resolve_path("monopoly_streamlit/app.py"),
-        "--server.headless=true",
         "--browser.serverAddress=localhost",
+        "--browser.gatherUsageStats=false",
+        "--client.toolbarMode=viewer",
         "--global.developmentMode=false",
+        "--server.headless=true",
     ]
     sys.exit(stcli.main())
