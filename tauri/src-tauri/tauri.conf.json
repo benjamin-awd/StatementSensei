@@ -1,6 +1,6 @@
 {
   "productName": "monopoly",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "identifier": "monopoly.streamlit.app",
   "build": {
     "beforeDevCommand": "pnpm dev",
