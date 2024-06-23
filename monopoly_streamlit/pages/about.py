@@ -27,11 +27,12 @@ st.markdown(
     """Currently supported banks:
 | Bank                | Credit Statement    | Debit Statement     |
 | --------------------| --------------------| --------------------|
-| Citibank            | :white_check_mark:  | :x:                 |
-| DBS                 | :white_check_mark:  | :white_check_mark:  |
-| HSBC                | :white_check_mark:  | :x:                 |
-| OCBC                | :white_check_mark:  | :white_check_mark:  |
-| Standard Chartered  | :white_check_mark:  | :x:                 |
+| Citibank            | ✅                 | ❌                  |
+| DBS/POSB            | ✅                 | ✅                  |
+| HSBC                | ✅                 | ❌                  |
+| Maybank             | ✅                 | ✅                  |
+| OCBC                | ✅                 | ✅                  |
+| Standard Chartered  | ✅                 | ❌                  |
 """
 )
 
