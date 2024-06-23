@@ -23,7 +23,7 @@ jq --arg new_version "$new_version" '.version = $new_version' tauri/src-tauri/ta
 
 # update the changelog
 git cliff --unreleased --tag $(poetry version --short) --prepend CHANGELOG.md
-git add -A -ip && git commit -m "chore(release): prepare for $1"
+git add -A -ip && git commit -m "chore(release): prepare for $new_version"
 
 export GIT_CLIFF_TEMPLATE="\
 	{% for group, commits in commits | group_by(attribute=\"group\") %}
@@ -34,6 +34,6 @@ export GIT_CLIFF_TEMPLATE="\
 	{% endfor %}"
 
 # create a signed tag
-git tag "v$1"
+git tag "v$new_version"
 echo "Done!"
 echo "Now push the commit (git push) and the tag (git push --tags)."
