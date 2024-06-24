@@ -2,19 +2,30 @@
 import pandas as pd
 import streamlit as st
 from monopoly.pipeline import Pipeline
+from monopoly.statements.base import SafetyCheckError
 from pydantic import SecretStr
 from pymupdf import Document
 
 
 def parse_bank_statement(document: Document, password: str = None) -> pd.DataFrame:
     pipeline = Pipeline(file_bytes=document.tobytes(), passwords=[SecretStr(password)])
+
+    # skip initial safety check, and handle it outside the pipeline
+    # so that we can raise a warning and still show transactions
     statement = pipeline.extract(safety_check=False)
-    transactions = pipeline.transform(statement)
+    try:
+        statement.perform_safety_check()
+    except SafetyCheckError:
+        st.error(
+            "Safety check failed, transactions are incorrect or missing", icon="❗"
+        )
 
     if statement.bank.__name__ == "GenericBank":
         st.warning(
             "This bank is not supported - transactions may be inaccurate", icon="⚠️"
         )
+
+    transactions = pipeline.transform(statement)
 
     df = pd.DataFrame(transactions)
     return df
