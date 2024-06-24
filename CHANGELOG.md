@@ -1,7 +1,5 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
 ## [0.3.3] - 2024-06-23
 
 ### 🛠️ Bug Fixes
