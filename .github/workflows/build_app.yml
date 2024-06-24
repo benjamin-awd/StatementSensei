@@ -133,9 +133,7 @@ jobs:
         run: echo "monopoly_version=$(poetry version --short)" >> $GITHUB_OUTPUT
 
       - name: Create release changelog
-        run: |
-          pip install git-cliff==2.3.0
-          git cliff --latest > RELEASE_CHANGELOG.md
+        run: git cliff --latest > RELEASE_CHANGELOG.md
 
       - name: Create a Github Release
         uses: softprops/action-gh-release@v2
