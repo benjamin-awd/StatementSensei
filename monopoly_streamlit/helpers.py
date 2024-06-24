@@ -1,4 +1,6 @@
 # pylint: disable=unsubscriptable-object
+from typing import Optional
+
 import pandas as pd
 import streamlit as st
 from monopoly.pipeline import Pipeline
@@ -7,7 +9,9 @@ from pydantic import SecretStr
 from pymupdf import Document
 
 
-def parse_bank_statement(document: Document, password: str = None) -> pd.DataFrame:
+def parse_bank_statement(
+    document: Document, password: Optional[str] = None
+) -> pd.DataFrame:
     pipeline = Pipeline(file_bytes=document.tobytes(), passwords=[SecretStr(password)])
 
     # skip initial safety check, and handle it outside the pipeline
