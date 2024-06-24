@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "monopoly-streamlit"
-version = "0.3.3"
+version = "0.3.4"
 description = "Streamlit deployment of Monopoly"
 authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
 readme = "README.md"

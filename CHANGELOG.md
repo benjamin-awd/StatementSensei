@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.3.4] - 2024-06-24
+
+### 🛠️ Bug Fixes
+
+- *(streamlit)* Filter out None from list of dfs
+
+### 🚜 Refactor
+
+- *(streamlit)* Raise warning instead of failure if safety check failed
+
+### 📚 Documentation
+
+- *(CHANGELOG)* Remove redundant changelog header line
+- Remove old links to monopoly-streamlit repo
+
+### ⚙️ Miscellaneous Tasks
+
+- *(CHANGELOG)* Only include latest changes in release
+- Add Optional type hint for password string
+- Add type hint for file_name
+
 ## [0.3.3] - 2024-06-23
 
 ### 🛠️ Bug Fixes

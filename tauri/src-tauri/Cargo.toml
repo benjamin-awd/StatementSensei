@@ -1,6 +1,6 @@
 [package]
 name = "monopoly-app"
-version = "0.3.3"
+version = "0.3.4"
 description = "Tauri wrapper for Monopoly"
 authors = ["Benjamin Dornel"]
 license = "AGPL-3.0"
