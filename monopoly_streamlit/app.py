@@ -8,7 +8,7 @@ from monopoly_streamlit.helpers import format_df, parse_bank_statement
 from monopoly_streamlit.logo import logo
 
 
-def handle_file(file: UploadedFile):
+def handle_file(file: UploadedFile) -> pd.DataFrame | None:
     file_bytes = file.getvalue()
     document = Document(stream=file_bytes)
 
@@ -18,7 +18,7 @@ def handle_file(file: UploadedFile):
     return parse_bank_statement(document)
 
 
-def handle_encrypted_document(document: Document, file_name):
+def handle_encrypted_document(document: Document, file_name) -> pd.DataFrame | None:
     password_container = st.empty()
     password = password_container.text_input(
         label="Password",
@@ -62,12 +62,15 @@ def app() -> None:
         accept_multiple_files=True,
     )
 
-    dataframes = [handle_file(file) for file in uploaded_files if file]
+    dataframes = []
+    for file in uploaded_files:
+        df = handle_file(file)
+        if isinstance(df, pd.DataFrame):
+            dataframes.append(df)
 
     if dataframes:
-        df = pd.concat([df for df in dataframes if df is not None])
-        df = format_df(df)
-        csv = df.to_csv(index=False).encode("utf-8")
+        concat_df = format_df(pd.concat(dataframes))
+        csv = concat_df.to_csv(index=False).encode("utf-8")
         st.download_button(
             label="Download CSV",
             data=csv,
