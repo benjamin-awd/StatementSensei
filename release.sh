@@ -15,9 +15,6 @@ msg="# managed by release.sh"
 # update the pyproject version
 poetry version $new_version
 
-# update the Cargo.toml version
-sed -i "s/^version = \".*\"/version = \"$new_version\"/" tauri/src-tauri/Cargo.toml
-
 # update the tauri.conf.json version
 jq --arg new_version "$new_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
