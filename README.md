@@ -1,6 +1,6 @@
 # 💸 Monopoly
 
-**Monopoly** is a Python [library](https://github.com/benjamin-awd/monopoly) and Streamlit app that converts bank statement PDFs to CSVs. The offline version of the app is available on the [releases](https://github.com/benjamin-awd/monopoly-streamlit/releases) page.
+**Monopoly** is a Python [library](https://github.com/benjamin-awd/monopoly) and Streamlit app that converts bank statement PDFs to CSVs. The offline version of the app is available on the [releases](https://github.com/benjamin-awd/monopoly-app/releases) page.
 
 <h3 align="center">
     🎉 Monopoly is now live! 🎉
@@ -10,7 +10,7 @@
 </h3>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/benjamin-awd/monopoly-streamlit/main/docs/streamlit_demo.gif" width=800>
+    <img src="https://raw.githubusercontent.com/benjamin-awd/monopoly-app/main/docs/streamlit_demo.gif" width=800>
 </p>
 
 # Usage

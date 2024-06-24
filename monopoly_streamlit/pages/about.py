@@ -78,9 +78,8 @@ at a specific point in time.
 Despite all the security measures listed above, uploading sensitive data to the internet always comes with a risk.
 
 With that in mind, here are some measures for a better security posture:
-- Use the monopoly [CLI](https://github.com/benjamin-awd/monopoly), or the [offline](https://github.com/benjamin-awd/monopoly-streamlit/releases) version of the app
+- Use the monopoly [CLI](https://github.com/benjamin-awd/monopoly), or the [offline](https://github.com/benjamin-awd/monopoly-app/releases) version of the app
 - Redact any sensitive information in transactions e.g. card numbers, names etc.
-- Change the default password of your bank statement PDFs (i.e. not NRIC/DOB)
 """
 )
 
@@ -93,6 +92,8 @@ st.markdown(
 """
 )
 st.markdown(
-    """If you need support for a bank/statement type or run into any bugs,
-    feel free to [contact me](mailto:benjamindornel@gmail.com)."""
+    """If you need support or run into any bugs,
+    feel free to raise an issue at https://github.com/benjamin-awd/monopoly-app/issues
+    or [contact me](mailto:benjamindornel@gmail.com).
+    """
 )
