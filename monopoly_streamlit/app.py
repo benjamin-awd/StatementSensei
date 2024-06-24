@@ -18,7 +18,9 @@ def handle_file(file: UploadedFile) -> pd.DataFrame | None:
     return parse_bank_statement(document)
 
 
-def handle_encrypted_document(document: Document, file_name) -> pd.DataFrame | None:
+def handle_encrypted_document(
+    document: Document, file_name: str
+) -> pd.DataFrame | None:
     password_container = st.empty()
     password = password_container.text_input(
         label="Password",
