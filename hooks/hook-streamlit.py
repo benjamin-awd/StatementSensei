@@ -1,6 +1,11 @@
+# pylint: disable=invalid-name
 import site
-from PyInstaller.utils.hooks import copy_metadata, collect_submodules
-from PyInstaller.utils.hooks import collect_data_files
+
+from PyInstaller.utils.hooks import (
+    collect_data_files,
+    collect_submodules,
+    copy_metadata,
+)
 
 site_packages_dir = site.getsitepackages()[0]
 datas = [(f"{site_packages_dir}/streamlit/runtime", "./streamlit/runtime")]
