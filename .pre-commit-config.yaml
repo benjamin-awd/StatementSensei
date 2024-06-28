@@ -49,3 +49,11 @@ repos:
     hooks:
     - id: poetry-export
       args: ["-f", "requirements.txt", "--output", "requirements.txt", "--without", "dev"]
+
+  - repo: local
+    hooks:
+      - id: add-monopoly-streamlit
+        name: poetry-export (monopoly-streamlit)
+        entry: .github/hooks/add_monopoly_streamlit.sh
+        language: script
+        files: ^requirements.txt$
