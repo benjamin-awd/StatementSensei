@@ -66,13 +66,19 @@ jobs:
           python-version: "3.11"
           poetry-version: "1.8.3"
 
-      - name: Create executable with pyinstaller
-        run: poetry run pyinstaller entrypoint.spec
-
-      - name: Copy executable to tauri binaries
+      # onedir mode doesn't work with ubuntu, build_appimage.sh fails
+      - name: Create executable for tauri (ubuntu)
+        if: matrix.os-target.os == 'ubuntu-latest'
         run: |
+          poetry run pyinstaller entrypoint.onefile.spec
+          cp dist/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
+
+      - name: Create executable for tauri (windows/macos)
+        if: matrix.os-target.os != 'ubuntu-latest'
+        run: |
+          poetry run pyinstaller entrypoint.spec
           cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
-          cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/_internal
+          cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/
 
       - uses: Swatinem/rust-cache@v2
         with:
