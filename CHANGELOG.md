@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.3.5] - 2024-06-29
+
+### 🛠️ Bug Fixes
+
+- *(build)* Use onefile for ubuntu
+
+### 🚜 Refactor
+
+- *(tauri)* Use log crate instead of println
+- *(tauri/pyinstaller)* Use onedir instead of single executable
+
+### ⚙️ Miscellaneous Tasks
+
+- Add monopoly-streamlit module to requirements.txt
+- Add linting for hooks
+
+### Build
+
+- *(deps)* Add hook to ensure monopoly-streamlit is in requirements
+
 ## [0.3.4] - 2024-06-24
 
 ### 🛠️ Bug Fixes

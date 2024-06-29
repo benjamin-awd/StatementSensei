@@ -142,9 +142,9 @@ jobs:
 
       - name: Create release changelog
         run: |
-          pip install git-cliff==2.3.0
-          git cliff --latest > RELEASE_CHANGELOG.md
-          cat RELEASE_CHANGELOG.md
+          poetry install --with build
+          git fetch --tags
+          poetry run git cliff --latest > RELEASE_CHANGELOG.md
 
       - name: Create a Github Release
         uses: softprops/action-gh-release@v2

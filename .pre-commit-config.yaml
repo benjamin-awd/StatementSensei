@@ -54,6 +54,7 @@ repos:
     hooks:
       - id: add-monopoly-streamlit
         name: poetry-export (monopoly-streamlit)
+        stages: [post-commit]
         entry: .github/hooks/add_monopoly_streamlit.sh
         language: script
         files: ^requirements.txt$
