@@ -1,3 +1,4 @@
+use log::{error, info, warn};
 use std::env;
 
 use killport::cli::Mode;
@@ -10,6 +11,8 @@ use tauri_plugin_shell::ShellExt;
 use tokio::time::sleep;
 
 pub fn run() {
+    env_logger::init();
+
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .setup(|app| {
@@ -24,11 +27,12 @@ pub fn run() {
                 loop {
                     match client.get("http://localhost:8501").send().await {
                         Ok(response) if response.status().is_success() => {
-                            println!("Streamlit server loaded");
+                            info!("Streamlit server loaded");
                             sleep(Duration::from_millis(500)).await;
                             break;
                         }
                         _ => {
+                            warn!("Streamlit server not available, retrying...");
                             sleep(Duration::from_millis(500)).await;
                         }
                     }
@@ -48,14 +52,14 @@ pub fn run() {
             #[allow(unused_variables)]
             WindowEvent::CloseRequested { api, .. } => {
                 if window.label() == "splashscreen" {
-                    println!("Close requested - exiting app");
+                    info!("Close requested - exiting app");
                     kill_monopoly(8501);
                     window.app_handle().exit(0);
                 }
             }
             WindowEvent::Destroyed => {
                 if window.label() == "main" {
-                    println!("Window destroyed - exiting app");
+                    info!("Window destroyed - exiting app");
                     kill_monopoly(8501);
                     window.app_handle().exit(0);
                 }
@@ -73,7 +77,7 @@ fn kill_monopoly(port: u16) {
     let target_killables = match killport.find_target_killables(port, mode) {
         Ok(killables) => killables,
         Err(err) => {
-            eprintln!("Error finding killables: {}", err);
+            error!("Error finding killables: {}", err);
             return;
         }
     };
@@ -83,9 +87,9 @@ fn kill_monopoly(port: u16) {
             let signal: KillportSignal = "SIGKILL".parse().unwrap();
 
             if let Err(err) = killable.kill(signal) {
-                eprintln!("Error killing {}: {}", killable.get_name(), err);
+                error!("Error killing {}: {}", killable.get_name(), err);
             } else {
-                println!("Killed {}", killable.get_name());
+                info!("Killed {}", killable.get_name());
             }
         }
     }
