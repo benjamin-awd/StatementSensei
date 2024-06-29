@@ -70,7 +70,9 @@ jobs:
         run: poetry run pyinstaller entrypoint.spec
 
       - name: Copy executable to tauri binaries
-        run: cp ./dist/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
+        run: |
+          cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
+          cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/_internal
 
       - uses: Swatinem/rust-cache@v2
         with:

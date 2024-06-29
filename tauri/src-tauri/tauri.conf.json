@@ -45,6 +45,9 @@
     ],
     "externalBin": [
       "binaries/monopoly"
-    ]
+    ],
+    "resources": {
+      "binaries/_internal": "_internal/"
+    }
   }
 }
