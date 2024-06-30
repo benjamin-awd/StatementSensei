@@ -29,6 +29,14 @@ Currently supported banks:
 | OCBC                | ✅                 | ✅                  |
 | Standard Chartered  | ✅                 | ❌                  |
 
+# Installation
+
+You may receive warnings on while trying to install -- this happens because the release binaries are unsigned.
+
+To get around this, follow these steps for [MacOS](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) / [Windows](https://stackoverflow.com/questions/54733909/windows-defender-alert-users-from-my-pyinstaller-exe).
+
+The Windows Defender alert can be bypassed by clicking "More info" -> "Run anyway".
+
 # Development
 
 Install dependencies with Poetry:
