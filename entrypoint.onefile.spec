@@ -1,8 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_submodules
 
-datas = [("./monopoly_streamlit/*.py", "monopoly_streamlit")]
-
 hiddenimports = []
 hiddenimports += collect_submodules("monopoly_streamlit")
 hiddenimports += collect_submodules("pybadges")
@@ -11,7 +9,7 @@ a = Analysis(
     ["entrypoint.py"],
     pathex=[],
     binaries=[],
-    datas=datas,
+    datas=[],
     hiddenimports=hiddenimports,
     hookspath=["./hooks"],
     hooksconfig={},

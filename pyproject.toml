@@ -15,7 +15,6 @@ pybadges = {git = "https://github.com/benjamin-awd/pybadges"}
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.0"
 isort = "^5.13.2"
-ipykernel = "^6.29.4"
 pylint = "^3.1.0"
 
 

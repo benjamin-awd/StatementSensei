@@ -44,17 +44,10 @@ repos:
       types: [python]
       require_serial: true
 
-  - repo: https://github.com/python-poetry/poetry
-    rev: 1.7.1
-    hooks:
-    - id: poetry-export
-      args: ["-f", "requirements.txt", "--output", "requirements.txt", "--without", "dev"]
-
   - repo: local
     hooks:
       - id: add-monopoly-streamlit
         name: poetry-export (monopoly-streamlit)
-        stages: [post-commit]
         entry: .github/hooks/add_monopoly_streamlit.sh
         language: script
-        files: ^requirements.txt$
+        files: ^(requirements.txt|poetry.lock)$

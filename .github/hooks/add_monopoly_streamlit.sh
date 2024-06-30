@@ -3,6 +3,8 @@
 REQUIREMENTS_FILE="requirements.txt"
 DOT="."
 
+poetry export -f requirements.txt --output requirements.txt --without dev
+
 if [ -f "$REQUIREMENTS_FILE" ]; then
     FIRST_LINE=$(head -n 1 "$REQUIREMENTS_FILE")
     if [ "$FIRST_LINE" != "$DOT" ]; then
