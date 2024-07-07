@@ -71,13 +71,13 @@ jobs:
         if: matrix.os-target.os == 'ubuntu-latest'
         run: |
           poetry run pyinstaller entrypoint.onefile.spec
-          cp dist/entrypoint ./tauri/src-tauri/binaries/statement_sensei-${{ matrix.os-target.target }}
+          cp dist/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
 
       - name: Create executable for tauri (windows/macos)
         if: matrix.os-target.os != 'ubuntu-latest'
         run: |
           poetry run pyinstaller entrypoint.spec
-          cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/statement_sensei-${{ matrix.os-target.target }}
+          cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
           cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/
 
       - uses: Swatinem/rust-cache@v2
@@ -109,7 +109,7 @@ jobs:
         id: artifact_upload
         uses: actions/upload-artifact@v4
         with:
-          name: statement_sensei-${{ matrix.os-target.target }}
+          name: statementsensei-${{ matrix.os-target.target }}
           path: |
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/appimage/*.AppImage
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/nsis/
@@ -117,18 +117,16 @@ jobs:
           compression-level: 9
 
   create_release:
-    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Python & Poetry
-        uses: ./.github/actions/setup-python-poetry
         with:
-          python-version: "3.11"
-          poetry-version: "1.8.3"
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
 
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -136,15 +134,15 @@ jobs:
           path: ./artifacts
           merge-multiple: true
 
-      - name: Get statement_sensei version
+      - name: Get Statement Sensei version
         id: statement_sensei_version
-        run: echo "statement_sensei_version=$(poetry version --short)" >> $GITHUB_OUTPUT
+        run: echo "statement_sensei_version=$(grep "^version" pyproject.toml | cut -d'"' -f2)" >> $GITHUB_OUTPUT
 
       - name: Create release changelog
         run: |
-          poetry install --with build
+          pip install git-cliff==2.4.0
           git fetch --tags
-          poetry run git cliff --latest > RELEASE_CHANGELOG.md
+          git cliff --latest > RELEASE_CHANGELOG.md
 
       - name: Create a Github Release
         uses: softprops/action-gh-release@v2
@@ -152,4 +150,4 @@ jobs:
           tag_name: v${{ steps.statement_sensei_version.outputs.statement_sensei_version }}
           target_commitish: main
           body_path: RELEASE_CHANGELOG.md
-          files: ./artifacts/**/statement_sensei*
+          files: ./artifacts/**/StatementSensei*

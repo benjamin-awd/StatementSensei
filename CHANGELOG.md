@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.0] - 2024-07-07
+
+### 🚜 Refactor
+
+- Rename app to StatementSensei
+
+### 📚 Documentation
+
+- *(README)* Add note about installation false postives
+
 ## [0.3.5] - 2024-06-29
 
 ### 🛠️ Bug Fixes
