@@ -4,8 +4,8 @@ from monopoly.pdf import WrongPasswordError
 from pymupdf import Document
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
-from monopoly_streamlit.helpers import format_df, parse_bank_statement
-from monopoly_streamlit.logo import logo
+from webapp.helpers import format_df, parse_bank_statement
+from webapp.logo import logo
 
 
 def handle_file(file: UploadedFile) -> pd.DataFrame | None:
@@ -48,8 +48,8 @@ def handle_encrypted_document(
 
 
 def app() -> None:
-    st.set_page_config(page_title="Monopoly", layout="wide")
-    st.image(logo, width=350)
+    st.set_page_config(page_title="Statement Sensei", layout="wide")
+    st.image(logo, width=450)
     st.markdown(
         """
         ## Convert bank statements to CSV

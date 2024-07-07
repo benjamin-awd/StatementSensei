@@ -1,7 +1,7 @@
 [package]
-name = "monopoly-app"
+name = "statement-sensei"
 version = "0.1.0"
-description = "Tauri wrapper for Monopoly"
+description = "Tauri wrapper for Statement Sensei"
 authors = ["Benjamin Dornel"]
 license = "AGPL-3.0"
 repository = ""

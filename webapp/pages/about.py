@@ -4,11 +4,11 @@ from importlib.metadata import version
 import pybadges
 import streamlit as st
 
-from monopoly_streamlit.helpers import switch_page
+from webapp.helpers import switch_page
 
 st.markdown("# About")
 
-app_version = version("monopoly-streamlit")
+app_version = version("statement_sensei")
 
 app_version_badge = pybadges.badge(
     left_text="app",
@@ -18,10 +18,6 @@ app_version_badge = pybadges.badge(
 )
 
 st.image(app_version_badge)
-
-st.markdown(
-    """Monopoly is a Python library that converts bank statement PDFs to CSV using pdftotext."""
-)
 
 st.markdown(
     """Currently supported banks:
@@ -47,7 +43,7 @@ st.markdown(
     """
 # FAQ
 ### Is this app secure?
-Monopoly on Streamlit takes the following security measures:
+StatementSensei on Streamlit takes the following security measures:
 - Uploaded files are stored in memory as a byte stream, and are not saved to the disk or
 uploaded to any external location besides Streamlit.
 - Passwords are wrapped in Pydantic's `SecretStr` class when passed to the underlying Python code,
@@ -78,7 +74,7 @@ at a specific point in time.
 Despite all the security measures listed above, uploading sensitive data to the internet always comes with a risk.
 
 With that in mind, here are some measures for a better security posture:
-- Use the monopoly [CLI](https://github.com/benjamin-awd/monopoly), or the [offline](https://github.com/benjamin-awd/monopoly-app/releases) version of the app
+- Use the monopoly [CLI](https://github.com/benjamin-awd/monopoly), or the [offline](https://github.com/benjamin-awd/statementsensei/releases) version of the app
 - Redact any sensitive information in transactions e.g. card numbers, names etc.
 """
 )
@@ -93,7 +89,7 @@ st.markdown(
 )
 st.markdown(
     """If you need support or run into any bugs,
-    feel free to raise an issue at https://github.com/benjamin-awd/monopoly-app/issues
+    feel free to raise an issue at https://github.com/benjamin-awd/statementsensei/issues
     or [contact me](mailto:benjamindornel@gmail.com).
     """
 )

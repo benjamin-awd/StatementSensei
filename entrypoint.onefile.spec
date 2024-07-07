@@ -2,7 +2,7 @@
 from PyInstaller.utils.hooks import collect_submodules
 
 hiddenimports = []
-hiddenimports += collect_submodules("monopoly_streamlit")
+hiddenimports += collect_submodules("webapp")
 hiddenimports += collect_submodules("pybadges")
 
 a = Analysis(

@@ -18,7 +18,7 @@ pub fn run() {
         .setup(|app| {
             let splash_window = app.get_webview_window("splashscreen").unwrap();
             let main_window = app.get_webview_window("main").unwrap();
-            let sidecar = app.shell().sidecar("monopoly").unwrap();
+            let sidecar = app.shell().sidecar("statementsensei").unwrap();
 
             tauri::async_runtime::spawn(async move {
                 let (_rx, _child) = sidecar.spawn().expect("Failed to spawn sidecar");
@@ -53,14 +53,14 @@ pub fn run() {
             WindowEvent::CloseRequested { api, .. } => {
                 if window.label() == "splashscreen" {
                     info!("Close requested - exiting app");
-                    kill_monopoly(8501);
+                    kill_statementsensei(8501);
                     window.app_handle().exit(0);
                 }
             }
             WindowEvent::Destroyed => {
                 if window.label() == "main" {
                     info!("Window destroyed - exiting app");
-                    kill_monopoly(8501);
+                    kill_statementsensei(8501);
                     window.app_handle().exit(0);
                 }
             }
@@ -70,7 +70,7 @@ pub fn run() {
         .expect("error while running tauri application");
 }
 
-fn kill_monopoly(port: u16) {
+fn kill_statementsensei(port: u16) {
     let killport = Killport;
     let mode = Mode::Auto;
 
@@ -83,7 +83,7 @@ fn kill_monopoly(port: u16) {
     };
 
     for killable in target_killables {
-        if killable.get_name().contains("monopoly") {
+        if killable.get_name().contains("statementsensei") {
             let signal: KillportSignal = "SIGKILL".parse().unwrap();
 
             if let Err(err) = killable.kill(signal) {

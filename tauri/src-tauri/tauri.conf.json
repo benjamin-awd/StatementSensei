@@ -1,7 +1,7 @@
 {
-  "productName": "monopoly",
-  "version": "0.3.5",
-  "identifier": "monopoly.streamlit.app",
+  "productName": "StatementSensei",
+  "version": "0.4.0",
+  "identifier": "statementsensei.streamlit.app",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "Monopoly",
+        "title": "Statement Sensei",
         "width": 1200,
         "height": 900,
         "resizable": true,
@@ -21,7 +21,7 @@
         "visible": false
       },
       {
-        "title": "Monopoly",
+        "title": "Statement Sensei",
         "width": 1200,
         "height": 900,
         "label": "splashscreen",
@@ -44,7 +44,7 @@
       "icons/icon.ico"
     ],
     "externalBin": [
-      "binaries/monopoly"
+      "binaries/statementsensei"
     ],
     "resources": {
       "binaries/_internal": "_internal/"

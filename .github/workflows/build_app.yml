@@ -60,7 +60,7 @@ jobs:
           toolchain: stable
           target: ${{ matrix.os-target.target }}
 
-      - name: Install Monopoly dependencies
+      - name: Install Statement Sensei dependencies
         uses: ./.github/actions/setup-python-poetry
         with:
           python-version: "3.11"
@@ -71,13 +71,13 @@ jobs:
         if: matrix.os-target.os == 'ubuntu-latest'
         run: |
           poetry run pyinstaller entrypoint.onefile.spec
-          cp dist/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
+          cp dist/entrypoint ./tauri/src-tauri/binaries/statement_sensei-${{ matrix.os-target.target }}
 
       - name: Create executable for tauri (windows/macos)
         if: matrix.os-target.os != 'ubuntu-latest'
         run: |
           poetry run pyinstaller entrypoint.spec
-          cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/monopoly-${{ matrix.os-target.target }}
+          cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/statement_sensei-${{ matrix.os-target.target }}
           cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/
 
       - uses: Swatinem/rust-cache@v2
@@ -109,7 +109,7 @@ jobs:
         id: artifact_upload
         uses: actions/upload-artifact@v4
         with:
-          name: monopoly-${{ matrix.os-target.target }}
+          name: statement_sensei-${{ matrix.os-target.target }}
           path: |
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/appimage/*.AppImage
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/nsis/
@@ -136,9 +136,9 @@ jobs:
           path: ./artifacts
           merge-multiple: true
 
-      - name: Get monopoly version
-        id: monopoly_version
-        run: echo "monopoly_version=$(poetry version --short)" >> $GITHUB_OUTPUT
+      - name: Get statement_sensei version
+        id: statement_sensei_version
+        run: echo "statement_sensei_version=$(poetry version --short)" >> $GITHUB_OUTPUT
 
       - name: Create release changelog
         run: |
@@ -149,7 +149,7 @@ jobs:
       - name: Create a Github Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.monopoly_version.outputs.monopoly_version }}
+          tag_name: v${{ steps.statement_sensei_version.outputs.statement_sensei_version }}
           target_commitish: main
           body_path: RELEASE_CHANGELOG.md
-          files: ./artifacts/**/monopoly*
+          files: ./artifacts/**/statement_sensei*

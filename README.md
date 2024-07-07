@@ -1,21 +1,21 @@
-# 💸 Monopoly
+<img src="./docs/logo.svg" width="396" height="91">
 
-**Monopoly** is a Python [library](https://github.com/benjamin-awd/monopoly) and Streamlit app that converts bank statement PDFs to CSVs. The offline version of the app is available on the [releases](https://github.com/benjamin-awd/monopoly-app/releases) page.
+Statement Sensei helps converts bank statement PDFs to CSVs. The offline version of the app is available on the [releases](https://github.com/benjamin-awd/statementsensei/releases) page.
 
 <h3 align="center">
-    🎉 Monopoly is now live! 🎉
+    🎉 Statement Sensei is now live! 🎉
     <br><br>
     Try it out: <br>
-    <a href="https://monopoly.streamlit.app/">https://monopoly.streamlit.app/</a>
+    <a href="https://statementsensei.streamlit.app/">https://statementsensei.streamlit.app/</a>
 </h3>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/benjamin-awd/monopoly-app/main/docs/streamlit_demo.gif" width=800>
+    <img src="./docs/streamlit_demo.gif" width=800>
 </p>
 
 # Usage
 
-Monopoly is available as both a web application, and an offline application.
+Statement Sensei is available as both a web application, and an offline application.
 
 The offline application runs Streamlit locally, and uses a [WebView](https://tauri.app/v1/references/webview-versions/) window to view the browser frontend at http://localhost:8501.
 
@@ -52,7 +52,7 @@ python entrypoint.py
 
 To run the application in developer mode:
 ```shell
-streamlit run monopoly_streamlit/app.py
+streamlit run webapp/app.py
 ```
 
 # Features

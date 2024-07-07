@@ -46,8 +46,8 @@ repos:
 
   - repo: local
     hooks:
-      - id: add-monopoly-streamlit
-        name: poetry-export (monopoly-streamlit)
-        entry: .github/hooks/add_monopoly_streamlit.sh
+      - id: include-webapp-in-requirements
+        name: poetry-export (webapp)
+        entry: .github/hooks/include_webapp_in_requirements.sh
         language: script
         files: ^(requirements.txt|poetry.lock)$

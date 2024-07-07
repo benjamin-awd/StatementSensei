@@ -1,7 +1,10 @@
 [tool.poetry]
-name = "monopoly-streamlit"
+name = "statement-sensei"
+packages = [
+    {include = "webapp"}
+]
 version = "0.3.5"
-description = "Streamlit deployment of Monopoly"
+description = "PDF to CSV conversion for your bank statements"
 authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
 readme = "README.md"
 

@@ -14,7 +14,7 @@ if __name__ == "__main__":
     sys.argv = [
         "streamlit",
         "run",
-        resolve_path("monopoly_streamlit/app.py"),
+        resolve_path("webapp/app.py"),
         "--browser.serverAddress=localhost",
         "--browser.gatherUsageStats=false",
         "--client.toolbarMode=viewer",
