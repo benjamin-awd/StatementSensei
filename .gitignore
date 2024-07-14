@@ -1,6 +1,7 @@
 *.pdf
 *.txt
 *.csv
+!docs/example_statement.pdf
 !entrypoint.spec
 
 _ignore*
