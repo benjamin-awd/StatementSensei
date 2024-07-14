@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.2] - 2024-07-14
+
+### ⚙️ Miscellaneous Tasks
+
+- Add example statement
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.10.3
+
 ## [0.4.1] - 2024-07-14
 
 ### Build
