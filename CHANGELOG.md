@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.1] - 2024-07-14
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.10.2
+
 ## [0.4.0] - 2024-07-07
 
 ### 🚜 Refactor
