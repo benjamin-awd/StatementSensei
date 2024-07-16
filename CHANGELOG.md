@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.3] - 2024-07-16
+
+### ⛰️ Features
+
+- *(tauri)* Enable HTML5 drag and drop
+
 ## [0.4.2] - 2024-07-14
 
 ### ⚙️ Miscellaneous Tasks
