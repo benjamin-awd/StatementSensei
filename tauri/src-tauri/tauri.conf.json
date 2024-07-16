@@ -18,7 +18,8 @@
         "resizable": true,
         "fullscreen": false,
         "label": "main",
-        "visible": false
+        "visible": false,
+        "dragDropEnabled": false
       },
       {
         "title": "Statement Sensei",
