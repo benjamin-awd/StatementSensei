@@ -10,7 +10,7 @@ Statement Sensei helps converts bank statement PDFs to CSVs. The offline version
 </h3>
 
 <p align="center">
-    <img src="./docs/streamlit_demo.gif" width=800>
+    <img src="./docs/statement_sensei_demo.gif" width=800>
 </p>
 
 # Usage
