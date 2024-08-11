@@ -1,0 +1,6 @@
+services:
+  statementsensei:
+    build: .
+    container_name: statementsensei
+    ports:
+      - "8501:8501"
