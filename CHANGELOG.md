@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.4] - 2024-08-11
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.10.6
+
 ## [0.4.3] - 2024-07-16
 
 ### ⛰️ Features
