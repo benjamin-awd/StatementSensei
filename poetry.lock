@@ -579,13 +579,13 @@ files = [
 
 [[package]]
 name = "monopoly-core"
-version = "0.10.6"
+version = "0.10.7"
 description = "Monopoly is a Python library & CLI that converts bank statement PDFs to CSV"
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "monopoly_core-0.10.6-py3-none-any.whl", hash = "sha256:668dd9fb8b6a212d199e26b8cdcd7bd492027710453be4bdb822fb83990e32a5"},
-    {file = "monopoly_core-0.10.6.tar.gz", hash = "sha256:28c103d173322e5fd5229b08b6250186a593d521dd2f5d4d6a4b0a2399d8ab48"},
+    {file = "monopoly_core-0.10.7-py3-none-any.whl", hash = "sha256:0f7cd7d98925d6dc0e29968b5bcdcdf77d50489919d2f3e4023d213f828189e8"},
+    {file = "monopoly_core-0.10.7.tar.gz", hash = "sha256:598c88e70e3687d563a8792e7d369f4fe90f1ce6dcd10aceedd9bbc42829c763"},
 ]
 
 [package.dependencies]
@@ -1859,4 +1859,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "c552bae5379a6e6460d07289ed68224609492118a966ad6d6b10da65178a9b31"
+content-hash = "206e7d63fab638829826e90bbb6a4a977e4af2fc61d9ed41de1695767abe010e"
