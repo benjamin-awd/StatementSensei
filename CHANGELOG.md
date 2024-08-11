@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.5] - 2024-08-11
+
+### 📚 Documentation
+
+- *(README)* Update usage/install information
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump monopoly-core to 0.10.7
+
 ## [0.4.4] - 2024-08-11
 
 ### Build
