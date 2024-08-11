@@ -15,7 +15,7 @@ Statement Sensei helps converts bank statement PDFs to CSVs. The offline version
 
 # Usage
 
-Statement Sensei is available as both a web application, and an offline application.
+Statement Sensei can be run as an offline application on Windows, MacOS or Linux.
 
 The offline application runs Streamlit locally, and uses a [WebView](https://tauri.app/v1/references/webview-versions/) window to view the browser frontend at http://localhost:8501.
 
@@ -31,7 +31,7 @@ Currently supported banks:
 
 # Installation
 
-You may receive warnings on while trying to install -- this happens because the release binaries are unsigned.
+You may receive security warnings during installation -- this happens because the release binaries are unsigned, and are incorrectly flagged as malware.
 
 To get around this, follow these steps for [MacOS](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) / [Windows](https://stackoverflow.com/questions/54733909/windows-defender-alert-users-from-my-pyinstaller-exe).
 
