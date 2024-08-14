@@ -4,22 +4,22 @@ from monopoly.pdf import WrongPasswordError
 from pymupdf import Document
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
-from webapp.helpers import format_df, parse_bank_statement
+from webapp.helpers import Config, format_df, parse_bank_statement
 from webapp.logo import logo
 
 
-def handle_file(file: UploadedFile) -> pd.DataFrame | None:
+def handle_file(file: UploadedFile, config: Config) -> pd.DataFrame | None:
     file_bytes = file.getvalue()
     document = Document(stream=file_bytes)
 
     if document.is_encrypted:  # pylint: disable=no-member
-        return handle_encrypted_document(document, file.name)
+        return handle_encrypted_document(document, config, file.name)
 
-    return parse_bank_statement(document)
+    return parse_bank_statement(document, config)
 
 
 def handle_encrypted_document(
-    document: Document, file_name: str
+    document: Document, config: Config, file_name: str
 ) -> pd.DataFrame | None:
     password_container = st.empty()
     password = password_container.text_input(
@@ -38,7 +38,7 @@ def handle_encrypted_document(
     if not document.is_encrypted:  # pylint: disable=no-member
         password_container.empty()
         try:
-            return parse_bank_statement(document, password)
+            return parse_bank_statement(document, config, password=password)
         except (ValueError, WrongPasswordError):
             st.error("Wrong password. Please try again.")
             return None
@@ -57,6 +57,10 @@ def app() -> None:
         """
     )
 
+    with st.sidebar.expander("Config"):
+        show_banks = st.toggle("Include bank name")
+    config = Config(show_banks)
+
     uploaded_files = st.file_uploader(
         label="Upload a bank statement",
         type="pdf",
@@ -66,7 +70,7 @@ def app() -> None:
 
     dataframes = []
     for file in uploaded_files:
-        df = handle_file(file)
+        df = handle_file(file, config)
         if isinstance(df, pd.DataFrame):
             dataframes.append(df)
 
@@ -78,6 +82,16 @@ def app() -> None:
             data=csv,
             mime="text/csv",
         )
+        return concat_df
+
+
+def get_files() -> list[UploadedFile]:
+    return st.file_uploader(
+        label="Upload a bank statement",
+        type="pdf",
+        label_visibility="hidden",
+        accept_multiple_files=True,
+    )
 
 
 if __name__ == "__main__":
