@@ -1,4 +1,5 @@
 # pylint: disable=unsubscriptable-object
+from dataclasses import dataclass
 from typing import Optional
 
 import pandas as pd
@@ -9,14 +10,20 @@ from pydantic import SecretStr
 from pymupdf import Document
 
 
+@dataclass
+class Config:
+    show_banks: bool
+
+
 def parse_bank_statement(
-    document: Document, password: Optional[str] = None
+    document: Document, config: Config, password: Optional[str] = None
 ) -> pd.DataFrame:
     pipeline = Pipeline(file_bytes=document.tobytes(), passwords=[SecretStr(password)])
 
     # skip initial safety check, and handle it outside the pipeline
     # so that we can raise a warning and still show transactions
     statement = pipeline.extract(safety_check=False)
+    bank_name = statement.bank.__name__
     try:
         statement.perform_safety_check()
     except SafetyCheckError:
@@ -24,7 +31,7 @@ def parse_bank_statement(
             "Safety check failed, transactions are incorrect or missing", icon="❗"
         )
 
-    if statement.bank.__name__ == "GenericBank":
+    if bank_name == "GenericBank":
         st.warning(
             "This bank is not supported - transactions may be inaccurate", icon="⚠️"
         )
@@ -32,6 +39,9 @@ def parse_bank_statement(
     transactions = pipeline.transform(statement)
 
     df = pd.DataFrame(transactions)
+
+    if config.show_banks:
+        df["bank"] = bank_name
     return df
 
 
@@ -40,9 +50,12 @@ def format_df(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(columns="suffix")
     total_balance = df["amount"].sum()
 
-    # cosmetic changes
-    df = df[["date", "description", "amount"]]
-    df.columns = ["Date", "Description", "Amount"]
+    # reorder and title case columns
+    desired_order = ["date", "description", "amount", "bank"]
+    columns_to_use = [col for col in desired_order if col in df.columns]
+    df = df[columns_to_use]
+    df.columns = [col.title() for col in df.columns]
+
     st.dataframe(
         df.style.format({"Amount": "{:.2f}"}),
         use_container_width=True,
