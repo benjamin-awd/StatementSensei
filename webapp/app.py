@@ -4,6 +4,7 @@ from monopoly.pdf import WrongPasswordError
 from pymupdf import Document
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
+from webapp.constants import APP_DESCRIPTION
 from webapp.helpers import Config, format_df, parse_bank_statement
 from webapp.logo import logo
 
@@ -50,12 +51,7 @@ def handle_encrypted_document(
 def app() -> None:
     st.set_page_config(page_title="Statement Sensei", layout="wide")
     st.image(logo, width=450)
-    st.markdown(
-        """
-        ## Convert bank statements to CSV
-        Effortlessly extract transactions from PDF bank statements.
-        """
-    )
+    st.markdown(APP_DESCRIPTION)
 
     with st.sidebar.expander("Config"):
         show_banks = st.toggle("Include bank name")

@@ -4,6 +4,7 @@ from importlib.metadata import version
 import pybadges
 import streamlit as st
 
+from webapp.constants import SUPPORTED_BANKS
 from webapp.helpers import switch_page
 
 st.markdown("# About")
@@ -19,18 +20,7 @@ app_version_badge = pybadges.badge(
 
 st.image(app_version_badge)
 
-st.markdown(
-    """Currently supported banks:
-| Bank                | Credit Statement    | Debit Statement     |
-| --------------------| --------------------| --------------------|
-| Citibank            | ✅                 | ❌                  |
-| DBS/POSB            | ✅                 | ✅                  |
-| HSBC                | ✅                 | ❌                  |
-| Maybank             | ✅                 | ✅                  |
-| OCBC                | ✅                 | ✅                  |
-| Standard Chartered  | ✅                 | ❌                  |
-"""
-)
+st.markdown(SUPPORTED_BANKS)
 
 st.write("\n")
 
