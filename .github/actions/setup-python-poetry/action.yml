@@ -8,6 +8,9 @@ inputs:
   poetry-version:
     description: 'Poetry version'
     required: true
+  poetry-install-args:
+    description: 'Arguments to use with poetry install'
+    required: true
 
 runs:
   using: 'composite'
@@ -37,4 +40,4 @@ runs:
     - name: Install dependencies
       shell: bash
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --with main --with build --without dev
+      run: poetry install ${{ inputs.poetry-install-args }}

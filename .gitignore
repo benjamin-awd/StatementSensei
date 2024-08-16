@@ -3,6 +3,7 @@
 *.csv
 !docs/example_statement.pdf
 !entrypoint.spec
+!tests/fixtures/**
 
 _ignore*
 build

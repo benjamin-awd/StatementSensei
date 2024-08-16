@@ -65,6 +65,7 @@ jobs:
         with:
           python-version: "3.11"
           poetry-version: "1.8.3"
+          poetry-install-args: --with main --with build --without dev
 
       # onedir mode doesn't work with ubuntu, build_appimage.sh fails
       - name: Create executable for tauri (ubuntu)

@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pdftotext
+        uses: daaku/gh-action-apt-install@v4
+        with:
+          packages: build-essential libpoppler-cpp-dev pkg-config
+
+      - name: Setup Python & Poetry
+        uses: ./.github/actions/setup-python-poetry
+        with:
+          python-version: "3.11"
+          poetry-version: "1.8.3"
+          poetry-install-args: --with dev
+
+      - name: Run CI
+        run: |
+          poetry run pytest .
+          poetry run flake8 webapp
