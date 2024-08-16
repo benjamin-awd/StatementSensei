@@ -48,7 +48,7 @@ def handle_encrypted_document(
         return None
 
 
-def app() -> None:
+def app() -> pd.DataFrame:
     st.set_page_config(page_title="Statement Sensei", layout="wide")
     st.image(logo, width=450)
     st.markdown(APP_DESCRIPTION)
@@ -57,13 +57,11 @@ def app() -> None:
         show_banks = st.toggle("Include bank name")
     config = Config(show_banks)
 
-    uploaded_files = st.file_uploader(
-        label="Upload a bank statement",
-        type="pdf",
-        label_visibility="hidden",
-        accept_multiple_files=True,
-    )
+    uploaded_files = get_files()
+    return process_pdf(uploaded_files, config)
 
+
+def process_pdf(uploaded_files, config) -> pd.DataFrame | None:
     dataframes = []
     for file in uploaded_files:
         df = handle_file(file, config)
