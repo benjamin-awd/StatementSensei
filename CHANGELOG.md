@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.5.0] - 2024-08-16
+
+### ⛰️ Features
+
+- Add bank to dataframe
+- Add integration test
+
+### 🚜 Refactor
+
+- Move supported banks and app description to constants
+- *(ci)* Replace pylint pre-commit with ruff and flake8
+
+### 📚 Documentation
+
+- *(README)* Update gif
+- *(README)* Add link to core monopoly library
+
+### Build
+
+- Add Docker support
+
 ## [0.4.5] - 2024-08-11
 
 ### 📚 Documentation
