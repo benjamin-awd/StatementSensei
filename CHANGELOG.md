@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.1] - 2024-08-17
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump monopoly-core to 0.10.8
+
 ## [0.5.0] - 2024-08-16
 
 ### ⛰️ Features
