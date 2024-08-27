@@ -46,3 +46,7 @@ coll = COLLECT(
     upx_exclude=[],
     name='entrypoint',
 )
+app = BUNDLE(coll,
+    name='StatementSensei.app',
+    bundle_identifier='StatementSensei'
+)
