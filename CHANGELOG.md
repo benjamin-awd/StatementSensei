@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.3] - 2024-08-27
+
+### 🛠️ Bug Fixes
+
+- Use onefile mode for MacOS
+
+### 📚 Documentation
+
+- *(README)* Add banner for security warnings
+- *(README)* Add note about docker compose
+
 ## [0.5.2] - 2024-08-26
 
 ### Build
