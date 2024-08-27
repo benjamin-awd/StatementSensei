@@ -60,6 +60,11 @@ To run the application in developer mode:
 streamlit run webapp/app.py
 ```
 
+Otherwise, to run the application as a container:
+```
+docker compose up
+```
+
 # Features
 - Supports uploading multiple bank statements
 - Allows unlocking of PDFs using user-provided credentials via the frontend
