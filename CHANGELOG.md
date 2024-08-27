@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.3-rc.1] - 2024-08-27
+
+### 🛠️ Bug Fixes
+
+- *(tauri)* Add missing Python framework for MacOS
+
 ## [0.5.2] - 2024-08-26
 
 ### Build
