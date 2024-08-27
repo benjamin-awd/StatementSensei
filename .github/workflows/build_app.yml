@@ -74,12 +74,12 @@ jobs:
           poetry run pyinstaller entrypoint.onefile.spec
           cp dist/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
 
+      # onedir mode doesn't work with macos, due to missing Python framework
       - name: Create executable for tauri (windows/macos)
         if: matrix.os-target.os != 'ubuntu-latest'
         run: |
-          poetry run pyinstaller entrypoint.spec
+          poetry run pyinstaller entrypoint.onefile.spec
           cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
-          cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/
 
       - uses: Swatinem/rust-cache@v2
         with:

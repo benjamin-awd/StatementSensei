@@ -1,9 +1,0 @@
-{
-  "bundle": {
-    "macOS": {
-      "frameworks": [
-        "Python"
-      ]
-    }
-  }
-}
