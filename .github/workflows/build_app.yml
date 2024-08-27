@@ -78,8 +78,9 @@ jobs:
       - name: Create executable for tauri (windows/macos)
         if: matrix.os-target.os != 'ubuntu-latest'
         run: |
-          poetry run pyinstaller entrypoint.onefile.spec
-          cp dist/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
+          poetry run pyinstaller entrypoint.spec
+          cp dist/entrypoint/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
+          cp -r dist/entrypoint/_internal ./tauri/src-tauri/binaries/
 
       - uses: Swatinem/rust-cache@v2
         with:
