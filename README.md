@@ -31,7 +31,12 @@ Currently supported banks:
 
 # Installation
 
-You may receive security warnings during installation -- this happens because the release binaries are unsigned, and are incorrectly flagged as malware.
+> [!WARNING]
+> The offline app may raise security warnings during installation.
+
+Specifically on MacOS, the application will show an "app is damaged and can't be opened" error.
+
+These security warnings happen because the release binaries are unsigned, and are incorrectly flagged as malware.
 
 To get around this, follow these steps for [MacOS](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) / [Windows](https://stackoverflow.com/questions/54733909/windows-defender-alert-users-from-my-pyinstaller-exe).
 
