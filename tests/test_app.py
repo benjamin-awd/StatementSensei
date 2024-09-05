@@ -1,4 +1,5 @@
 # pylint: disable=no-name-in-module
+import os
 from unittest.mock import patch
 from uuid import uuid4
 
@@ -10,8 +11,7 @@ from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRe
 from webapp.app import app
 
 
-@pytest.fixture
-def uploaded_file(file_name="example_statement.pdf"):
+def create_uploaded_file(file_name):
     with open(f"tests/fixtures/{file_name}", "rb") as f:
         raw_file = f.read()
 
@@ -26,9 +26,33 @@ def uploaded_file(file_name="example_statement.pdf"):
     return UploadedFile(record, file_urls)
 
 
+@pytest.fixture
+def uploaded_file():
+    return create_uploaded_file("example_statement.pdf")
+
+
+@pytest.fixture
+def protected_file():
+    return create_uploaded_file("protected_example_statement.pdf")
+
+
 def test_app(uploaded_file):
     with patch("webapp.app.get_files") as get_files:
         get_files.return_value = [uploaded_file]
+        df = app()
+
+    expected_df = pd.read_csv("tests/fixtures/example_statement.csv")
+
+    df["Date"] = pd.to_datetime(df["Date"])
+    expected_df["Date"] = pd.to_datetime(expected_df["Date"])
+
+    assert df.equals(expected_df)
+
+
+def test_unlock_protected(protected_file):
+    os.environ["PDF_PASSWORDS"] = '["foobar123"]'
+    with patch("webapp.app.get_files") as get_files:
+        get_files.return_value = [protected_file]
         df = app()
 
     expected_df = pd.read_csv("tests/fixtures/example_statement.csv")
