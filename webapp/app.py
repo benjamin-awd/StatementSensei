@@ -63,11 +63,22 @@ def app() -> pd.DataFrame:
 
 
 def process_pdf(uploaded_files, config) -> pd.DataFrame | None:
+    num_files = len(uploaded_files)
+    show_pbar = num_files > 4
+
+    pbar = st.progress(0, text="Processing PDFs") if show_pbar else None
+
     dataframes = []
-    for file in uploaded_files:
+    for i, file in enumerate(uploaded_files):
+        if pbar:
+            pbar.progress(i / num_files, text=f"Processing {file.name}")
+
         df = handle_file(file, config)
         if isinstance(df, pd.DataFrame):
             dataframes.append(df)
+
+    if pbar:
+        pbar.empty()
 
     if dataframes:
         concat_df = format_df(pd.concat(dataframes))
