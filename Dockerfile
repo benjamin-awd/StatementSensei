@@ -20,6 +20,6 @@ COPY pyproject.toml poetry.lock README.md entrypoint.py ./
 COPY webapp/ ./webapp
 
 # install python dependencies
-RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev
+RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --extras ocrmypdf --without dev
 
 CMD [ "python", "entrypoint.py" ]

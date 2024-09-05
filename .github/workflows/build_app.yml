@@ -38,7 +38,7 @@ jobs:
       - name: Install pdftotext dependencies (windows)
         if: matrix.os-target.os == 'windows-latest'
         run: |
-          conda install -c conda-forge poppler ocrmypdf
+          conda install -c conda-forge poppler
 
       - name: Setup brew (mac)
         if: matrix.os-target.os == 'macos-latest'
@@ -60,7 +60,17 @@ jobs:
           toolchain: stable
           target: ${{ matrix.os-target.target }}
 
-      - name: Install Statement Sensei dependencies
+      - name: Install Statement Sensei dependencies (ubuntu/macos)
+        if: matrix.os-target.os != 'windows-latest'
+        uses: ./.github/actions/setup-python-poetry
+        with:
+          python-version: "3.11"
+          poetry-version: "1.8.3"
+          poetry-install-args: --with main --with build --without dev --extras ocrmypdf
+
+      # pngquant isn't supported on windows, so ocrmypdf can't be installed
+      - name: Install Statement Sensei dependencies (windows)
+        if: matrix.os-target.os == 'windows-latest'
         uses: ./.github/actions/setup-python-poetry
         with:
           python-version: "3.11"
