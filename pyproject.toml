@@ -3,7 +3,7 @@ name = "statement-sensei"
 packages = [
     {include = "webapp"}
 ]
-version = "0.6.1"
+version = "0.6.2"
 description = "PDF to CSV conversion for your bank statements"
 authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
 readme = "README.md"

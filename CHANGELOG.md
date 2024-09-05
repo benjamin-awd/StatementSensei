@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.2] - 2024-09-05
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Update tauri with ocrmypdf dependency
+
 ## [0.6.1] - 2024-09-05
 
 ### 🛠️ Bug Fixes
