@@ -14,7 +14,7 @@ WORKDIR /app
 
 # install pdftotext dependencies
 RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && apt-get -y install build-essential libpoppler-cpp-dev pkg-config
+    apt-get update && apt-get -y install build-essential libpoppler-cpp-dev pkg-config ocrmypdf
 
 COPY pyproject.toml poetry.lock README.md entrypoint.py ./
 COPY webapp/ ./webapp
