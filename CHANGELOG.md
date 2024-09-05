@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0] - 2024-09-05
+
+### ⛰️ Features
+
+- Add OCR support for HSBC
+- Add progress bar for pdfs
+- *(ci)* Add publish to docker hub workflow
+
+### 🧪 Testing
+
+- Check protected files can be bypassed using env var
+
 ## [0.5.3] - 2024-08-27
 
 ### 🛠️ Bug Fixes
