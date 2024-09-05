@@ -3,7 +3,7 @@
 REQUIREMENTS_FILE="requirements.txt"
 DOT="."
 
-poetry export -f requirements.txt --output requirements.txt --without dev
+poetry export -f requirements.txt --output requirements.txt --extras ocrmypdf --without dev
 
 if [ -f "$REQUIREMENTS_FILE" ]; then
     FIRST_LINE=$(head -n 1 "$REQUIREMENTS_FILE")
