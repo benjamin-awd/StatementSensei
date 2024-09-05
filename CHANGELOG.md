@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.1] - 2024-09-05
+
+### 🛠️ Bug Fixes
+
+- *(docker)* Add missing ocrmypdf dependency
+
+### ⚙️ Miscellaneous Tasks
+
+- Move publish workflow to correct directory
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.11.0
+
 ## [0.6.0] - 2024-09-05
 
 ### ⛰️ Features
