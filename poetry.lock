@@ -948,32 +948,28 @@ files = [
 
 [[package]]
 name = "monopoly-core"
-version = "0.10.10"
+version = "0.11.0"
 description = "Monopoly is a Python library & CLI that converts bank statement PDFs to CSV"
 optional = false
-python-versions = "^3.10"
-files = []
-develop = false
+python-versions = "<4.0,>=3.10"
+files = [
+    {file = "monopoly_core-0.11.0-py3-none-any.whl", hash = "sha256:0b513e57bd2dc8b7f5a9ff0bf4d2d7d40933f2ce77861c42bc0d0229f3282034"},
+    {file = "monopoly_core-0.11.0.tar.gz", hash = "sha256:03d0f90e478e7f6384c9c1de060a3582b64991c33da6f98bbd58af2e64796ffc"},
+]
 
 [package.dependencies]
-click = "^8.1.7"
-dateparser = "^1.2.0"
-pdftotext = "^2.2.2"
-pydantic = "^2.5.2"
-pydantic-settings = "^2.0.3"
-pymupdf = "^1.23.7"
-strenum = "^0.4.15"
-tabulate = "^0.9.0"
-tqdm = "^4.66.1"
+click = ">=8.1.7,<9.0.0"
+dateparser = ">=1.2.0,<2.0.0"
+pdftotext = ">=2.2.2,<3.0.0"
+pydantic = ">=2.5.2,<3.0.0"
+pydantic-settings = ">=2.0.3,<3.0.0"
+pymupdf = ">=1.23.7,<2.0.0"
+strenum = ">=0.4.15,<0.5.0"
+tabulate = ">=0.9.0,<0.10.0"
+tqdm = ">=4.66.1,<5.0.0"
 
 [package.extras]
 ocr = ["ocrmypdf (>=16.5.0,<17.0.0)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/benjamin-awd/monopoly"
-reference = "ocr"
-resolved_reference = "502b0aabf31283f04e364539024774af445f213f"
 
 [[package]]
 name = "mypy-extensions"
@@ -2633,4 +2629,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "ee45f341f98e1fad96b4c3acf51e2cf7c0983197a4f9766ff378b697487346c2"
+content-hash = "85bd1fe49a5ac86acf2352c961cf85a629bf2aeab8fd2880df688c26dbf8a6bb"
