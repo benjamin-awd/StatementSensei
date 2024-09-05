@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.3] - 2024-09-05
+
+### 🛠️ Bug Fixes
+
+- *(tauri)* Avoid installing ocrmypdf on windows
+
 ## [0.6.2] - 2024-09-05
 
 ### ⚙️ Miscellaneous Tasks
