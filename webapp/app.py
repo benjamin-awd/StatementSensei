@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from monopoly.pdf import WrongPasswordError
+from monopoly.pdf import PdfDocument, WrongPasswordError
 from pymupdf import Document
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
@@ -11,23 +11,24 @@ from webapp.logo import logo
 
 def handle_file(file: UploadedFile, config: Config) -> pd.DataFrame | None:
     file_bytes = file.getvalue()
-    document = Document(stream=file_bytes)
+    document = PdfDocument(file_bytes=file_bytes)
+    document._name = file.name
 
     if document.is_encrypted:  # pylint: disable=no-member
-        return handle_encrypted_document(document, config, file.name)
+        return handle_encrypted_document(document, config)
 
     return parse_bank_statement(document, config)
 
 
 def handle_encrypted_document(
-    document: Document, config: Config, file_name: str
+    document: Document, config: Config
 ) -> pd.DataFrame | None:
     password_container = st.empty()
     password = password_container.text_input(
         label="Password",
         type="password",
-        placeholder=f"Enter password for {file_name}",
-        key=file_name,
+        placeholder=f"Enter password for {document.name}",
+        key=document.name,
     )
 
     if not password:

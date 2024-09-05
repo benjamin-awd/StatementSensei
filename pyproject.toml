@@ -11,9 +11,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
 streamlit = "^1.36.0"
-monopoly-core = "0.10.10"
 pybadges = {git = "https://github.com/benjamin-awd/pybadges"}
-
+monopoly-core = { git = "https://github.com/benjamin-awd/monopoly", branch = "ocr" }
+ocrmypdf = "^16.5.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.0"

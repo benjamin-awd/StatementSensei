@@ -4,6 +4,9 @@ from typing import Optional
 
 import pandas as pd
 import streamlit as st
+from monopoly.banks import BankDetector, banks
+from monopoly.generic import GenericBank
+from monopoly.pdf import PdfParser
 from monopoly.pipeline import Pipeline
 from monopoly.statements.base import SafetyCheckError
 from pydantic import SecretStr
@@ -18,12 +21,21 @@ class Config:
 def parse_bank_statement(
     document: Document, config: Config, password: Optional[str] = None
 ) -> pd.DataFrame:
-    pipeline = Pipeline(file_bytes=document.tobytes(), passwords=[SecretStr(password)])
+    analyzer = BankDetector(document)
+    bank = analyzer.detect_bank(banks) or GenericBank
+    parser = PdfParser(bank, document)
+
+    if parser.ocr_available:
+        with st.spinner(f"Adding OCR layer for {document.name}"):
+            parser.document = parser.apply_ocr(document)
+
+    pipeline = Pipeline(parser, passwords=[SecretStr(password)])
 
     # skip initial safety check, and handle it outside the pipeline
     # so that we can raise a warning and still show transactions
     statement = pipeline.extract(safety_check=False)
-    bank_name = statement.bank.__name__
+    bank_name = parser.bank.__name__
+
     try:
         statement.perform_safety_check()
     except SafetyCheckError:
