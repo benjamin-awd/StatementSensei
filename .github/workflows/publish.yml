@@ -34,6 +34,7 @@ jobs:
             echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
           else
             echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
+          fi
 
       - name: Push to Docker Hub
         uses: docker/build-push-action@v6
