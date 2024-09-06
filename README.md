@@ -65,6 +65,18 @@ Otherwise, to run the application as a container:
 docker compose up
 ```
 
+If running locally with docker: you can either store passwords in an environment variable as a string
+
+```sh
+export PDF_PASSWORDS='["pass123", "otherpw123"]'
+```
+
+or otherwise store them in an .env file in the project root:
+
+```sh
+echo 'PDF_PASSWORDS=["foo"]' > .env
+```
+
 # Features
 - Supports uploading multiple bank statements
 - Allows unlocking of PDFs using user-provided credentials via the frontend
