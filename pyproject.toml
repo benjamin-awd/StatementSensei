@@ -13,7 +13,7 @@ python = ">=3.10,<3.13"
 streamlit = "^1.36.0"
 pybadges = {git = "https://github.com/benjamin-awd/pybadges"}
 monopoly-core = "^0.11.0"
-ocrmypdf = { version = "^15.4.0", optional = true }
+ocrmypdf = { version = "^16.5.0", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.0"

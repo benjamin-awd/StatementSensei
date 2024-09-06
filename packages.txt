@@ -2,5 +2,4 @@ build-essential
 libpoppler-cpp-dev
 pkg-config
 ocrmypdf
-ghostscript-x
-ghostscript
+ghostscript/bookworm
