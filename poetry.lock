@@ -948,13 +948,13 @@ files = [
 
 [[package]]
 name = "monopoly-core"
-version = "0.11.0"
+version = "0.11.1"
 description = "Monopoly is a Python library & CLI that converts bank statement PDFs to CSV"
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "monopoly_core-0.11.0-py3-none-any.whl", hash = "sha256:0b513e57bd2dc8b7f5a9ff0bf4d2d7d40933f2ce77861c42bc0d0229f3282034"},
-    {file = "monopoly_core-0.11.0.tar.gz", hash = "sha256:03d0f90e478e7f6384c9c1de060a3582b64991c33da6f98bbd58af2e64796ffc"},
+    {file = "monopoly_core-0.11.1-py3-none-any.whl", hash = "sha256:c64464b9b7ba082bc613be3622be055b422fe45195ec09828429881341387528"},
+    {file = "monopoly_core-0.11.1.tar.gz", hash = "sha256:c9426b0b524681c5b995651cc37a099a3fce01345b7202a9819de861808b82c0"},
 ]
 
 [package.dependencies]
@@ -2633,4 +2633,4 @@ ocrmypdf = ["ocrmypdf"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "b5f4d48eef45b42948e242d36a60036bfd08c75f9962bcf4a15c9a259ee3f83f"
+content-hash = "dd6a88c59f0e1138e60f1c5802b6f943d6df4aa676fd50d4261eadcb7ae29f61"
