@@ -40,7 +40,8 @@ def parse_bank_statement(
         statement.perform_safety_check()
     except SafetyCheckError:
         st.error(
-            "Safety check failed, transactions are incorrect or missing", icon="❗"
+            f"Safety check failed for {document.name}, transactions are incorrect or missing",
+            icon="❗",
         )
 
     if bank_name == "GenericBank":
