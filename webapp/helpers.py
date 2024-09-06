@@ -1,5 +1,5 @@
 # pylint: disable=unsubscriptable-object
-from dataclasses import dataclass
+from functools import lru_cache
 from typing import Optional
 
 import pandas as pd
@@ -8,19 +8,17 @@ from monopoly.banks import BankDetector, banks
 from monopoly.generic import GenericBank
 from monopoly.pdf import PdfParser
 from monopoly.pipeline import Pipeline
-from monopoly.statements.base import SafetyCheckError
+from monopoly.statements.base import SafetyCheckError, Transaction
 from pydantic import SecretStr
 from pymupdf import Document
 
-
-@dataclass
-class Config:
-    show_banks: bool
+from webapp.models import Config, TransactionMetadata, Transactions
 
 
+@lru_cache
 def parse_bank_statement(
-    document: Document, config: Config, password: Optional[str] = None
-) -> pd.DataFrame:
+    document: Document, password: Optional[str] = None
+) -> list[Transaction]:
     analyzer = BankDetector(document)
     bank = analyzer.detect_bank(banks) or GenericBank
     parser = PdfParser(bank, document)
@@ -52,17 +50,18 @@ def parse_bank_statement(
     if bank_name == "GenericBank":
         st.warning("Unrecognized bank - using generic parser", icon="⚠️")
 
-    transactions = pipeline.transform(statement)
+    metadata = TransactionMetadata(bank_name)
+    transactions = Transactions(pipeline.transform(statement), metadata)
 
+    return transactions
+
+
+def create_df(transactions: Transactions, config: Config) -> pd.DataFrame:
     df = pd.DataFrame(transactions)
-
-    if config.show_banks:
-        df["bank"] = bank_name
-    return df
-
-
-def format_df(df: pd.DataFrame) -> pd.DataFrame:
     df["date"] = pd.to_datetime(df["date"]).dt.date
+    if config.show_banks:
+        df["bank"] = transactions.metadata.bank_name
+
     df = df.drop(columns="suffix")
     total_balance = df["amount"].sum()
 
