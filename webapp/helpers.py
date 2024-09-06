@@ -45,9 +45,7 @@ def parse_bank_statement(
         )
 
     if bank_name == "GenericBank":
-        st.warning(
-            "This bank is not supported - transactions may be inaccurate", icon="⚠️"
-        )
+        st.warning("Unrecognized bank - using generic parser", icon="⚠️")
 
     transactions = pipeline.transform(statement)
 
