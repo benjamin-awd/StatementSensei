@@ -27,7 +27,12 @@ def parse_bank_statement(
 
     if parser.ocr_available:
         with st.spinner(f"Adding OCR layer for {document.name}"):
-            parser.document = parser.apply_ocr(document)
+            # certain PDFs have strange formats that can break the OCR,
+            # so they need to be cropped before further processing
+            if cropbox := bank.pdf_config.page_bbox:
+                for page in parser.document:
+                    page.set_cropbox(cropbox)
+                parser.document = parser.apply_ocr(document)
 
     pipeline = Pipeline(parser, passwords=[SecretStr(password)])
 
