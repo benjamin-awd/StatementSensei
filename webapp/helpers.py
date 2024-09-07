@@ -27,7 +27,8 @@ def parse_bank_statement(
             if cropbox := bank.pdf_config.page_bbox:
                 for page in parser.document:
                     page.set_cropbox(cropbox)
-                parser.document = parser.apply_ocr(document)
+
+            parser.document = parser.apply_ocr(document)
 
     pipeline = Pipeline(parser, passwords=[SecretStr(password)])
 
