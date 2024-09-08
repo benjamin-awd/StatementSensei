@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.6.4] - 2024-09-08
+
+### ⛰️ Features
+
+- Add caching for files
+
+### 🛠️ Bug Fixes
+
+- *(ci)* Pre-commit hook should include ocrmypdf extras
+- Crop pages before applying OCR
+
+### 📚 Documentation
+
+- *(README)* Add note explaining how to inject pdf passwords
+
+### ⚙️ Miscellaneous Tasks
+
+- Add ghostscript deps to streamlit packages
+- Add file name to safety check failure message
+- Create symlink to tesseract.cfg in webapp
+- Update unrecognized bank message
+- *(ocr)* Move apply_ocr outside of `id` condition
+
+### Build
+
+- *(deps)* Pin ocrmypdf at version ^15.4.0
+- *(deps)* Use ocrmypdf from debian bookworm
+- *(deps)* Bump monopoly-core to 0.12.0
+
 ## [0.6.3] - 2024-09-05
 
 ### 🛠️ Bug Fixes
