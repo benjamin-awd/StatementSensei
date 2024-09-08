@@ -37,13 +37,14 @@ def parse_bank_statement(
     statement = pipeline.extract(safety_check=False)
     bank_name = parser.bank.__name__
 
-    try:
-        statement.perform_safety_check()
-    except SafetyCheckError:
-        st.error(
-            f"Safety check failed for {document.name}, transactions are incorrect or missing",
-            icon="❗",
-        )
+    if statement.config.safety_check:
+        try:
+            statement.perform_safety_check()
+        except SafetyCheckError:
+            st.error(
+                f"Safety check failed for {document.name}, transactions are incorrect or missing",
+                icon="❗",
+            )
 
     if bank_name == "GenericBank":
         st.warning("Unrecognized bank - using generic parser", icon="⚠️")
