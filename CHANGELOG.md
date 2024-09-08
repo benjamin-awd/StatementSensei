@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.6.5] - 2024-09-08
+
+### 📚 Documentation
+
+- Add UOB to supported bank list
+- Add ZKB to supported bank list
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.12.1
+
 ## [0.6.4] - 2024-09-08
 
 ### ⛰️ Features
