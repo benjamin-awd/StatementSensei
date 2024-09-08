@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.6.6] - 2024-09-08
+
+### 🚜 Refactor
+
+- Allow safety check to be disabled for specific banks
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.12.2
+
 ## [0.6.5] - 2024-09-08
 
 ### 📚 Documentation
