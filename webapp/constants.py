@@ -12,4 +12,5 @@ SUPPORTED_BANKS = """Currently supported banks:
 | Maybank             | ✅                 | ✅                  |
 | OCBC                | ✅                 | ✅                  |
 | Standard Chartered  | ✅                 | ❌                  |
+| UOB                 | ✅                 | ✅                  |
 """

@@ -28,6 +28,7 @@ Currently supported banks:
 | Maybank             | ✅                 | ✅                  |
 | OCBC                | ✅                 | ✅                  |
 | Standard Chartered  | ✅                 | ❌                  |
+| UOB                 | ✅                 | ✅                  |
 
 # Installation
 
