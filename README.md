@@ -29,6 +29,7 @@ Currently supported banks:
 | OCBC                | ✅                 | ✅                  |
 | Standard Chartered  | ✅                 | ❌                  |
 | UOB                 | ✅                 | ✅                  |
+| ZKB                 | ❌                 | ✅                  |
 
 # Installation
 

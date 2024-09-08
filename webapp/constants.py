@@ -13,4 +13,5 @@ SUPPORTED_BANKS = """Currently supported banks:
 | OCBC                | ✅                 | ✅                  |
 | Standard Chartered  | ✅                 | ❌                  |
 | UOB                 | ✅                 | ✅                  |
+| ZKB                 | ❌                 | ✅                  |
 """
