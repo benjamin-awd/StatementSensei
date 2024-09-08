@@ -12,7 +12,7 @@ readme = "README.md"
 python = ">=3.10,<3.13"
 streamlit = "^1.36.0"
 pybadges = {git = "https://github.com/benjamin-awd/pybadges"}
-monopoly-core = "^0.11.1"
+monopoly-core = "^0.12.0"
 ocrmypdf = { version = "^16.5.0", optional = true }
 
 [tool.poetry.group.dev.dependencies]
