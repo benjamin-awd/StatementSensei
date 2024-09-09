@@ -40,6 +40,12 @@ jobs:
         run: |
           conda install -c conda-forge poppler
 
+      - name: Install ocrmypdf dependencies (windows)
+        uses: MinoruSekine/setup-scoop@v4.0.1
+        if: matrix.os-target.os == 'windows-latest'
+        with:
+          apps: tesseract pdfquant ghostscript
+
       - name: Setup brew (mac)
         if: matrix.os-target.os == 'macos-latest'
         uses: Homebrew/actions/setup-homebrew@master
@@ -60,22 +66,12 @@ jobs:
           toolchain: stable
           target: ${{ matrix.os-target.target }}
 
-      - name: Install Statement Sensei dependencies (ubuntu/macos)
-        if: matrix.os-target.os != 'windows-latest'
+      - name: Install Statement Sensei dependencies
         uses: ./.github/actions/setup-python-poetry
         with:
           python-version: "3.11"
           poetry-version: "1.8.3"
           poetry-install-args: --with main --with build --without dev --extras ocrmypdf
-
-      # pngquant isn't supported on windows, so ocrmypdf can't be installed
-      - name: Install Statement Sensei dependencies (windows)
-        if: matrix.os-target.os == 'windows-latest'
-        uses: ./.github/actions/setup-python-poetry
-        with:
-          python-version: "3.11"
-          poetry-version: "1.8.3"
-          poetry-install-args: --with main --with build --without dev
 
       # onedir mode doesn't work with ubuntu, build_appimage.sh fails
       - name: Create executable for tauri (ubuntu)
