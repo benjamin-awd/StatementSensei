@@ -79,6 +79,8 @@ def create_df(processed_files: list[ProcessedFile], config: Config) -> pd.DataFr
         use_container_width=True,
         hide_index=True,
     )
+    st.session_state["df"] = concat_df
+
     st.write(f"Total Balance: ${total_balance:.2f}")
     return df
 
