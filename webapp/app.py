@@ -6,7 +6,7 @@ from streamlit.runtime.uploaded_file_manager import UploadedFile
 from webapp.constants import APP_DESCRIPTION
 from webapp.helpers import create_df, parse_bank_statement
 from webapp.logo import logo
-from webapp.models import Config, ProcessedFile
+from webapp.models import ProcessedFile
 
 
 def app() -> pd.DataFrame:
@@ -14,10 +14,6 @@ def app() -> pd.DataFrame:
     st.image(logo, width=450)
     st.markdown(APP_DESCRIPTION)
 
-    with st.sidebar.expander("Config"):
-        show_banks = st.toggle("Include bank name")
-
-    config = Config(show_banks)
     files = get_files()
 
     df = None
@@ -25,7 +21,7 @@ def app() -> pd.DataFrame:
         processed_files = process_files(files)
 
         if processed_files:
-            df = create_df(processed_files, config)
+            df = create_df(processed_files)
             csv = df.to_csv(index=False).encode("utf-8")
             st.download_button(
                 label="Download CSV",
