@@ -22,16 +22,7 @@ def render_metric(
     )
 
 
-st.markdown("# Graphs")
-
-if "df" in st.session_state.keys():
-    df: pd.DataFrame = st.session_state["df"].copy()
-    df.index = pd.to_datetime(df["date"])
-    df["Income"] = df["amount"].apply(lambda x: x if x > 0 else 0)
-    df["Expenses"] = df["amount"].apply(lambda x: abs(x) if x < 0 else 0)
-    df = df.drop(columns=["description", "date"])
-    df = df.resample("ME").sum()
-
+def show_stacked_bar_chart(df: pd.DataFrame):
     income_trace = go.Bar(
         x=df.index,
         y=df["Income"],
@@ -107,3 +98,17 @@ if "df" in st.session_state.keys():
     render_metric(col2, "Expenses", f"${total_expenses:,}", value_color="#F63366")
     render_metric(col3, "Total Savings", formatted_total_savings)
     render_metric(col4, "Savings Rate", formatted_savings_rate)
+
+
+st.markdown("# Visualizations")
+
+if "df" in st.session_state.keys():
+    df: pd.DataFrame = st.session_state["df"].copy()
+    df.index = pd.to_datetime(df["date"])
+    df["Bank"] = df["bank"]
+    df["Income"] = df["amount"].apply(lambda x: x if x > 0 else 0)
+    df["Expenses"] = df["amount"].apply(lambda x: abs(x) if x < 0 else 0)
+    df = df.drop(columns=["description", "date"])
+    df = df.resample("ME").sum()
+
+    show_stacked_bar_chart(df)
