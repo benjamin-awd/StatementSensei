@@ -10,7 +10,7 @@ from monopoly.pipeline import Pipeline
 from monopoly.statements.base import SafetyCheckError
 from pydantic import SecretStr
 
-from webapp.models import Config, ProcessedFile, TransactionMetadata
+from webapp.models import ProcessedFile, TransactionMetadata
 
 
 def parse_bank_statement(
@@ -55,13 +55,12 @@ def parse_bank_statement(
     return processed_file
 
 
-def create_df(processed_files: list[ProcessedFile], config: Config) -> pd.DataFrame:
+def create_df(processed_files: list[ProcessedFile]) -> pd.DataFrame:
     dataframes = []
     for file in processed_files:
         df = pd.DataFrame(file)
         df["date"] = pd.to_datetime(df["date"]).dt.date
-        if config.show_banks:
-            df["bank"] = file.metadata.bank_name
+        df["bank"] = file.metadata.bank_name
 
         df = df.drop(columns="suffix")
         total_balance = df["amount"].sum()

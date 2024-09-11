@@ -4,11 +4,6 @@ from monopoly.statements import Transaction
 
 
 @dataclass
-class Config:
-    show_banks: bool
-
-
-@dataclass
 class TransactionMetadata:
     bank_name: str
 
