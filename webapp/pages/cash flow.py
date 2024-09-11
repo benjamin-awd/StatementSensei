@@ -26,10 +26,10 @@ st.markdown("# Graphs")
 
 if "df" in st.session_state.keys():
     df: pd.DataFrame = st.session_state["df"].copy()
-    df.index = pd.to_datetime(df["Date"])
-    df["Income"] = df["Amount"].apply(lambda x: x if x > 0 else 0)
-    df["Expenses"] = df["Amount"].apply(lambda x: abs(x) if x < 0 else 0)
-    df = df.drop(columns=["Description", "Date"])
+    df.index = pd.to_datetime(df["date"])
+    df["Income"] = df["amount"].apply(lambda x: x if x > 0 else 0)
+    df["Expenses"] = df["amount"].apply(lambda x: abs(x) if x < 0 else 0)
+    df = df.drop(columns=["description", "date"])
     df = df.resample("ME").sum()
 
     income_trace = go.Bar(
@@ -59,7 +59,7 @@ if "df" in st.session_state.keys():
         mode="lines",
         line=dict(color="black", width=4),
         hoverinfo="text+name",
-        text=[f"${s:,.2f}" for s in df["Amount"]],
+        text=[f"${s:,.2f}" for s in df["amount"]],
     )
 
     layout = go.Layout(
@@ -88,7 +88,7 @@ if "df" in st.session_state.keys():
 
     total_income = round(df["Income"].sum())
     total_expenses = round(df["Expenses"].sum())
-    total_savings = round(df["Amount"].sum())
+    total_savings = round(df["amount"].sum())
     if total_income > 0:  # Avoid division by zero
         savings_rate = (total_savings / total_income) * 100
     else:

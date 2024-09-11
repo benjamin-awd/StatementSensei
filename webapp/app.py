@@ -4,7 +4,7 @@ from monopoly.pdf import MissingPasswordError, PdfDocument
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 from webapp.constants import APP_DESCRIPTION
-from webapp.helpers import create_df, parse_bank_statement
+from webapp.helpers import create_df, parse_bank_statement, show_df
 from webapp.logo import logo
 from webapp.models import ProcessedFile
 
@@ -17,17 +17,17 @@ def app() -> pd.DataFrame:
     files = get_files()
 
     df = None
+    if "df" in st.session_state:
+        df = st.session_state["df"]
+
     if files:
         processed_files = process_files(files)
 
         if processed_files:
             df = create_df(processed_files)
-            csv = df.to_csv(index=False).encode("utf-8")
-            st.download_button(
-                label="Download CSV",
-                data=csv,
-                mime="text/csv",
-            )
+
+    if df is not None:
+        show_df(df)
 
     return df
 
