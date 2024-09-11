@@ -63,25 +63,31 @@ def create_df(processed_files: list[ProcessedFile]) -> pd.DataFrame:
         df["bank"] = file.metadata.bank_name
 
         df = df.drop(columns="suffix")
-        total_balance = df["amount"].sum()
-
-        # reorder and title case columns
-        desired_order = ["date", "description", "amount", "bank"]
-        columns_to_use = [col for col in desired_order if col in df.columns]
-        df = df[columns_to_use]
-        df.columns = [col.title() for col in df.columns]
         dataframes.append(df)
 
     concat_df = pd.concat(dataframes)
+    st.session_state["df"] = concat_df
+    return concat_df
+
+
+def show_df(df: pd.DataFrame) -> None:
+    desired_order = ["date", "description", "amount", "bank"]
+    columns_to_use = [col for col in desired_order if col in df.columns]
+    df = df[columns_to_use]
+    df.columns = [col.title() for col in df.columns]
     st.dataframe(
-        concat_df.style.format({"Amount": "{:.2f}"}),
+        df.style.format({"Amount": "{:,.2f}"}),
         use_container_width=True,
         hide_index=True,
     )
-    st.session_state["df"] = concat_df
-
-    st.write(f"Total Balance: ${total_balance:.2f}")
-    return df
+    total_balance = df["Amount"].sum()
+    st.write(f"Total Balance: ${total_balance:,.2f}")
+    csv = df.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        label="Download CSV",
+        data=csv,
+        mime="text/csv",
+    )
 
 
 def switch_page(page_name: str):
