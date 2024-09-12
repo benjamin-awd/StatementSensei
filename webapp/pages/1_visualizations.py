@@ -107,6 +107,6 @@ if "df" in st.session_state.keys():
     df["Income"] = df["amount"].apply(lambda x: x if x > 0 else 0)
     df["Expenses"] = df["amount"].apply(lambda x: abs(x) if x < 0 else 0)
     df = df.drop(columns=["description", "date"])
-    df = df.resample("ME").sum()
+    df = df.resample("MS").sum()
 
     show_stacked_bar_chart(df)
