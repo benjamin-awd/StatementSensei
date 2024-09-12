@@ -75,7 +75,7 @@ def show_stacked_bar_chart(df: pd.DataFrame):
     )
 
     fig = go.Figure(data=[income_trace, expenses_trace, savings_trace], layout=layout)
-    st.plotly_chart(fig, use_container_width=True)
+    chart = st.plotly_chart(fig, use_container_width=True)
 
     total_income = round(df["Income"].sum())
     total_expenses = round(df["Expenses"].sum())
@@ -94,10 +94,11 @@ def show_stacked_bar_chart(df: pd.DataFrame):
 
     col1, col2, col3, col4 = st.columns(4)
 
-    render_metric(col1, "Income", f"${total_income:,}", value_color="#00CEAA")
-    render_metric(col2, "Expenses", f"${total_expenses:,}", value_color="#F63366")
-    render_metric(col3, "Total Savings", formatted_total_savings)
-    render_metric(col4, "Savings Rate", formatted_savings_rate)
+    if chart:
+        render_metric(col1, "Income", f"${total_income:,}", value_color="#00CEAA")
+        render_metric(col2, "Expenses", f"${total_expenses:,}", value_color="#F63366")
+        render_metric(col3, "Total Savings", formatted_total_savings)
+        render_metric(col4, "Savings Rate", formatted_savings_rate)
 
 
 st.markdown("# Visualizations")
