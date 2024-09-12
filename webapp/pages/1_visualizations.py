@@ -56,10 +56,7 @@ def show_stacked_bar_chart(df: pd.DataFrame):
     layout = go.Layout(
         title="Cash Flow",
         title_font=dict(size=26),
-        xaxis=dict(
-            title="Month",
-            showgrid=False,
-        ),
+        xaxis=dict(title="Month", showgrid=False, dtick="M1"),
         yaxis=dict(
             title="Amount",
             showgrid=False,
