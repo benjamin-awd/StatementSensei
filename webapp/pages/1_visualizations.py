@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.graph_objs as go
 import streamlit as st
 
+from webapp.helpers import switch_page
+
 if TYPE_CHECKING:
     from streamlit.delta_generator import DeltaGenerator
 
@@ -110,3 +112,8 @@ if "df" in st.session_state.keys():
     df = df.resample("MS").sum()
 
     show_stacked_bar_chart(df)
+
+if "df" not in st.session_state.keys():
+    switch_page_button = st.button("Convert a bank statement")
+    if switch_page_button:
+        switch_page("app")
