@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.7.0] - 2024-09-13
+
+### ⛰️ Features
+
+- *(streamlit)* Add cash flow graph
+
+### 🛠️ Bug Fixes
+
+- *(tauri)* Add pyinstaller hook for ocrmypdf
+- Resample using start of month
+- Add missing plotly dependency
+
+### 🚜 Refactor
+
+- Show bank name in dataframe by default
+- Cache dataframe when moving between pages
+- *(visualizations)* Show redirect button if no dataframe found
+
+### 🧪 Testing
+
+- Fix order of columns
+
+### ⚙️ Miscellaneous Tasks
+
+- Rename pages with page numbers
+- Wait for cashflow graph to load before showing metrics
+- Show ticks for each month
+
 ## [0.6.6] - 2024-09-08
 
 ### 🚜 Refactor
