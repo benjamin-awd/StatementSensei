@@ -445,9 +445,9 @@ markupsafe==2.1.5 ; python_version >= "3.10" and python_version < "3.13" \
 mdurl==0.1.2 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8 \
     --hash=sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba
-monopoly-core==0.12.2 ; python_version >= "3.10" and python_version < "3.13" \
-    --hash=sha256:0ee69f0c437fdd301eb79c8ee5cefab3ac2049ed576d201328089fca3412c9c6 \
-    --hash=sha256:b7de0486c8a192290201a5f102b32666e999a8b8a31934dceca53a50ac62350b
+monopoly-core==0.12.3 ; python_version >= "3.10" and python_version < "3.13" \
+    --hash=sha256:3e487bb6fbe1f6f95af94fc55d99f3ae8cad04cc0a7c9289e8b004717de4c523 \
+    --hash=sha256:4b9700d38e0d42577555d990a07ab23379b4daba6b5d63b0d81e2393349d9175
 narwhals==1.6.2 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:caee5b13a62740787fa69fc7f13fb119e0d36a7a1f8797a70c2ec19bcecc0b5a \
     --hash=sha256:f236fe14300dd85d877a8c05eb861805e2e0076c14b1d24af66d02fa98c245b6
