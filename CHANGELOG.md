@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.7.1] - 2024-09-15
+
+### ⚙️ Miscellaneous Tasks
+
+- Skip release step for development branch
+
+### Build
+
+- *(tauri)* Switch to .deb instead of .appimage
+- *(deps)* Bump monopoly-core to 0.12.3
+
 ## [0.7.0] - 2024-09-13
 
 ### ⛰️ Features
