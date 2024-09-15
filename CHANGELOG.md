@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.2] - 2024-09-15
+
+### ⚙️ Miscellaneous Tasks
+
+- Allow pushing to docker hub using custom branch
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.12.4
+
 ## [0.7.1] - 2024-09-15
 
 ### ⚙️ Miscellaneous Tasks
