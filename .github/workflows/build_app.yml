@@ -127,7 +127,7 @@ jobs:
         with:
           name: statementsensei-${{ matrix.os-target.target }}
           path: |
-            tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/appimage/*.AppImage
+            tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/deb/
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/nsis/
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/dmg/
           compression-level: 9
