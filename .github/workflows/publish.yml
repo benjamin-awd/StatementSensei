@@ -9,6 +9,9 @@ on:
       tag:
         description: Docker tag to use
         required: true
+      branch:
+        description: Branch to use (optional)
+        required: false
 
 jobs:
   build:
@@ -17,6 +20,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch || github.ref_name }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
