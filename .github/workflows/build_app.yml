@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - "v*.*.*"
+    branches:
+      - development
   workflow_dispatch:
 
 defaults:
@@ -131,6 +133,7 @@ jobs:
           compression-level: 9
 
   create_release:
+    if: github.ref != 'refs/heads/development'
     needs: build
     runs-on: ubuntu-latest
     steps:
