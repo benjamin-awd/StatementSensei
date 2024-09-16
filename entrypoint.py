@@ -3,6 +3,11 @@ import sys
 from pathlib import Path
 
 import streamlit.web.cli as stcli
+from pydantic_settings import BaseSettings
+
+
+class StreamlitConfig(BaseSettings):
+    browser_server_address: str = "localhost"
 
 
 def resolve_path(path: str) -> str:
@@ -11,11 +16,12 @@ def resolve_path(path: str) -> str:
 
 
 if __name__ == "__main__":
+    config = StreamlitConfig()
     sys.argv = [
         "streamlit",
         "run",
         resolve_path("webapp/app.py"),
-        "--browser.serverAddress=localhost",
+        f"--browser.serverAddress={config.browser_server_address}",
         "--browser.gatherUsageStats=false",
         "--client.toolbarMode=viewer",
         "--global.developmentMode=false",
