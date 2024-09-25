@@ -1,4 +1,4 @@
-.
+dist/statement_sensei-0.7.3.tar.gz
 altair==5.4.1 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:0ce8c2e66546cb327e5f2d7572ec0e7c6feece816203215613962f0ec1d76a82 \
     --hash=sha256:0fb130b8297a569d08991fb6fe763582e7569f8a04643bbd9212436e3be04aef

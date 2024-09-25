@@ -7,4 +7,5 @@
 
 _ignore*
 build
-dist
+dist/entrypoint
+*.whl
