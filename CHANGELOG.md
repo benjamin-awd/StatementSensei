@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.3] - 2024-09-25
+
+### ⛰️ Features
+
+- Add support for custom server address
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.12.5
+
 ## [0.7.2] - 2024-09-15
 
 ### ⚙️ Miscellaneous Tasks
