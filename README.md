@@ -45,8 +45,19 @@ To get around this, follow these steps for [MacOS](https://support.apple.com/en-
 The Windows Defender alert can be bypassed by clicking "More info" -> "Run anyway".
 
 # Development
+Install system dependencies using brew or apt-get (necessary since `pdftotext` needs them)
 
-Install dependencies with Poetry:
+```sh
+apt-get install build-essential libpoppler-cpp-dev pkg-config ocrmypdf
+```
+
+or
+
+```sh
+brew install gcc@11 pkg-config poppler ocrmypdf
+```
+
+Install app dependencies with Poetry:
 ```shell
 poetry install
 poetry shell
