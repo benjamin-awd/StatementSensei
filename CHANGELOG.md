@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.7.4] - 2024-10-05
+
+### ⛰️ Features
+
+- *(ci)* Add support for linux/arm64
+
+### 📚 Documentation
+
+- *(README)* Update installation instructions
+- *(README)* Add updated instructions for docker
+
+### Build
+
+- Put local tar file in requirements
+
 ## [0.7.3] - 2024-09-25
 
 ### ⛰️ Features
