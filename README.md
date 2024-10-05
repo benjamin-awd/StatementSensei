@@ -73,9 +73,17 @@ To run the application in developer mode:
 streamlit run webapp/app.py
 ```
 
+## Docker
 Otherwise, to run the application as a container:
-```
+```sh
 docker compose up
+```
+
+or:
+
+```sh
+docker pull benjaminawd/statementsensei:latest
+docker run -p 8501:8501 benjaminawd/statementsensei:latest
 ```
 
 If running locally with docker: you can either store passwords in an environment variable as a string
@@ -84,7 +92,7 @@ If running locally with docker: you can either store passwords in an environment
 export PDF_PASSWORDS='["pass123", "otherpw123"]'
 ```
 
-or otherwise store them in an .env file in the project root:
+or store them in an .env file in the project root:
 
 ```sh
 echo 'PDF_PASSWORDS=["foo"]' > .env
