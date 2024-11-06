@@ -10,3 +10,4 @@ jobs:
       - uses: actions/stale@v9
         with:
           stale-issue-message: This issue is stale because it has been open for 60 days with no activity. Remove stale label or comment or this will be closed in 5 days.
+          exempt-pr-labels: enhancement,bug,work-in-progress
