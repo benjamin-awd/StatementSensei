@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.8.0] - 2024-11-15
+
+### 🛠️ Bug Fixes
+
+- *(build)* Add hash to statementsensei tar.gz
+
+### ⚙️ Miscellaneous Tasks
+
+- Add 0.7.4 tar file
+- *(ci)* Add stale action
+- *(ci)* Add exempt labels for stale action
+- *(helpers)* Add warning for statements without statement check
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.13.2
+
 ## [0.7.4] - 2024-10-05
 
 ### ⛰️ Features
