@@ -47,7 +47,7 @@ def parse_bank_statement(
             )
     if not statement.config.safety_check:
         st.warning(
-            "This bank/statement has no safety check, "
+            f"{bank_name} {statement.config.statement_type} statements have no safety check, "
             + "please review your transactions and proceed with caution",
             icon="⚠️",
         )
