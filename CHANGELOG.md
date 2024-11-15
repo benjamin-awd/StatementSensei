@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.8.1] - 2024-11-15
+
+### ⚙️ Miscellaneous Tasks
+
+- Improve warning for missing safety check
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.13.3
+- *(deps)* Bump monopoly-core to 0.13.4
+
 ## [0.8.0] - 2024-11-15
 
 ### 🛠️ Bug Fixes
