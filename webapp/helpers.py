@@ -45,6 +45,12 @@ def parse_bank_statement(
                 f"Safety check failed for {document.name}, transactions are incorrect or missing",
                 icon="❗",
             )
+    if not statement.config.safety_check:
+        st.warning(
+            "This bank/statement has no safety check, "
+            + "please review your transactions and proceed with caution",
+            icon="⚠️",
+        )
 
     if bank_name == "GenericBank":
         st.warning("Unrecognized bank - using generic parser", icon="⚠️")
