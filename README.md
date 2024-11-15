@@ -20,16 +20,18 @@ Statement Sensei can be run as an offline application on Windows, MacOS or Linux
 The offline application runs Streamlit locally, and uses a [WebView](https://tauri.app/v1/references/webview-versions/) window to view the browser frontend at http://localhost:8501.
 
 Currently supported banks:
-| Bank                | Credit Statement    | Debit Statement     |
-| --------------------| --------------------| --------------------|
-| Citibank            | ✅                 | ❌                  |
-| DBS/POSB            | ✅                 | ✅                  |
-| HSBC                | ✅                 | ❌                  |
-| Maybank             | ✅                 | ✅                  |
-| OCBC                | ✅                 | ✅                  |
-| Standard Chartered  | ✅                 | ❌                  |
-| UOB                 | ✅                 | ✅                  |
-| ZKB                 | ❌                 | ✅                  |
+| Bank                 | Credit Statement   | Debit Statement       |
+|----------------------|--------------------|-----------------------|
+| Bank of America      | ✅                 | ❌                   |
+| Chase                | ✅                 | ❌                   |
+| Citibank             | ✅                 | ❌                   |
+| DBS/POSB             | ✅                 | ✅                   |
+| HSBC                 | ✅                 | ❌                   |
+| Maybank              | ✅                 | ✅                   |
+| OCBC                 | ✅                 | ✅                   |
+| Standard Chartered   | ✅                 | ❌                   |
+| UOB                  | ✅                 | ✅                   |
+| Zürcher Kantonalbank | ❌                 | ✅                   |
 
 # Installation
 
