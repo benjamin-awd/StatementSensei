@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.2] - 2024-12-27
+
+### 🚜 Refactor
+
+- Store password in state and re-use
+
 ## [0.8.1] - 2024-11-15
 
 ### ⚙️ Miscellaneous Tasks
