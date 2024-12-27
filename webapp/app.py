@@ -78,6 +78,15 @@ def handle_file(document: PdfDocument) -> ProcessedFile | None:
 
 
 def handle_encrypted_document(document: PdfDocument) -> PdfDocument | None:
+    passwords: list[str] = st.session_state.setdefault("pdf_passwords", [])
+
+    # Try existing passwords first
+    for password in passwords:
+        document.authenticate(password)
+        if not document.is_encrypted:  # pylint: disable=no-member
+            return document
+
+    # Prompt user for password if none of the existing passwords work
     password_container = st.empty()
     password = password_container.text_input(
         label="Password",
@@ -92,6 +101,7 @@ def handle_encrypted_document(document: PdfDocument) -> PdfDocument | None:
     document.authenticate(password)
 
     if not document.is_encrypted:  # pylint: disable=no-member
+        passwords.append(password)
         password_container.empty()
         return document
 
