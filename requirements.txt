@@ -1,4 +1,4 @@
-dist/statement_sensei-0.8.2.tar.gz --hash=sha256:7984abdf8fa6ea9cdc480d875294cb8b8ce7dedd0b5a42f62c131ab6977e8a12
+dist/statement_sensei-0.9.0.tar.gz --hash=sha256:df7cd241812087396094f30272358b8d9663f69b6bd603d12ca6dbc0ec90177a
 altair==5.4.1 ; python_version >= "3.10" and python_version < "3.13" \
     --hash=sha256:0ce8c2e66546cb327e5f2d7572ec0e7c6feece816203215613962f0ec1d76a82 \
     --hash=sha256:0fb130b8297a569d08991fb6fe763582e7569f8a04643bbd9212436e3be04aef
