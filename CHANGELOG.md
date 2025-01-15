@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.8.2] - 2025-01-15
+
+### 🚜 Refactor
+
+- Store password in state and re-use
+
+### 📚 Documentation
+
+- Add Trust to supported banks
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.14.1
+
+## [0.8.2] - 2025-01-15
+
+### 🚜 Refactor
+
+- Store password in state and re-use
+
+### 📚 Documentation
+
+- Add Trust to supported banks
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.14.1
+
 ## [0.8.1] - 2024-11-15
 
 ### ⚙️ Miscellaneous Tasks

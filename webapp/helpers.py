@@ -68,7 +68,7 @@ def create_df(processed_files: list[ProcessedFile]) -> pd.DataFrame:
         df["date"] = pd.to_datetime(df["date"]).dt.date
         df["bank"] = file.metadata.bank_name
 
-        df = df.drop(columns="suffix")
+        df = df.drop(columns="polarity")
         dataframes.append(df)
 
     concat_df = pd.concat(dataframes)
