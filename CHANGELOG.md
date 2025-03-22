@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1] - 2025-03-22
+
+### Build
+
+- *(deps)* Bump streamlit to 1.43.2
+- *(deps)* Bump monopoly-core to 0.14.2
+
 ## [0.9.0] - 2025-01-15
 
 ### 🚜 Refactor
