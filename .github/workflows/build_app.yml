@@ -75,6 +75,14 @@ jobs:
           poetry-version: "1.8.3"
           poetry-install-args: --with main --with build --without dev --extras ocrmypdf
 
+      # workaround due to upstream distribution issues
+      - name: Force-install pdftotext
+        env:
+          PIP_NO_BINARY: pdftotext
+        run: |
+          pip uninstall -y pdftotext
+          pip install --no-cache-dir --force-reinstall pdftotext
+
       # onedir mode doesn't work with ubuntu, build_appimage.sh fails
       - name: Create executable for tauri (ubuntu)
         if: matrix.os-target.os == 'ubuntu-latest'
