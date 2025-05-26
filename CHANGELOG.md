@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.9.2-rc.1] - 2025-05-26
+
+### ⚙️ Miscellaneous Tasks
+
+- Attempt hotfix for pdftotext
+
 ## [0.9.1] - 2025-03-22
 
 ### Build
