@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.9.2-rc.2] - 2025-05-27
+
+### Build
+
+- *(deps)* Pin pdftotext to v3.0.0
+
 ## [0.9.2-rc.1] - 2025-05-26
 
 ### ⚙️ Miscellaneous Tasks
