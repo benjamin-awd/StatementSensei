@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.9.2-rc.3] - 2025-05-27
+
+### Build
+
+- Use poetry to install pdftotext
+
 ## [0.9.2-rc.2] - 2025-05-27
 
 ### Build
