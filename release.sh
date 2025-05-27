@@ -13,16 +13,16 @@ echo "Preparing $new_version..."
 msg="# managed by release.sh"
 
 # update the pyproject version
-poetry version $new_version
+uv version $new_version
 
 # build the latest version
-poetry build
+uv build
 
 # update the tauri.conf.json version
 jq --arg new_version "$new_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
 # update the changelog
-git cliff --unreleased --tag $(poetry version --short) --prepend CHANGELOG.md
+git cliff --unreleased --tag $(uv version --short) --prepend CHANGELOG.md
 git add -A -ip && git commit -m "chore(release): prepare for $new_version"
 
 export GIT_CLIFF_TEMPLATE="\

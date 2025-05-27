@@ -5,7 +5,7 @@ VERSION=$(poetry version --short)
 TAR_FILE="dist/statement_sensei-$VERSION.tar.gz"
 HASH=$(sha256sum "$TAR_FILE" | awk '{ print $1 }')
 
-poetry export -f requirements.txt --output requirements.txt --extras ocrmypdf --without dev
+uv export --output-file requirements.txt --all-extras
 
 if [ -f "$REQUIREMENTS_FILE" ]; then
     FIRST_LINE=$(head -n 1 "$REQUIREMENTS_FILE")

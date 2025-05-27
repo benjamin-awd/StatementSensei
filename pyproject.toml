@@ -1,41 +1,33 @@
-[tool.poetry]
-name = "statement-sensei"
-packages = [
-    {include = "webapp"}
+[project]
+authors = [
+    {name = "Benjamin Dornel", email = "benjamindornel@gmail.com"},
 ]
+
+requires-python = "<3.14,>=3.10"
+dependencies = [
+    "streamlit<2.0.0,>=1.43.2",
+    "pybadges @ git+https://github.com/benjamin-awd/pybadges",
+    "monopoly-core<1.0.0,>=0.14.2",
+    "plotly<7.0.0,>=6.0.0",
+    "pdftotext<4.0.0,>=3.0.0",
+    "pymupdf==1.25",
+]
+name = "statement-sensei"
 version = "0.9.2-rc.3"
 description = "PDF to CSV conversion for your bank statements"
-authors = ["Benjamin Dornel <benjamindornel@gmail.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = ">=3.10,<3.14"
-streamlit = "^1.43.2"
-pybadges = {git = "https://github.com/benjamin-awd/pybadges"}
-monopoly-core = "^0.14.2"
-ocrmypdf = { version = "^16.5.0", optional = true }
-plotly = "^6.0.0"
-pdftotext = "^3.0.0"
+[project.optional-dependencies]
+ocrmypdf = [
+    "ocrmypdf<17.0.0,>=16.5.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-black = "^24.4.0"
-isort = "^5.13.2"
-pylint = "^3.1.0"
-pytest = "^8.3.2"
-flake8 = "^7.1.1"
-
-[tool.poetry.extras]
-ocrmypdf = ["ocrmypdf"]
-
-[tool.poetry.group.build.dependencies]
-git-cliff = "^2.3.0"
-pyinstaller = "^6.8.0"
-
+[tool.pdm.build]
+includes = ["webapp"]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [tool.isort]
 profile = "black"
@@ -47,4 +39,17 @@ disable = [
     "missing-function-docstring",
     "missing-class-docstring",
     "logging-fstring-interpolation"
+]
+
+[dependency-groups]
+dev = [
+    "black<25.0.0,>=24.4.0",
+    "isort<6.0.0,>=5.13.2",
+    "pylint<4.0.0,>=3.1.0",
+    "pytest<9.0.0,>=8.3.2",
+    "flake8<8.0.0,>=7.1.1",
+]
+build = [
+    "git-cliff<3.0.0,>=2.3.0",
+    "pyinstaller<7.0.0,>=6.8.0",
 ]

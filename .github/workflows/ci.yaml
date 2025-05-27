@@ -17,14 +17,16 @@ jobs:
         with:
           packages: build-essential libpoppler-cpp-dev pkg-config
 
-      - name: Setup Python & Poetry
-        uses: ./.github/actions/setup-python-poetry
-        with:
-          python-version: "3.11"
-          poetry-version: "1.8.3"
-          poetry-install-args: --with dev
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install StatementSensei dependencies
+        run: uv pip install .
 
       - name: Run CI
         run: |
-          poetry run pytest .
-          poetry run flake8 webapp
+          uv run pytest .
+          uv run flake8 webapp
