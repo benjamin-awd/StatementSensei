@@ -81,7 +81,9 @@ jobs:
         run: uv python install
 
       - name: Install StatementSensei dependencies
-        run: uv pip install .
+        run: |
+          uv venv
+          uv pip install .
 
       # onedir mode doesn't work with ubuntu, build_appimage.sh fails
       - name: Create executable for tauri (ubuntu)
