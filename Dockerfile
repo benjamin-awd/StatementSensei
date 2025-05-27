@@ -16,7 +16,7 @@ WORKDIR /app
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get -y install build-essential libpoppler-cpp-dev pkg-config ocrmypdf
 
-COPY pyproject.toml poetry.lock README.md entrypoint.py ./
+COPY pyproject.toml README.md entrypoint.py ./
 COPY webapp/ ./webapp
 
 # install python dependencies
