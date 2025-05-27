@@ -26,7 +26,7 @@ jobs:
       - name: Install StatementSensei dependencies
         run: |
           uv venv
-          uv pip install .
+          uv sync --group dev
 
       - name: Run CI
         run: |
