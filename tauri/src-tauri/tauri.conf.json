@@ -1,6 +1,6 @@
 {
   "productName": "StatementSensei",
-  "version": "0.9.2-rc.2",
+  "version": "0.9.2-rc.3",
   "identifier": "statementsensei.streamlit.app",
   "build": {
     "beforeDevCommand": "pnpm dev",
