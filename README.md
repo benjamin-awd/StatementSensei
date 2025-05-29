@@ -1,6 +1,6 @@
 <img src="./docs/logo.svg" width="396" height="91">
 
-Statement Sensei helps converts bank statement PDFs to CSVs using the [monopoly](https://github.com/benjamin-awd/monopoly) CLI library. The offline version of the app is available on the [releases](https://github.com/benjamin-awd/statementsensei/releases) page.
+Statement Sensei converts bank statement PDFs to CSVs using the [monopoly](https://github.com/benjamin-awd/monopoly) CLI library. The offline version of the app is available on the [releases](https://github.com/benjamin-awd/statementsensei/releases) page.
 
 <h3 align="center">
     🎉 Statement Sensei is now live! 🎉
