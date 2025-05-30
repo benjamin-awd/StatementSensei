@@ -684,7 +684,7 @@ wheels = [
 
 [[package]]
 name = "monopoly-core"
-version = "0.14.2"
+version = "0.15.0rc2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -697,9 +697,9 @@ dependencies = [
     { name = "tabulate" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/73/ed/e2f5a635882682bec2e44accd082a6a911e152fc9ed797d2404826d97762/monopoly_core-0.14.2.tar.gz", hash = "sha256:da2a08a047025d13ad3c523b039210246d3236350465b6acc9bda6dcab6848e2", size = 235934, upload-time = "2025-03-22T06:29:31.642Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/47/b3/b24b6e98916ccfa8da70c0ea14c092c27fff3c9546fe580b70857d46db45/monopoly_core-0.15.0rc2.tar.gz", hash = "sha256:d9f046c3f5f00c1d1e76ca7fb2a85bfda733fdefe5ec37d662bddef9420009e0", size = 236457, upload-time = "2025-05-30T10:44:20.11Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/ac/be6db0c7be493d1c797a307e5c769fa4f36c522fce8819b69c139d8c22fd/monopoly_core-0.14.2-py3-none-any.whl", hash = "sha256:31ae1db67e16b9c0a75e6685e5dee48544c79fc734fc38dd5706653fc7d32b5c", size = 251170, upload-time = "2025-03-22T06:29:29.95Z" },
+    { url = "https://files.pythonhosted.org/packages/26/25/8806895b96aef82769f0e40ad67511a1a1ebc6461925b09c820de1310a6a/monopoly_core-0.15.0rc2-py3-none-any.whl", hash = "sha256:bb48cbd3ff7d6d8c3d8f7316495448fd6294fccbe9cbd5c78f19b377761abb13", size = 251808, upload-time = "2025-05-30T10:44:18.557Z" },
 ]
 
 [[package]]
@@ -1734,7 +1734,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "monopoly-core", specifier = ">=0.14.2,<1.0.0" },
+    { name = "monopoly-core", specifier = "==0.15.0rc2" },
     { name = "ocrmypdf", marker = "extra == 'ocrmypdf'", specifier = ">=16.5.0,<17.0.0" },
     { name = "pdftotext", specifier = ">=3.0.0,<4.0.0" },
     { name = "plotly", specifier = ">=6.0.0,<7.0.0" },

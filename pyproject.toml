@@ -7,7 +7,7 @@ requires-python = "<3.14,>=3.10"
 dependencies = [
     "streamlit<2.0.0,>=1.43.2",
     "pybadges @ git+https://github.com/benjamin-awd/pybadges",
-    "monopoly-core<1.0.0,>=0.14.2",
+    "monopoly-core==0.15.0rc2",
     "plotly<7.0.0,>=6.0.0",
     "pdftotext<4.0.0,>=3.0.0",
     "pymupdf==1.25",
