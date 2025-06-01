@@ -18,8 +18,8 @@ description = "PDF to CSV conversion for your bank statements"
 readme = "README.md"
 
 [project.optional-dependencies]
-ocrmypdf = [
-    "ocrmypdf<17.0.0,>=16.5.0",
+ocr = [
+    "ocrmypdf>=16.10.2",
 ]
 
 [build-system]
