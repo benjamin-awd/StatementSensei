@@ -31,4 +31,3 @@ jobs:
       - name: Run CI
         run: |
           uv run pytest .
-          uv run flake8 webapp

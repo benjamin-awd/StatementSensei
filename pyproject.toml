@@ -43,11 +43,7 @@ includes = ["webapp"]
 
 [dependency-groups]
 dev = [
-    "black>=25.1.0",
-    "isort>=6.0.1",
-    "pylint>=3.3.7",
     "pytest>=8.3.5",
-    "flake8>=7.2.0",
 ]
 build = [
     "git-cliff>=2.8.0",
