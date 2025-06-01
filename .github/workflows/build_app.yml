@@ -106,11 +106,6 @@ jobs:
           uv run pyinstaller entrypoint.onefile.spec
           cp dist/entrypoint ./tauri/src-tauri/binaries/statementsensei-${{ matrix.os-target.target }}
 
-      - uses: Swatinem/rust-cache@v2
-        with:
-          cache-on-failure: true
-          workspaces: tauri/src-tauri
-
       - name: Install tauri dependencies (ubuntu)
         if: matrix.os-target.os == 'ubuntu-latest'
         run: |
