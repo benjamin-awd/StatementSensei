@@ -1,29 +1,19 @@
 # Changelog
 
-## [0.9.2-rc.3] - 2025-05-27
+## [0.9.2] - 2025-06-01
 
 ### Build
 
+- *(deps)* Update monopoly-core to 0.16.0
+- *(deps)* Pin ocrmypdf to 16.10.2
 - Use poetry to install pdftotext
-
-## [0.9.2-rc.2] - 2025-05-27
-
-### Build
-
 - *(deps)* Pin pdftotext to v3.0.0
-
-## [0.9.2-rc.1] - 2025-05-26
+- *(deps)* Bump streamlit to 1.43.2
+- *(deps)* Bump monopoly-core to 0.14.2
 
 ### ⚙️ Miscellaneous Tasks
 
 - Attempt hotfix for pdftotext
-
-## [0.9.1] - 2025-03-22
-
-### Build
-
-- *(deps)* Bump streamlit to 1.43.2
-- *(deps)* Bump monopoly-core to 0.14.2
 
 ## [0.9.0] - 2025-01-15
 
@@ -41,19 +31,9 @@
 
 ## [0.8.2] - 2025-01-15
 
-### 🚜 Refactor
-
-- Store password in state and re-use
-
-### 📚 Documentation
-
-- Add Trust to supported banks
-
 ### Build
 
 - *(deps)* Bump monopoly-core to 0.14.1
-
-## [0.8.2] - 2025-01-15
 
 ### 🚜 Refactor
 
