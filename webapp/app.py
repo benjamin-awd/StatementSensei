@@ -8,6 +8,9 @@ from webapp.helpers import create_df, parse_bank_statement, show_df
 from webapp.logo import logo
 from webapp.models import ProcessedFile
 
+# number of files that need to be added before progress bar appears
+PBAR_MIN_FILES = 4
+
 
 def app() -> pd.DataFrame:
     st.set_page_config(page_title="Statement Sensei", layout="wide")
@@ -34,7 +37,7 @@ def app() -> pd.DataFrame:
 
 def process_files(uploaded_files: list[UploadedFile]) -> list[ProcessedFile] | None:
     num_files = len(uploaded_files)
-    show_pbar = num_files > 4
+    show_pbar = num_files > PBAR_MIN_FILES
 
     pbar = st.progress(0, text="Processing PDFs") if show_pbar else None
 
@@ -69,7 +72,7 @@ def process_files(uploaded_files: list[UploadedFile]) -> list[ProcessedFile] | N
 def handle_file(document: PdfDocument) -> ProcessedFile | None:
     document_id = document.xref_get_key(-1, "ID")[-1]
     uuid = document.name + document_id
-    if uuid in st.session_state.keys():
+    if uuid in st.session_state:
         return st.session_state[uuid]
 
     file = parse_bank_statement(document)

@@ -1,5 +1,4 @@
 # pylint: disable=unsubscriptable-object
-from typing import Optional
 
 import pandas as pd
 import streamlit as st
@@ -13,9 +12,7 @@ from pydantic import SecretStr
 from webapp.models import ProcessedFile, TransactionMetadata
 
 
-def parse_bank_statement(
-    document: PdfDocument, password: Optional[str] = None
-) -> ProcessedFile:
+def parse_bank_statement(document: PdfDocument, password: str | None = None) -> ProcessedFile:
     analyzer = BankDetector(document)
     bank = analyzer.detect_bank(banks) or GenericBank
     parser = PdfParser(bank, document)
@@ -48,7 +45,7 @@ def parse_bank_statement(
     if not statement.config.safety_check:
         st.warning(
             f"{bank_name} {statement.config.statement_type} statements have no safety check, "
-            + "please review your transactions and proceed with caution",
+            "please review your transactions and proceed with caution",
             icon="⚠️",
         )
 
@@ -56,9 +53,7 @@ def parse_bank_statement(
         st.warning("Unrecognized bank - using generic parser", icon="⚠️")
 
     metadata = TransactionMetadata(bank_name)
-    processed_file = ProcessedFile(pipeline.transform(statement), metadata)
-
-    return processed_file
+    return ProcessedFile(pipeline.transform(statement), metadata)
 
 
 def create_df(processed_files: list[ProcessedFile]) -> pd.DataFrame:
@@ -98,10 +93,12 @@ def show_df(df: pd.DataFrame) -> None:
 
 def switch_page(page_name: str):
     """
-    Switch page programmatically in a multipage app
+    Switch page programmatically in a multipage app.
 
     Args:
+    ----
         page_name (str): Target page name
+
     """
     # pylint: disable=import-outside-toplevel
     from streamlit.runtime.scriptrunner import RerunData, RerunException
@@ -125,4 +122,5 @@ def switch_page(page_name: str):
 
     page_names = [standardize_name(config["page_name"]) for config in pages.values()]
 
-    raise ValueError(f"Could not find page {page_name}. Must be one of {page_names}")
+    msg = f"Could not find page {page_name}. Must be one of {page_names}"
+    raise ValueError(msg)

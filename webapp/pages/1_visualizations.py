@@ -10,9 +10,7 @@ if TYPE_CHECKING:
     from streamlit.delta_generator import DeltaGenerator
 
 
-def render_metric(
-    column: "DeltaGenerator", title, value, title_color="#262730", value_color="#262730"
-):
+def render_metric(column: "DeltaGenerator", title, value, title_color="#262730", value_color="#262730"):
     column.markdown(
         f"""
         <div style="text-align:center;">
@@ -29,7 +27,7 @@ def show_stacked_bar_chart(df: pd.DataFrame):
         x=df.index,
         y=df["Income"],
         name="Income",
-        marker=dict(color="#00CEAA", cornerradius=10),
+        marker={"color": "#00CEAA", "cornerradius": 10},
         hovertext=[f"${s:,.2f}" for s in df["Income"]],
         hoverinfo="text+name",
         offsetgroup=0,
@@ -39,7 +37,7 @@ def show_stacked_bar_chart(df: pd.DataFrame):
         x=df.index,
         y=[-expense for expense in df["Expenses"]],
         name="Expenses",
-        marker=dict(color="#F63366", cornerradius=10),
+        marker={"color": "#F63366", "cornerradius": 10},
         hovertext=[f"${s:,.2f}" for s in df["Expenses"]],
         hoverinfo="text+name",
         offsetgroup=0,
@@ -50,23 +48,23 @@ def show_stacked_bar_chart(df: pd.DataFrame):
         y=df["Income"] - df["Expenses"],
         name="Savings",
         mode="lines",
-        line=dict(color="black", width=4),
+        line={"color": "black", "width": 4},
         hoverinfo="text+name",
         text=[f"${s:,.2f}" for s in df["amount"]],
     )
 
     layout = go.Layout(
         title="Cash Flow",
-        title_font=dict(size=26),
-        xaxis=dict(title="Month", showgrid=False, dtick="M1"),
-        yaxis=dict(
-            title="Amount",
-            showgrid=False,
-            zeroline=True,
-            zerolinecolor="#EFEFEF",
-            zerolinewidth=2,
-            tickformat="$,.1s",
-        ),
+        title_font={"size": 26},
+        xaxis={"title": "Month", "showgrid": False, "dtick": "M1"},
+        yaxis={
+            "title": "Amount",
+            "showgrid": False,
+            "zeroline": True,
+            "zerolinecolor": "#EFEFEF",
+            "zerolinewidth": 2,
+            "tickformat": "$,.1s",
+        },
         barmode="relative",
         hovermode="x unified",
         bargap=0.5,
@@ -79,17 +77,12 @@ def show_stacked_bar_chart(df: pd.DataFrame):
     total_income = round(df["Income"].sum())
     total_expenses = round(df["Expenses"].sum())
     total_savings = round(df["amount"].sum())
-    if total_income > 0:  # Avoid division by zero
-        savings_rate = (total_savings / total_income) * 100
-    else:
-        savings_rate = 0  # Handle case where income is zero
 
+    # Avoid division by zero
+    savings_rate = total_savings / total_income * 100 if total_income > 0 else 0
     formatted_savings_rate = f"{savings_rate:.2f}%"
     formatted_total_savings = f"${total_savings:,.0f}"
-    if total_savings < 0:
-        formatted_total_savings = f"-${abs(total_savings):,}"
-    else:
-        formatted_total_savings = f"${total_savings:,}"
+    formatted_total_savings = f"-${abs(total_savings):,}" if total_savings < 0 else f"${total_savings:,}"
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -102,18 +95,18 @@ def show_stacked_bar_chart(df: pd.DataFrame):
 
 st.markdown("# Visualizations")
 
-if "df" in st.session_state.keys():
+if "df" in st.session_state:
     df: pd.DataFrame = st.session_state["df"].copy()
     df.index = pd.to_datetime(df["date"])
     df["Bank"] = df["bank"]
-    df["Income"] = df["amount"].apply(lambda x: x if x > 0 else 0)
+    df["Income"] = df["amount"].apply(lambda x: max(0, x))
     df["Expenses"] = df["amount"].apply(lambda x: abs(x) if x < 0 else 0)
     df = df.drop(columns=["description", "date"])
     df = df.resample("MS").sum()
 
     show_stacked_bar_chart(df)
 
-if "df" not in st.session_state.keys():
+if "df" not in st.session_state:
     switch_page_button = st.button("Convert a bank statement")
     if switch_page_button:
         switch_page("app")
