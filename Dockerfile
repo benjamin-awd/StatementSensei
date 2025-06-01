@@ -1,8 +1,7 @@
 FROM python:3.12-slim AS base
 
 # Install system dependencies for pdftotext
-RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y install build-essential libpoppler-cpp-dev pkg-config ocrmypdf \
     # uv build dependencies
     curl git
