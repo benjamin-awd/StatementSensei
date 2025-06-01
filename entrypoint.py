@@ -1,4 +1,3 @@
-import os
 import sys
 from pathlib import Path
 
@@ -11,7 +10,7 @@ class StreamlitConfig(BaseSettings):
 
 
 def resolve_path(path: str) -> str:
-    base_path = getattr(sys, "_MEIPASS", os.getcwd())
+    base_path = getattr(sys, "_MEIPASS", str(Path.cwd()))
     return str(Path(base_path) / path)
 
 

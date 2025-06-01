@@ -17,21 +17,19 @@ def create_uploaded_file(file_name):
 
     file_id = str(uuid4())
 
-    record = UploadedFileRec(
-        file_id=file_id, name=file_name, type="application/pdf", data=raw_file
-    )
+    record = UploadedFileRec(file_id=file_id, name=file_name, type="application/pdf", data=raw_file)
     upload_url = f"/_stcore/upload_file/{uuid4()}/{file_id}"
     file_urls = FileURLs(upload_url=upload_url, delete_url=upload_url)
 
     return UploadedFile(record, file_urls)
 
 
-@pytest.fixture
+@pytest.fixture()
 def uploaded_file():
     return create_uploaded_file("example_statement.pdf")
 
 
-@pytest.fixture
+@pytest.fixture()
 def protected_file():
     return create_uploaded_file("protected_example_statement.pdf")
 

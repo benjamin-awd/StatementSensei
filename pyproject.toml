@@ -5,12 +5,12 @@ authors = [
 
 requires-python = "<3.14,>=3.10"
 dependencies = [
-    "streamlit<2.0.0,>=1.43.2",
+    "streamlit>=1.45.1",
     "pybadges @ git+https://github.com/benjamin-awd/pybadges",
-    "monopoly-core==0.15.0rc2",
-    "plotly<7.0.0,>=6.0.0",
-    "pdftotext<4.0.0,>=3.0.0",
-    "pymupdf==1.25",
+    "monopoly-core>=0.16.0",
+    "plotly>=6.1.2",
+    "pdftotext>=3.0.0",
+    "pymupdf>=1.26.0",
 ]
 name = "statement-sensei"
 version = "0.9.2rc7"
@@ -21,9 +21,6 @@ readme = "README.md"
 ocrmypdf = [
     "ocrmypdf<17.0.0,>=16.5.0",
 ]
-
-[tool.pdm.build]
-includes = ["webapp"]
 
 [build-system]
 requires = ["pdm-backend"]
@@ -41,15 +38,51 @@ disable = [
     "logging-fstring-interpolation"
 ]
 
+[tool.pdm.build]
+includes = ["webapp"]
+
 [dependency-groups]
 dev = [
-    "black<25.0.0,>=24.4.0",
-    "isort<6.0.0,>=5.13.2",
-    "pylint<4.0.0,>=3.1.0",
-    "pytest<9.0.0,>=8.3.2",
-    "flake8<8.0.0,>=7.1.1",
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "pylint>=3.3.7",
+    "pytest>=8.3.5",
+    "flake8>=7.2.0",
 ]
 build = [
-    "git-cliff<3.0.0,>=2.3.0",
-    "pyinstaller<7.0.0,>=6.8.0",
+    "git-cliff>=2.8.0",
+    "pyinstaller>=6.13.0",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+fixable = ["ALL"]
+exclude = ["tests/*"]
+
+ignore = [
+    # modules
+    "ANN",
+
+    # specific rules
+    "COM812",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D212",
+    "E501",
+    "ISC001",
+    "PD901",
+    "PTH123",
+    "N999",
+    "SLF001"
 ]
