@@ -40,7 +40,10 @@ jobs:
       - name: Install pdftotext dependencies (windows)
         if: matrix.os-target.os == 'windows-latest'
         run: |
+          conda update conda
+          conda update --all
           conda install -c conda-forge poppler
+          conda list
 
       - name: Install ocrmypdf dependencies (windows)
         uses: MinoruSekine/setup-scoop@v4.0.1
