@@ -13,7 +13,7 @@ dependencies = [
     "pymupdf>=1.26.0",
 ]
 name = "statement-sensei"
-version = "0.9.3rc3"
+version = "0.9.3rc4"
 description = "PDF to CSV conversion for your bank statements"
 readme = "README.md"
 
