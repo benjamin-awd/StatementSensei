@@ -167,7 +167,7 @@ jobs:
         run: |
           pip install git-cliff==2.4.0
           git fetch --tags
-          git cliff --latest > RELEASE_CHANGELOG.md
+          git cliff --ignore-tags "rc" --latest > RELEASE_CHANGELOG.md
 
       - name: Create a Github Release
         uses: softprops/action-gh-release@v2

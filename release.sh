@@ -34,7 +34,7 @@ uv build
 jq --arg new_version "$semver_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
 # update the changelog
-git cliff --unreleased --tag "$(uv version --short)" --prepend CHANGELOG.md
+git cliff --ignore-tags "rc" > CHANGELOG.md
 git add -A -ip && git commit -m "chore(release): prepare for $new_version"
 
 export GIT_CLIFF_TEMPLATE="\
