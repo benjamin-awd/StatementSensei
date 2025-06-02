@@ -9,16 +9,20 @@ fi
 new_version=$1
 echo "Preparing $new_version..."
 
-# Convert to proper SemVer only for tauri.conf.json
-to_semver() {
+# Strip pre-release (e.g., -rc.3) from version for tauri.conf.json
+strip_rc() {
 	local raw="$1"
-	if [[ "$raw" =~ ^([0-9]+\.[0-9]+\.[0-9]+)([a-zA-Z]+)([0-9]+)$ ]]; then
-		echo "${BASH_REMATCH[1]}-${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+	# Remove leading 'v' if present
+	raw="${raw#v}"
+	# Extract only major.minor.patch
+	if [[ "$raw" =~ ^([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+		echo "${BASH_REMATCH[1]}"
 	else
 		echo "$raw"
 	fi
 }
-semver_version=$(to_semver "$new_version")
+
+semver_version=$(strip_rc "$new_version")
 
 # update the pyproject version
 uv version "$new_version"
@@ -26,7 +30,7 @@ uv version "$new_version"
 # build the latest version
 uv build
 
-# update the tauri.conf.json version (with SemVer-compliant string)
+# update the tauri.conf.json version
 jq --arg new_version "$semver_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
 # update the changelog
