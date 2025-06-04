@@ -5,8 +5,13 @@ VERSION=$(poetry version --short)
 TAR_FILE="dist/statement_sensei-$VERSION.tar.gz"
 HASH=$(sha256sum "$TAR_FILE" | awk '{ print $1 }')
 
-uv export --output-file requirements.txt --all-extras
+# Export dependencies using uv (this adds -e . if project is local)
+uv export --output-file "$REQUIREMENTS_FILE" --all-extras
 
+# Remove "-e ." or any editable install lines
+sed -i '' '/^-e \.$/d' "$REQUIREMENTS_FILE"
+
+# Add tar.gz with hash to the top of requirements.txt
 if [ -f "$REQUIREMENTS_FILE" ]; then
     FIRST_LINE=$(head -n 1 "$REQUIREMENTS_FILE")
     # Create the required entry with hash
