@@ -1,6 +1,6 @@
 # Changelog
 
-## [unreleased]
+## [0.9.3] - 2025-06-04
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -8,11 +8,13 @@
 - *(ci)* Remove rust cache
 - *(ci)* Strip rc from tauri conf
 - *(git-cliff)* Fix ignore tags
+- Exclude uv.lock
 
 ### Build
 
 - *(docker)* Remove apt cache
 - *(dev-deps)* Remove old dev deps
+- *(deps)* Bump monopoly to 0.16.1
 
 ## [0.9.2] - 2025-06-01
 

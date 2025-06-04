@@ -33,20 +33,12 @@ uv build
 # update the tauri.conf.json version
 jq --arg new_version "$semver_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
-# update the changelog
-git cliff --ignore-tags "rc" > CHANGELOG.md
-git add -A -ip && git commit -m "chore(release): prepare for $new_version"
-
-export GIT_CLIFF_TEMPLATE="\
-	{% for group, commits in commits | group_by(attribute=\"group\") %}
-	{{ group | upper_first }}\
-	{% for commit in commits %}
-		- {% if commit.breaking %}(breaking) {% endif %}{{ commit.message | upper_first }} ({{ commit.id | truncate(length=7, end=\"\") }})\
-	{% endfor %}
-	{% endfor %}"
-
 # create a signed tag
 git tag "v$new_version"
+
+# update the changelog
+git cliff --ignore-tags "rc" --tag "v$new_version" > CHANGELOG.md
+git add -A -ip && git commit -m "chore(release): prepare for $new_version"
 
 echo "Done!"
 echo "Now push the commit (git push) and the tag (git push --tags)."

@@ -25,4 +25,3 @@ repos:
         name: uv-export (webapp)
         entry: .github/hooks/include_webapp_in_requirements.sh
         language: script
-        files: ^(requirements.txt|uv.lock)$
