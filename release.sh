@@ -44,7 +44,14 @@ fi
 # create a signed tag
 git tag "v$new_version"
 sh .github/hooks/include_webapp_in_requirements.sh
+
+# override uv default behaviour of creating a gitignore in dist
 rm -rf dist/.gitignore
+
+# remove all dist files except the one matching the current version
+dist_name="statement_sensei-${new_version}.tar.gz"
+dist_path="dist/${dist_name}"
+find dist/ -type f -name 'statement_sensei-*.tar.gz' ! -name "$dist_name" -exec rm -v {} +
 
 echo "Done!"
 echo "Now push the commit (git push) and the tag (git push --tags)."
