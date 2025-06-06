@@ -5,7 +5,6 @@ import pybadges
 import streamlit as st
 
 from webapp.constants import SUPPORTED_BANKS
-from webapp.helpers import switch_page
 
 st.markdown("# About")
 
@@ -27,7 +26,7 @@ st.write("\n")
 st.markdown("# Usage")
 switch_page_button = st.button("Convert a bank statement")
 if switch_page_button:
-    switch_page("app")
+    st.switch_page("app.py")
 
 st.markdown(
     """

@@ -89,38 +89,3 @@ def show_df(df: pd.DataFrame) -> None:
         data=csv,
         mime="text/csv",
     )
-
-
-def switch_page(page_name: str):
-    """
-    Switch page programmatically in a multipage app.
-
-    Args:
-    ----
-        page_name (str): Target page name
-
-    """
-    # pylint: disable=import-outside-toplevel
-    from streamlit.runtime.scriptrunner import RerunData, RerunException
-    from streamlit.source_util import get_pages
-
-    def standardize_name(name: str) -> str:
-        return name.lower().replace("_", " ")
-
-    page_name = standardize_name(page_name)
-
-    pages = get_pages("app.py")
-
-    for page_hash, config in pages.items():
-        if standardize_name(config["page_name"]) == page_name:
-            raise RerunException(
-                RerunData(
-                    page_script_hash=page_hash,
-                    page_name=page_name,
-                )
-            )
-
-    page_names = [standardize_name(config["page_name"]) for config in pages.values()]
-
-    msg = f"Could not find page {page_name}. Must be one of {page_names}"
-    raise ValueError(msg)

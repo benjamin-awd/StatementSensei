@@ -4,8 +4,6 @@ import pandas as pd
 import plotly.graph_objs as go
 import streamlit as st
 
-from webapp.helpers import switch_page
-
 if TYPE_CHECKING:
     from streamlit.delta_generator import DeltaGenerator
 
@@ -109,4 +107,4 @@ if "df" in st.session_state:
 if "df" not in st.session_state:
     switch_page_button = st.button("Convert a bank statement")
     if switch_page_button:
-        switch_page("app")
+        st.switch_page("app.py")
