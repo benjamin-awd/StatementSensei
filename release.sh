@@ -44,6 +44,7 @@ fi
 # create a signed tag
 git tag "v$new_version"
 sh .github/hooks/include_webapp_in_requirements.sh
+rm -rf dist/.gitignore
 
 echo "Done!"
 echo "Now push the commit (git push) and the tag (git push --tags)."
