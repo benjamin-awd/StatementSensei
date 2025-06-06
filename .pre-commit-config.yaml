@@ -21,7 +21,7 @@ repos:
 
   - repo: local
     hooks:
-      - id: include-webapp-in-requirements
-        name: uv-export (webapp)
+      - id: uv-export
+        name: uv-export
         entry: .github/hooks/include_webapp_in_requirements.sh
         language: script

@@ -33,12 +33,17 @@ uv build
 # update the tauri.conf.json version
 jq --arg new_version "$semver_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
+if [[ "$new_version" == *"rc"* ]]; then
+  echo "Skipping changelog for release candidate: $new_version"
+else
+  # update the changelog
+  git cliff --unreleased --tag "$new_version" --prepend CHANGELOG.md
+  git add -A -ip && git commit -m "chore(release): prepare for $new_version"
+fi
+
 # create a signed tag
 git tag "v$new_version"
-
-# update the changelog
-git cliff --ignore-tags "rc" --tag "v$new_version" > CHANGELOG.md
-git add -A -ip && git commit -m "chore(release): prepare for $new_version"
+sh .github/hooks/include_webapp_in_requirements.sh
 
 echo "Done!"
 echo "Now push the commit (git push) and the tag (git push --tags)."
