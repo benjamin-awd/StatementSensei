@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 from monopoly.banks import BankDetector, banks
 from monopoly.generic import GenericBank
-from monopoly.pdf import PdfDocument, PdfParser
+from monopoly.pdf import MissingOCRError, PdfDocument, PdfParser
 from monopoly.pipeline import Pipeline
 from monopoly.statements.base import SafetyCheckError
 from pydantic import SecretStr
@@ -12,22 +12,30 @@ from pydantic import SecretStr
 from webapp.models import ProcessedFile, TransactionMetadata
 
 
-def parse_bank_statement(document: PdfDocument, password: str | None = None) -> ProcessedFile:
+def build_pipeline(document: PdfDocument, password: str | None = None) -> tuple[Pipeline, PdfParser]:
     analyzer = BankDetector(document)
     bank = analyzer.detect_bank(banks) or GenericBank
     parser = PdfParser(bank, document)
+    pipeline = Pipeline(parser, passwords=[SecretStr(password)])
+    return pipeline, parser
 
-    if parser.ocr_available:
+
+def parse_bank_statement(document: PdfDocument, password: str | None = None) -> ProcessedFile:
+    try:
+        pipeline, parser = build_pipeline(document, password)
+    except MissingOCRError:
+        st.info(f"No text found - {document.name}. Attempting to apply OCR.")
         with st.spinner(f"Adding OCR layer for {document.name}"):
+            analyzer = BankDetector(document)
+            bank = analyzer.detect_bank(banks) or GenericBank
             # certain PDFs have strange formats that can break the OCR,
             # so they need to be cropped before further processing
             if cropbox := bank.pdf_config.page_bbox:
-                for page in parser.document:
+                for page in document:
                     page.set_cropbox(cropbox)
 
-            parser.document = parser.apply_ocr(document)
-
-    pipeline = Pipeline(parser, passwords=[SecretStr(password)])
+            document = PdfParser.apply_ocr(document)
+            pipeline, parser = build_pipeline(document, password)
 
     # skip initial safety check, and handle it outside the pipeline
     # so that we can raise a warning and still show transactions
