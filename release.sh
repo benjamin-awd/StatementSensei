@@ -53,5 +53,13 @@ dist_name="statement_sensei-${new_version}.tar.gz"
 dist_path="dist/${dist_name}"
 find dist/ -type f -name 'statement_sensei-*.tar.gz' ! -name "$dist_name" -exec rm -v {} +
 
+# If the hook or anything above made changes, add and amend
+if ! git diff --quiet; then
+  echo "Changes detected after commit, staging and amending commit..."
+  git add -A
+  git commit --amend --no-edit
+  git tag -f "v$new_version"
+fi
+
 echo "Done!"
-echo "Now push the commit (git push) and the tag (git push --tags)."
+echo "Now push the commit (git push) and the tag (git push --force --tags)."
