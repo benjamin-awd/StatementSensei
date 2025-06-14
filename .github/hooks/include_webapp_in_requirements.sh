@@ -19,7 +19,7 @@ if [ -f "$REQUIREMENTS_FILE" ]; then
 
     if [ "$FIRST_LINE" != "$TAR_WITH_HASH" ]; then
         echo "Adding $TAR_WITH_HASH to the top of $REQUIREMENTS_FILE"
-        (echo "$TAR_WITH_HASH" && cat "$REQUIREMENTS_FILE") > "$REQUIREMENTS_FILE.tmp"
+        (echo "$TAR_WITH_HASH") > "$REQUIREMENTS_FILE.tmp"
         mv "$REQUIREMENTS_FILE.tmp" "$REQUIREMENTS_FILE"
     fi
 else
