@@ -61,9 +61,9 @@ jobs:
 
       - name: Install pdftotext dependencies (ubuntu)
         if: matrix.os-target.os == 'ubuntu-latest'
-        uses: daaku/gh-action-apt-install@v4
-        with:
-          packages: build-essential libpoppler-cpp-dev pkg-config ocrmypdf
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential libpoppler-cpp-dev pkg-config ocrmypdf
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
