@@ -60,10 +60,11 @@ or
 brew install gcc@11 pkg-config poppler ocrmypdf
 ```
 
-Install app dependencies with Poetry:
+Install app dependencies with uv:
 ```shell
-poetry install
-poetry shell
+uv venv
+source .venv/bin/activate
+uv pip install -e .
 ```
 
 To run the consumer-facing application:
