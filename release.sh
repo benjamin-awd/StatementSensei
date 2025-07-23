@@ -39,6 +39,7 @@ else
   # update the changelog
   git cliff --unreleased --tag "$new_version" --prepend CHANGELOG.md
   git add -A -ip && git commit -m "chore(release): prepare for $new_version"
+  git add -A -ip && git commit --amend --no-edit
 fi
 
 # create a signed tag
