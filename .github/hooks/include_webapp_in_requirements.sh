@@ -11,9 +11,9 @@ uv export --output-file "$REQUIREMENTS_FILE" --all-extras
 # Remove "-e ." or any editable install lines (macOS vs Linux compatible)
 # Detect OS for sed inline flag
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' '/^-e\s\+\.\s*$/d' "$REQUIREMENTS_FILE"
+  sed -i '' '/^-e[[:space:]]\.\s*$/d' "$REQUIREMENTS_FILE"
 else
-  sed -i '/^-e\s\+\.\s*$/d' "$REQUIREMENTS_FILE"
+  sed -i '/^-e[[:space:]]\.\s*$/d' "$REQUIREMENTS_FILE"
 fi
 
 # Add tar.gz with hash to the top of requirements.txt
