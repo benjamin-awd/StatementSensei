@@ -10,7 +10,7 @@ dependencies = [
     "plotly>=6.1.2",
     "pdftotext>=3.0.0",
     "pymupdf>=1.26.0",
-    "monopoly-core==0.18.4",
+    "monopoly-core==0.19.0",
 ]
 name = "statement-sensei"
 version = "0.9.7"
