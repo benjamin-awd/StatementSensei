@@ -17,7 +17,7 @@ Statement Sensei converts bank statement PDFs to CSVs using the [monopoly](https
 
 Statement Sensei can be run as an offline application on Windows, MacOS or Linux.
 
-> ⚠️ Note: Windows does not work currently due to upstream build issuess with `pdftotext`.
+> ⚠️ Note: Windows does not work currently due to upstream build issues with `pdftotext`.
 
 The offline application runs Streamlit locally, and uses a [WebView](https://tauri.app/v1/references/webview-versions/) window to view the browser frontend at http://localhost:8501.
 
