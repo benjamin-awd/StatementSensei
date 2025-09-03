@@ -3,18 +3,25 @@ APP_DESCRIPTION = """
 Transform your PDF bank statements into easy-to-use CSV files.
 """
 
-SUPPORTED_BANKS = """Currently supported banks:
-| Bank                 | Credit Statement   | Debit Statement       |
-|----------------------|--------------------|-----------------------|
-| Bank of America      | ✅                 | ❌                   |
-| Chase                | ✅                 | ❌                   |
-| Citibank             | ✅                 | ❌                   |
-| DBS/POSB             | ✅                 | ✅                   |
-| HSBC                 | ✅                 | ❌                   |
-| Maybank              | ✅                 | ✅                   |
-| OCBC                 | ✅                 | ✅                   |
-| Standard Chartered   | ✅                 | ❌                   |
-| Trust                | ✅                 | ❌                   |
-| UOB                  | ✅                 | ✅                   |
-| Zürcher Kantonalbank | ❌                 | ✅                   |
+SUPPORTED_BANKS = """Supported banks:
+| Bank                                   | Credit Statement   | Debit Statement       |
+|----------------------------------------|--------------------|-----------------------|
+| Bank of America                        | ✅                 | ❌                   |
+| Bank of Montreal (BMO)                 | ✅                 | ✅                   |
+| Canadian Imperial Bank of Commerce (CIBC) | ✅                 | ✅                   |
+| Canadian Tire Bank                     | ✅                 | ❌                   |
+| Capital One Canada                     | ✅                 | ❌                   |
+| Chase                                  | ✅                 | ❌                   |
+| Citibank                               | ✅                 | ❌                   |
+| DBS/POSB                               | ✅                 | ✅                   |
+| HSBC                                   | ✅                 | ❌                   |
+| Maybank                                | ✅                 | ✅                   |
+| OCBC                                   | ✅                 | ✅                   |
+| Royal Bank of Canada (RBC)             | ✅                 | ✅                   |
+| Scotiabank                             | ✅                 | ✅                   |
+| Standard Chartered                     | ✅                 | ❌                   |
+| TD Canada Trust                        | ✅                 | ✅                   |
+| Trust                                  | ✅                 | ❌                   |
+| UOB                                    | ✅                 | ✅                   |
+| Zürcher Kantonalbank                   | ❌                 | ✅                   |
 """

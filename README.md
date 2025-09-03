@@ -17,24 +17,31 @@ Statement Sensei converts bank statement PDFs to CSVs using the [monopoly](https
 
 Statement Sensei can be run as an offline application on Windows, MacOS or Linux.
 
-> ⚠️ Note: Windows does not work currently due to upstream build issues with `pdftotext`.
+> ⚠️ Note: Windows does not work currently due to upstream build issuess with `pdftotext`.
 
 The offline application runs Streamlit locally, and uses a [WebView](https://tauri.app/v1/references/webview-versions/) window to view the browser frontend at http://localhost:8501.
 
-Currently supported banks:
-| Bank                 | Credit Statement   | Debit Statement       |
-|----------------------|--------------------|-----------------------|
-| Bank of America      | ✅                 | ❌                   |
-| Chase                | ✅                 | ❌                   |
-| Citibank             | ✅                 | ❌                   |
-| DBS/POSB             | ✅                 | ✅                   |
-| HSBC                 | ✅                 | ❌                   |
-| Maybank              | ✅                 | ✅                   |
-| OCBC                 | ✅                 | ✅                   |
-| Standard Chartered   | ✅                 | ❌                   |
-| Trust                | ✅                 | ❌                   |
-| UOB                  | ✅                 | ✅                   |
-| Zürcher Kantonalbank | ❌                 | ✅                   |
+Supported banks:
+| Bank                                   | Credit Statement   | Debit Statement       |
+|----------------------------------------|--------------------|-----------------------|
+| Bank of America                        | ✅                 | ❌                   |
+| Bank of Montreal (BMO)                 | ✅                 | ✅                   |
+| Canadian Imperial Bank of Commerce (CIBC) | ✅                 | ✅                   |
+| Canadian Tire Bank                     | ✅                 | ❌                   |
+| Capital One Canada                     | ✅                 | ❌                   |
+| Chase                                  | ✅                 | ❌                   |
+| Citibank                               | ✅                 | ❌                   |
+| DBS/POSB                               | ✅                 | ✅                   |
+| HSBC                                   | ✅                 | ❌                   |
+| Maybank                                | ✅                 | ✅                   |
+| OCBC                                   | ✅                 | ✅                   |
+| Royal Bank of Canada (RBC)             | ✅                 | ✅                   |
+| Scotiabank                             | ✅                 | ✅                   |
+| Standard Chartered                     | ✅                 | ❌                   |
+| TD Canada Trust                        | ✅                 | ✅                   |
+| Trust                                  | ✅                 | ❌                   |
+| UOB                                    | ✅                 | ✅                   |
+| Zürcher Kantonalbank                   | ❌                 | ✅                   |
 
 # Installation
 
