@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.1] - 2025-09-07
+
+### 📚 Documentation
+
+- *(README)* Fix typo
+- Update supported banks
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove -e . from requirements
+- Update regex to properly remove -e .
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.19.2
+
 ## [0.9.3] - 2025-06-04
 
 ### ⚙️ Miscellaneous Tasks

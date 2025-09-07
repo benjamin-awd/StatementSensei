@@ -13,7 +13,7 @@ dependencies = [
     "monopoly-core==0.19.2",
 ]
 name = "statement-sensei"
-version = "0.10.0"
+version = "0.10.1"
 description = "PDF to CSV conversion for your bank statements"
 readme = "README.md"
 
