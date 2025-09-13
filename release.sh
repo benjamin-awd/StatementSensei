@@ -33,6 +33,9 @@ uv build
 # update the tauri.conf.json version
 jq --arg new_version "$semver_version" '.version = $new_version' tauri/src-tauri/tauri.conf.json > temp.json && mv temp.json tauri/src-tauri/tauri.conf.json
 
+# update supported banks
+python3 .github/hooks/update_supported_banks.py
+
 if [[ "$new_version" == *"rc"* ]]; then
   echo "Skipping changelog for release candidate: $new_version"
 else
