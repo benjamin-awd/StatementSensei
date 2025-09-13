@@ -24,7 +24,7 @@ The offline application runs Streamlit locally, and uses a [WebView](https://tau
 Supported banks:
 | Bank                                   | Credit Statement   | Debit Statement       |
 |----------------------------------------|--------------------|-----------------------|
-| Bank of America                        | ✅                 | ❌                   |
+| Bank of America                        | ✅                 | ✅                   |
 | Bank of Montreal (BMO)                 | ✅                 | ✅                   |
 | Canadian Imperial Bank of Commerce (CIBC) | ✅                 | ✅                   |
 | Canadian Tire Bank                     | ✅                 | ❌                   |

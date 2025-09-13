@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.10.2] - 2025-09-13
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Add hook to automatically update supported banks
+
+### Build
+
+- *(deps)* Bump monopoly-core to 0.19.3
+
 ## [0.10.1] - 2025-09-07
 
 ### 📚 Documentation
