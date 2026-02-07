@@ -1,0 +1,19 @@
+name: healthcheck
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check health endpoint
+        run: |
+          http_status=$(curl -so /dev/null -w '%{http_code}' https://statementsensei.streamlit.app/healthz)
+          if [ "$http_status" != "200" ]; then
+            echo "::error::Health check failed with status $http_status"
+            exit 1
+          fi
+          echo "Health check passed (HTTP $http_status)"
