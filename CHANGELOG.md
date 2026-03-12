@@ -9,20 +9,11 @@
 ### ⚙️ Miscellaneous Tasks
 
 - *(ci)* Add hourly healtcheck
+- *(ci)* Update bank name
 
 ### Build
 
 - *(deps)* Bump monopoly-core to 0.20.0
-
-## [0.10.5] - 2026-03-12
-
-### 📚 Documentation
-
-- *(README)* Fix typo
-
-### ⚙️ Miscellaneous Tasks
-
-- *(ci)* Add hourly healtcheck
 
 ## [0.10.4] - 2025-12-08
 
