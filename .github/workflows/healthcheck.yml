@@ -17,3 +17,18 @@ jobs:
             exit 1
           fi
           echo "Health check passed (HTTP $http_status)"
+
+      - name: Check app loads successfully
+        run: |
+          response=$(curl -sL -w '\n%{http_code}' https://statementsensei.streamlit.app/)
+          http_status=$(echo "$response" | tail -1)
+          body=$(echo "$response" | sed '$d')
+          if [ "$http_status" != "200" ]; then
+            echo "::error::App page returned status $http_status"
+            exit 1
+          fi
+          if echo "$body" | grep -qi "Error running app"; then
+            echo "::error::App is returning an error page"
+            exit 1
+          fi
+          echo "App loads successfully (HTTP $http_status)"
