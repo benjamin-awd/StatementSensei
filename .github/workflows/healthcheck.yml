@@ -36,9 +36,9 @@ jobs:
                 waitUntil: 'networkidle',
                 timeout: 60000,
               });
-              const errorText = await page.locator('text=Error running app').count();
-              if (errorText > 0) {
-                console.error('::error::App is returning an error page');
+              const bodyText = await page.locator('body').innerText();
+              if (bodyText.includes('Error')) {
+                console.error('::error::' + bodyText.trim());
                 process.exit(1);
               }
               console.log('App loads successfully');
