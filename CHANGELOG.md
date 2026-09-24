@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.6](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.5...v0.10.6) (2026-09-24)
+
+
+### Bug Fixes
+
+* **ci:** also check app page loads in healthcheck ([c0c9ef3](https://github.com/benjamin-awd/StatementSensei/commit/c0c9ef3f447fbdd939f8a0934d147ca554d8fb7e))
+* **ci:** show full error text on healthcheck failure ([535deeb](https://github.com/benjamin-awd/StatementSensei/commit/535deebf78aea616e2d0c88443e26528777f913e))
+* **ci:** use Playwright to detect app errors in healthcheck ([f75a338](https://github.com/benjamin-awd/StatementSensei/commit/f75a338510fd6c7bae466822b4fcb17193f10f1d))
+* **hooks:** read the version with uv and run the requirements hook under bash ([d4fd7ad](https://github.com/benjamin-awd/StatementSensei/commit/d4fd7ad4f9f2cf23f2b95ddb4aa44e8fe1ab8eec))
+* remove sources.list causing apt failure on Streamlit Cloud ([29cce11](https://github.com/benjamin-awd/StatementSensei/commit/29cce1188d631e198e23f5829f3dbcef246e726e))
+
+
+### Build System
+
+* **deps:** bump monopoly-core to 0.23.1 ([0cb0e85](https://github.com/benjamin-awd/StatementSensei/commit/0cb0e858a28ae59a4d99b4955424a13706e5c57c))
+
 ## [0.10.5] - 2026-03-12
 
 ### 📚 Documentation
