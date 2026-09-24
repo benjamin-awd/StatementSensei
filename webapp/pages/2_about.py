@@ -18,6 +18,8 @@ app_version_badge = pybadges.badge(
 )
 
 st.image(app_version_badge)
+# plain-text copy of the badge, read by the smoke test to confirm which version is deployed
+st.caption(f"Version {app_version}")
 
 st.markdown(SUPPORTED_BANKS)
 
