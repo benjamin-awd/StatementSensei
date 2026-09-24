@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 REQUIREMENTS_FILE="requirements.txt"
-VERSION=$(poetry version --short)
+VERSION=$(uv version --short)
 TAR_FILE="dist/statement_sensei-$VERSION.tar.gz"
 HASH=$(sha256sum "$TAR_FILE" | awk '{ print $1 }')
 
