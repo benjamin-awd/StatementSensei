@@ -41,9 +41,9 @@ def test_app(uploaded_file):
 
     expected_df = pd.read_csv("tests/fixtures/example_statement.csv")
 
-    df["date"] = pd.to_datetime(df["date"])
+    df["date"] = pd.to_datetime(df["date"]).astype("datetime64[us]")
     df = df[["description", "amount", "date", "bank"]]
-    expected_df["date"] = pd.to_datetime(expected_df["date"])
+    expected_df["date"] = pd.to_datetime(expected_df["date"]).astype("datetime64[us]")
     assert df.equals(expected_df)
 
 
@@ -55,8 +55,8 @@ def test_unlock_protected(protected_file):
 
     expected_df = pd.read_csv("tests/fixtures/example_statement.csv")
 
-    df["date"] = pd.to_datetime(df["date"])
+    df["date"] = pd.to_datetime(df["date"]).astype("datetime64[us]")
     df = df[["description", "amount", "date", "bank"]]
-    expected_df["date"] = pd.to_datetime(expected_df["date"])
+    expected_df["date"] = pd.to_datetime(expected_df["date"]).astype("datetime64[us]")
 
     assert df.equals(expected_df)
