@@ -1,9 +1,14 @@
 name: publish
 
+# Builds and pushes the Docker image. release-please.yaml calls this workflow
+# when a release is created; workflow_dispatch builds an image by hand.
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag to build and use as the Docker tag
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       tag:
@@ -21,7 +26,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.branch || github.ref_name }}
+          # A release checks out its tag; a manual run checks out the chosen
+          # branch, or the branch it was dispatched from.
+          ref: ${{ github.event_name == 'workflow_dispatch' && (inputs.branch || github.ref_name) || inputs.tag }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -32,15 +39,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set Docker tag
-        id: docker_tag
-        run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
-          else
-            echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
-          fi
-
       - name: Push to Docker Hub
         uses: docker/build-push-action@v6
         with:
@@ -49,4 +47,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/statementsensei:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/statementsensei:${{ env.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/statementsensei:${{ inputs.tag }}
