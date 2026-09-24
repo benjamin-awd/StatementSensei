@@ -67,11 +67,9 @@ def parse_bank_statement(document: PdfDocument, password: str | None = None) -> 
 def create_df(processed_files: list[ProcessedFile]) -> pd.DataFrame:
     dataframes = []
     for file in processed_files:
-        df = pd.DataFrame(file)
+        df = pd.DataFrame(file)[["date", "description", "amount"]]
         df["date"] = pd.to_datetime(df["date"]).dt.date
         df["bank"] = file.metadata.bank_name
-
-        df = df.drop(columns="polarity")
         dataframes.append(df)
 
     concat_df = pd.concat(dataframes)
