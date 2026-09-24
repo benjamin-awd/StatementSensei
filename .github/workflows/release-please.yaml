@@ -1,0 +1,117 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Runs one at a time so two pushes to main never race on the release PR branch.
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+env:
+  ARTIFACTS_COMMIT_MESSAGE: "chore(release): regenerate release artifacts"
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      prs_created: ${{ steps.release.outputs.prs_created }}
+      pr: ${{ steps.release.outputs.pr }}
+    steps:
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@v5
+        with:
+          # RELEASE_PLEASE_TOKEN is an optional PAT. With it, the release PR
+          # runs ci.yaml like any other PR. The default GITHUB_TOKEN works too,
+          # but events it causes do not trigger other workflows.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  # Streamlit Community Cloud installs the webapp from the sdist committed in
+  # dist/, pinned by hash on the first line of requirements.txt. This job
+  # rebuilds that sdist, requirements.txt and the supported-banks list on the
+  # release PR branch, so the commit that gets tagged already carries them.
+  release-artifacts:
+    needs: release-please
+    if: needs.release-please.outputs.prs_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the release PR branch
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ fromJSON(needs.release-please.outputs.pr).headBranchName }}
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+
+      # release-please force-pushes the branch whenever the release PR
+      # changes, which drops this job's commit. A branch that still ends with
+      # that commit already has current artifacts.
+      - name: Check whether the artifacts are current
+        id: check
+        run: |
+          if [ "$(git log -1 --format=%s)" = "$ARTIFACTS_COMMIT_MESSAGE" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install uv
+        if: steps.check.outputs.current != 'true'
+        uses: astral-sh/setup-uv@v7
+
+      - name: Update supported banks
+        if: steps.check.outputs.current != 'true'
+        run: uv run --no-project --with requests python .github/hooks/update_supported_banks.py
+
+      - name: Build the sdist
+        if: steps.check.outputs.current != 'true'
+        run: |
+          rm -f dist/statement_sensei-*.tar.gz
+          uv build --sdist
+          # uv writes a catch-all dist/.gitignore, which would hide the sdist from git
+          rm -f dist/.gitignore
+
+      - name: Regenerate requirements.txt
+        if: steps.check.outputs.current != 'true'
+        run: .github/hooks/include_webapp_in_requirements.sh
+
+      - name: Commit and push the artifacts
+        if: steps.check.outputs.current != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A dist requirements.txt README.md webapp/constants.py
+          if git diff --cached --quiet; then
+            echo "Artifacts are unchanged"
+            exit 0
+          fi
+          git commit -m "$ARTIFACTS_COMMIT_MESSAGE"
+          git push
+
+  # Tags created with the default GITHUB_TOKEN do not trigger other
+  # workflows, so the release builds are called here directly.
+  docker:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/publish.yml
+    with:
+      tag: ${{ needs.release-please.outputs.tag_name }}
+    secrets: inherit
+
+  desktop:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build_app.yml
+    with:
+      tag: ${{ needs.release-please.outputs.tag_name }}
