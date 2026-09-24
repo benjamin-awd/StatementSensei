@@ -1,12 +1,23 @@
 name: Build App & Release
 
+# Builds the Tauri desktop app. release-please.yaml calls this workflow when a
+# release is created, and the bundles are attached to that GitHub release.
+# Pushes to development and manual runs without a tag only build.
 on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag to build and attach the bundles to
+        required: true
+        type: string
   push:
-    tags:
-      - "v*.*.*"
     branches:
       - development
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to build and attach the bundles to (optional)
+        required: false
 
 defaults:
   run:
@@ -32,6 +43,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
 
       - name: Setup Conda (windows)
         if: matrix.os-target.os == 'windows-latest'
@@ -142,39 +155,23 @@ jobs:
             tauri/src-tauri/target/${{ matrix.os-target.target }}/release/bundle/dmg/
           compression-level: 9
 
-  create_release:
-    if: github.ref != 'refs/heads/development'
+  upload_release_assets:
+    if: inputs.tag != ''
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: ./artifacts
           merge-multiple: true
 
-      - name: Get Statement Sensei version
-        id: statement_sensei_version
-        run: echo "statement_sensei_version=$(grep "^version" pyproject.toml | cut -d'"' -f2)" >> $GITHUB_OUTPUT
-
-      - name: Create release changelog
+      - name: Attach the bundles to the GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
         run: |
-          pip install git-cliff==2.4.0
-          git fetch --tags
-          git cliff --ignore-tags "rc" --latest > RELEASE_CHANGELOG.md
-
-      - name: Create a Github Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.statement_sensei_version.outputs.statement_sensei_version }}
-          target_commitish: main
-          body_path: RELEASE_CHANGELOG.md
-          files: ./artifacts/**/StatementSensei*
+          find artifacts -type f -name 'StatementSensei*' -print0 \
+            | xargs -0 gh release upload "$TAG" --clobber --repo "$GITHUB_REPOSITORY"
