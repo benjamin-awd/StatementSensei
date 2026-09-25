@@ -115,3 +115,15 @@ jobs:
     uses: ./.github/workflows/build_app.yml
     with:
       tag: ${{ needs.release-please.outputs.tag_name }}
+
+  # Streamlit Community Cloud redeploys from main on its own, with no deploy
+  # API. This waits until the live app reports the released version, then runs
+  # the smoke test against it, so a release only passes once it is served.
+  verify-deploy:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/smoke-test.yml
+    with:
+      expected_version: ${{ needs.release-please.outputs.tag_name }}
