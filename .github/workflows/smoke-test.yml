@@ -4,71 +4,43 @@ on:
   schedule:
     - cron: "0 * * * *"
   workflow_dispatch:
+    inputs:
+      expected_version:
+        description: Wait until the live app reports this version (e.g. v0.10.6) before testing
+        required: false
+        default: ""
+  workflow_call:
+    inputs:
+      expected_version:
+        description: Wait until the live app reports this version (e.g. v0.10.6) before testing
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
 
 jobs:
   smoke-test:
     runs-on: ubuntu-latest
+    # covers the version wait (20 minutes by default) plus the checks themselves
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          sparse-checkout: docs/example_statement.pdf
+          sparse-checkout: |
+            docs/example_statement.pdf
+            .github/scripts/smoke_test.py
           sparse-checkout-cone-mode: false
 
-      - name: Check health endpoint
-        run: |
-          http_status=$(curl -so /dev/null -w '%{http_code}' https://statementsensei.streamlit.app/healthz)
-          if [ "$http_status" != "200" ]; then
-            echo "::error::Health check failed with status $http_status"
-            exit 1
-          fi
-          echo "Health check passed (HTTP $http_status)"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
-      - name: Install Playwright
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install playwright > /dev/null 2>&1
-          npx playwright install chromium --with-deps > /dev/null 2>&1
+      - name: Install Chromium
+        run: uv run --no-project --with playwright playwright install --with-deps chromium
 
-      - name: Check app loads and processes a statement
-        run: |
-          node -e "
-          const { chromium } = require('playwright');
-          (async () => {
-            const browser = await chromium.launch();
-            const page = await browser.newPage();
-            try {
-              await page.goto('https://statementsensei.streamlit.app/', { timeout: 60000 });
-
-              // Check for error page
-              await page.waitForTimeout(5000);
-              const bodyText = await page.locator('body').innerText();
-              if (bodyText.includes('Error')) {
-                console.error('::error::' + bodyText.trim());
-                process.exit(1);
-              }
-              console.log('App loads successfully');
-
-              // Streamlit Cloud wraps the app in an iframe
-              const iframe = page.frameLocator('iframe').first();
-
-              // Upload the example statement
-              const fileInput = iframe.locator('[data-testid=\"stFileUploader\"] input[type=\"file\"]');
-              await fileInput.waitFor({ state: 'attached', timeout: 60000 });
-              await fileInput.setInputFiles('docs/example_statement.pdf');
-              console.log('Uploaded example statement');
-
-              // Wait for a dataframe/table to appear (indicates successful processing)
-              await iframe.locator('[data-testid=\"stDataFrame\"], table').first().waitFor({
-                state: 'visible',
-                timeout: 60000,
-              });
-              console.log('Statement processed successfully');
-            } catch (err) {
-              console.error('::error::' + err.message);
-              process.exit(1);
-            } finally {
-              await browser.close();
-            }
-          })();
-          "
+      - name: Check the live app
+        env:
+          EXPECTED_VERSION: ${{ inputs.expected_version }}
+        run: uv run --no-project --with playwright python .github/scripts/smoke_test.py --expected-version "$EXPECTED_VERSION"
