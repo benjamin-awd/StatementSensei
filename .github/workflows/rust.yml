@@ -1,0 +1,51 @@
+name: rust
+
+# Compiles the Tauri shell on pull requests. build_app.yml only runs on
+# releases and pushes to development, so Cargo changes were otherwise unbuilt.
+on:
+  pull_request:
+    paths:
+      - "tauri/src-tauri/**"
+      - ".github/workflows/rust.yml"
+  push:
+    branches: main
+    paths:
+      - "tauri/src-tauri/**"
+      - ".github/workflows/rust.yml"
+
+defaults:
+  run:
+    working-directory: tauri/src-tauri
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tauri dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: tauri/src-tauri
+
+      # tauri-build requires the externalBin sidecar to exist, but a type
+      # check does not need the real PyInstaller binary
+      - name: Stub the sidecar binary
+        run: touch binaries/statementsensei-x86_64-unknown-linux-gnu
+
+      - name: Check
+        run: cargo check --locked
+
+      - name: Clippy
+        run: cargo clippy --locked
