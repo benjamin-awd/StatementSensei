@@ -1,4 +1,5 @@
 # pylint: disable=line-too-long
+import base64
 from importlib.metadata import version
 
 import pybadges
@@ -78,5 +79,5 @@ monopoly_version_badge = pybadges.badge(
     left_color="#555",
     right_color="#007ec6",
 )
-st.image(monopoly_version_badge)
-st.caption("Powered by [monopoly](https://github.com/benjamin-awd/monopoly)")
+badge_uri = f"data:image/svg+xml;base64,{base64.b64encode(monopoly_version_badge.encode()).decode()}"
+st.markdown(f"[![monopoly]({badge_uri})](https://github.com/benjamin-awd/monopoly)")
