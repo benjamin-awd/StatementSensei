@@ -24,11 +24,13 @@ The offline application runs Streamlit locally, and uses a [WebView](https://tau
 Supported banks:
 | Bank                                   | Credit Statement   | Debit Statement       |
 |----------------------------------------|--------------------|-----------------------|
+| American Express (Singapore Platinum, US) | ✅              | ❌                   |
 | Bank of America                        | ✅                 | ✅                   |
 | Bank of Montreal (BMO)                 | ✅                 | ✅                   |
 | Canadian Imperial Bank of Commerce (CIBC) | ✅                 | ✅                   |
 | Canadian Tire Bank                     | ✅                 | ❌                   |
 | Capital One Canada                     | ✅                 | ❌                   |
+| Capital One 360 (US)                   | ❌                 | ✅                   |
 | Chase                                  | ✅                 | ❌                   |
 | Citibank                               | ✅                 | ❌                   |
 | DBS/POSB                               | ✅                 | ✅                   |
