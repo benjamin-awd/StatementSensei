@@ -14,6 +14,15 @@ app_version = version("statement_sensei")
 # plain-text app version, read by the smoke test to confirm which version is deployed
 st.caption(f"Version {app_version}")
 
+monopoly_version_badge = pybadges.badge(
+    left_text="monopoly",
+    right_text=f"v{version('monopoly-core')}",
+    left_color="#555",
+    right_color="#007ec6",
+)
+badge_uri = f"data:image/svg+xml;base64,{base64.b64encode(monopoly_version_badge.encode()).decode()}"
+st.markdown(f"[![monopoly]({badge_uri})](https://github.com/benjamin-awd/monopoly)")
+
 faq_tab, banks_tab, contact_tab = st.tabs(["FAQ", "Supported banks", "Contact"])
 
 with faq_tab:
@@ -72,12 +81,3 @@ with contact_tab:
         or [contact me](mailto:benjamindornel@gmail.com).
         """
     )
-
-monopoly_version_badge = pybadges.badge(
-    left_text="monopoly",
-    right_text=f"v{version('monopoly-core')}",
-    left_color="#555",
-    right_color="#007ec6",
-)
-badge_uri = f"data:image/svg+xml;base64,{base64.b64encode(monopoly_version_badge.encode()).decode()}"
-st.markdown(f"[![monopoly]({badge_uri})](https://github.com/benjamin-awd/monopoly)")
