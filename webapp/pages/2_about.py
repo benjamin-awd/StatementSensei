@@ -10,17 +10,6 @@ st.markdown("# About")
 
 app_version = version("statement_sensei")
 
-monopoly_version = version("monopoly-core")
-
-monopoly_version_badge = pybadges.badge(
-    left_text="monopoly",
-    right_text=f"v{monopoly_version}",
-    left_color="#555",
-    right_color="#007ec6",
-)
-
-st.image(monopoly_version_badge)
-st.caption("Powered by [monopoly](https://github.com/benjamin-awd/monopoly)")
 # plain-text app version, read by the smoke test to confirm which version is deployed
 st.caption(f"Version {app_version}")
 
@@ -85,3 +74,12 @@ st.markdown(
     or [contact me](mailto:benjamindornel@gmail.com).
     """
 )
+
+monopoly_version_badge = pybadges.badge(
+    left_text="monopoly",
+    right_text=f"v{version('monopoly-core')}",
+    left_color="#555",
+    right_color="#007ec6",
+)
+st.image(monopoly_version_badge)
+st.caption("Powered by [monopoly](https://github.com/benjamin-awd/monopoly)")
