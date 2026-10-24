@@ -115,6 +115,28 @@ or store them in an .env file in the project root:
 echo 'PDF_PASSWORDS=["foo"]' > .env
 ```
 
+## Testing on the dev deploy
+Changes can be tried on Streamlit Community Cloud before they reach production.
+The [dev fork](https://github.com/benjaminawd-dev/StatementSensei) deploys its `main` branch to
+https://statementsensei-dev.streamlit.app (production is https://statementsensei.streamlit.app).
+
+```sh
+git remote add dev https://github.com/benjaminawd-dev/StatementSensei
+git fetch origin
+git checkout -b dev-test origin/main
+git merge --no-ff <branch>        # repeat for each branch to test
+git push --force dev dev-test:main
+```
+
+`dev/main` is reset to `origin/main` this way each time, so don't keep anything there.
+Once the app has redeployed, run the smoke test against it:
+
+```sh
+uv run --no-project --with playwright playwright install chromium
+uv run --no-project --with playwright python .github/scripts/smoke_test.py \
+  --app-url https://statementsensei-dev.streamlit.app --expected-version v<version>
+```
+
 # Features
 - Supports uploading multiple bank statements
 - Allows unlocking of PDFs using user-provided credentials via the frontend
