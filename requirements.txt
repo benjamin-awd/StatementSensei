@@ -186,9 +186,13 @@ pydantic==2.14.1
 pydantic-core==2.50.1
     # via pydantic
 pydantic-settings==2.15.0 ; python_full_version < '3.11'
-    # via monopoly-core
+    # via
+    #   monopoly-core
+    #   statement-sensei
 pydantic-settings==2.16.1 ; python_full_version >= '3.11'
-    # via monopoly-core
+    # via
+    #   monopoly-core
+    #   statement-sensei
 pydeck==0.9.3
     # via streamlit
 pygments==2.21.0
