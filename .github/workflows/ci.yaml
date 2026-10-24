@@ -12,8 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # refresh the package index first; the runner image's copy can point at
-      # versions the mirror no longer serves
       - name: Install pdftotext
         run: |
           sudo apt-get update
