@@ -7,7 +7,7 @@
 
 _ignore*
 build
-dist/entrypoint
+dist
 *.whl
 
 # exclude uv to allow optional dependencies to be installed on streamlit

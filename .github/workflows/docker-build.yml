@@ -1,0 +1,64 @@
+name: docker-build
+
+# Builds the image on pull requests and checks that it starts and can parse PDFs;
+# publishing is handled by docker-latest.yml and publish.yml.
+on:
+  pull_request:
+    paths:
+      - Dockerfile
+      - pyproject.toml
+      - requirements.txt
+      - entrypoint.py
+      - tesseract.cfg
+      - .streamlit/**
+      - webapp/**
+      - .github/workflows/docker-build.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: statementsensei:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Check OCR and PDF dependencies
+        run: |
+          docker run --rm statementsensei:ci sh -c \
+            'tesseract --version && gs --version && python -c "import pdftotext, ocrmypdf, webapp.app"'
+
+      - name: Check the app parses a statement
+        run: |
+          docker run --rm -v "$PWD/docs:/docs:ro" statementsensei:ci python -c '
+          from monopoly.pdf import PdfDocument
+          from webapp.helpers import parse_bank_statement
+          document = PdfDocument(file_bytes=open("/docs/example_statement.pdf", "rb").read())
+          document._name = "example_statement.pdf"
+          processed = parse_bank_statement(document)
+          assert processed.transactions, "no transactions parsed"
+          print(f"{len(processed.transactions)} transactions from {processed.metadata.bank_name}")
+          '
+
+      - name: Check the server starts
+        run: |
+          docker run -d --name app -p 8501:8501 statementsensei:ci
+          for _ in $(seq 30); do
+            curl -fsS http://localhost:8501/_stcore/health && exit 0
+            sleep 2
+          done
+          docker logs app
+          exit 1
