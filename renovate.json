@@ -4,7 +4,7 @@
   "enabledManagers": ["pep621"],
   "packageRules": [
     {
-      "matchPackageNames": ["*", "!monopoly-core"],
+      "matchPackageNames": ["!monopoly-core"],
       "enabled": false
     }
   ],
