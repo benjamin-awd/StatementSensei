@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.10](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.9...v0.10.10) (2026-10-24)
+
+
+### Bug Fixes
+
+* **webapp:** drop custom theme so the light/dark switcher is available ([aed5d28](https://github.com/benjamin-awd/StatementSensei/commit/aed5d28def40df289bb73db7ebdbde23bc621ed0))
+
 ## [0.10.9](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.8...v0.10.9) (2026-10-24)
 
 

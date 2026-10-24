@@ -252,7 +252,7 @@ six==1.17.0
     # via python-dateutil
 starlette==1.7.0 ; python_full_version < '3.11'
     # via streamlit
-starlette==1.9.0 ; python_full_version >= '3.11'
+starlette==1.10.0 ; python_full_version >= '3.11'
     # via streamlit
 streamlit==1.65.0 ; python_full_version < '3.11'
     # via statement-sensei
