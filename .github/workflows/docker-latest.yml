@@ -1,28 +1,36 @@
-name: rebuild-latest
+name: docker-latest
 
-# The Dockerfile resolves dependencies at build time and pulls an unpinned
-# base image, so `latest` goes stale between releases. This rebuilds it weekly
-# from the most recent release tag. Release tags are left untouched.
+# The Dockerfile resolves dependencies at build time, so `latest` goes stale
+# until the next release. This rebuilds it whenever something the image is
+# built from changes on main, e.g. a merged monopoly-core bump. Release tags
+# are pushed by publish.yml and left untouched.
 on:
-  schedule:
-    - cron: "0 3 * * 1"
+  push:
+    branches:
+      - main
+    paths:
+      - Dockerfile
+      - pyproject.toml
+      - README.md
+      - entrypoint.py
+      - webapp/**
+      - .github/workflows/docker-latest.yml
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: docker-latest
+  cancel-in-progress: true
+
 jobs:
-  rebuild:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Check out the latest release tag
-        run: git checkout "$(git describe --tags --abbrev=0 --match 'v*')"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -39,6 +47,5 @@ jobs:
           context: .
           push: true
           pull: true
-          no-cache: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/statementsensei:latest
