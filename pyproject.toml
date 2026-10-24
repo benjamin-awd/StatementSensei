@@ -3,7 +3,7 @@ authors = [
     {name = "Benjamin Dornel", email = "benjamindornel@gmail.com"},
 ]
 
-requires-python = "<3.14,>=3.10"
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "streamlit>=1.51.0",
     "pybadges @ git+https://github.com/benjamin-awd/pybadges",
