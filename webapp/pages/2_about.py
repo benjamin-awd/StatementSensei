@@ -64,6 +64,12 @@ with faq_tab:
     With that in mind, here are some measures for a better security posture:
     - Use the monopoly [CLI](https://github.com/benjamin-awd/monopoly), or the [offline](https://github.com/benjamin-awd/statementsensei/releases) version of the app
     - Redact any sensitive information in transactions e.g. card numbers, names etc.
+
+    ### What is monopoly?
+    StatementSensei is a web interface for [monopoly](https://github.com/benjamin-awd/monopoly),
+    an open-source Python library and CLI that does the actual PDF parsing.
+    The badge at the top of this page shows which version of it this app is running.
+    If you'd rather not upload statements anywhere, you can run monopoly locally.
     """
     )
 
