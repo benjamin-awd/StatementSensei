@@ -9,19 +9,19 @@ from webapp.constants import SUPPORTED_BANKS
 
 st.markdown("# About")
 
-app_version = version("statement_sensei")
 
-# plain-text app version, read by the smoke test to confirm which version is deployed
-st.caption(f"Version {app_version}")
+def badge_link(label: str, ver: str, url: str) -> str:
+    """Render a linked badge; the alt text carries the version, which the smoke test reads."""
+    svg = pybadges.badge(left_text=label, right_text=f"v{ver}", left_color="#555", right_color="#007ec6")
+    uri = f"data:image/svg+xml;base64,{base64.b64encode(svg.encode()).decode()}"
+    return f"[![{label} v{ver}]({uri})]({url})"
 
-monopoly_version_badge = pybadges.badge(
-    left_text="monopoly",
-    right_text=f"v{version('monopoly-core')}",
-    left_color="#555",
-    right_color="#007ec6",
+
+st.markdown(
+    badge_link("StatementSensei", version("statement_sensei"), "https://github.com/benjamin-awd/statementsensei")
+    + " "
+    + badge_link("monopoly", version("monopoly-core"), "https://github.com/benjamin-awd/monopoly")
 )
-badge_uri = f"data:image/svg+xml;base64,{base64.b64encode(monopoly_version_badge.encode()).decode()}"
-st.markdown(f"[![monopoly]({badge_uri})](https://github.com/benjamin-awd/monopoly)")
 
 faq_tab, banks_tab, contact_tab = st.tabs(["FAQ", "Supported banks", "Contact"])
 

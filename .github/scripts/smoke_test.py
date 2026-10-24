@@ -29,7 +29,7 @@ EXAMPLE_STATEMENT = Path("docs/example_statement.pdf")
 LOAD_TIMEOUT_MS = 60_000
 RENDER_WAIT_MS = 5_000
 HTTP_OK = 200
-VERSION_PATTERN = re.compile(r"Version (\S+)")
+VERSION_PATTERN = re.compile(r"StatementSensei v(\S+)")
 
 
 class SmokeTestError(Exception):
@@ -59,6 +59,17 @@ def page_text(page: Page) -> str:
     return "\n".join(texts)
 
 
+def badge_alts(page: Page) -> str:
+    """Concatenate the alt text of every image in every frame; the About page badges carry the versions."""
+    alts = []
+    for frame in page.frames:
+        try:
+            alts.extend(a or "" for a in frame.locator("img").evaluate_all("els => els.map(e => e.alt)"))
+        except PlaywrightError:
+            continue
+    return "\n".join(alts)
+
+
 def wait_for_version(page: Page, app_url: str, expected: str, timeout_minutes: float, poll_seconds: float) -> None:
     deadline = time.monotonic() + timeout_minutes * 60
     seen = "nothing yet"
@@ -66,7 +77,7 @@ def wait_for_version(page: Page, app_url: str, expected: str, timeout_minutes: f
         try:
             page.goto(f"{app_url}/about", timeout=LOAD_TIMEOUT_MS)
             page.wait_for_timeout(RENDER_WAIT_MS)
-            match = VERSION_PATTERN.search(page_text(page))
+            match = VERSION_PATTERN.search(badge_alts(page))
             seen = match.group(1) if match else "no version on the page"
             if seen == expected:
                 log(f"Deployed version is {expected}")
