@@ -37,10 +37,10 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
-  # Streamlit Community Cloud installs the webapp from the sdist committed in
-  # dist/, pinned by hash on the first line of requirements.txt. This job
-  # rebuilds that sdist, requirements.txt and the supported-banks list on the
-  # release PR branch, so the commit that gets tagged already carries them.
+  # Streamlit Community Cloud installs from requirements.txt, whose last line
+  # (`.`) installs the webapp from the repo root. This job regenerates
+  # requirements.txt and the supported-banks list on the release PR branch,
+  # so the commit that gets tagged already carries them.
   release-artifacts:
     needs: release-please
     if: needs.release-please.outputs.prs_created == 'true'
@@ -70,14 +70,6 @@ jobs:
         if: steps.check.outputs.current != 'true'
         run: uv run --no-project --with requests python .github/hooks/update_supported_banks.py
 
-      - name: Build the sdist
-        if: steps.check.outputs.current != 'true'
-        run: |
-          rm -f dist/statement_sensei-*.tar.gz
-          uv build --sdist
-          # uv writes a catch-all dist/.gitignore, which would hide the sdist from git
-          rm -f dist/.gitignore
-
       - name: Regenerate requirements.txt
         if: steps.check.outputs.current != 'true'
         run: .github/hooks/include_webapp_in_requirements.sh
@@ -87,7 +79,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A dist requirements.txt README.md webapp/constants.py
+          git add requirements.txt README.md webapp/constants.py
           if git diff --cached --quiet; then
             echo "Artifacts are unchanged"
             exit 0
