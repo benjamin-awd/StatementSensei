@@ -17,9 +17,6 @@ st.markdown(SUPPORTED_BANKS)
 
 st.write("\n")
 
-st.markdown("# Usage")
-st.page_link("app.py", label="Convert a bank statement", icon=":material/arrow_forward:")
-
 st.markdown(
     """
 # FAQ
