@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.10.9](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.8...v0.10.9) (2026-10-24)
+
+
+### Features
+
+* **webapp:** add a StatementSensei badge and have the smoke test read badge alt text ([b32a7f7](https://github.com/benjamin-awd/StatementSensei/commit/b32a7f73fa421cbc00ec415f5962fd146dca7b75))
+* **webapp:** show the monopoly version and link on the About page ([8c5f2d4](https://github.com/benjamin-awd/StatementSensei/commit/8c5f2d4da04be918079b8b1505e07d1b1f4a3bca))
+* **webapp:** split the About page into Supported banks, FAQ and Contact tabs ([6d7ffce](https://github.com/benjamin-awd/StatementSensei/commit/6d7ffce460a922b22dd84f96a09bfe676c7050c6))
+
+
+### Code Refactoring
+
+* **webapp:** drop the Usage section from the About page ([d56155d](https://github.com/benjamin-awd/StatementSensei/commit/d56155d554dfdd3b608196e21acf2127540a6a2f))
+* **webapp:** link the monopoly badge directly to the repo ([e92a111](https://github.com/benjamin-awd/StatementSensei/commit/e92a11126e119a15bea1549a8d5691a9ba0b2681))
+* **webapp:** move the monopoly badge to the bottom of the About page ([77154c2](https://github.com/benjamin-awd/StatementSensei/commit/77154c2cffff7ce3c7c2fcda99a50f56b6211d65))
+* **webapp:** put the FAQ tab first on the About page ([4833fff](https://github.com/benjamin-awd/StatementSensei/commit/4833fffb8cb4afc2b8175564f79bc3057f8c93d8))
+* **webapp:** show the monopoly badge under the app version ([7887a02](https://github.com/benjamin-awd/StatementSensei/commit/7887a020f2d94fca44e5a763eb4e35a8cc1a4311))
+
+
+### Documentation
+
+* **webapp:** explain monopoly in the About FAQ ([c3ca9b2](https://github.com/benjamin-awd/StatementSensei/commit/c3ca9b20f4fdf269d8f5816dc543b8a70fd147bd))
+* **webapp:** trim the monopoly FAQ entry ([c38d3cf](https://github.com/benjamin-awd/StatementSensei/commit/c38d3cf07f37acdd473de4df0de9ed149cc78a97))
+
+
+### Build System
+
+* **deps:** bump serde_with ([08f58c1](https://github.com/benjamin-awd/StatementSensei/commit/08f58c1f5e7d887647ccd4960c25cf01955e42cc))
+
 ## [0.10.8](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.7...v0.10.8) (2026-10-24)
 
 
