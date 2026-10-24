@@ -26,9 +26,7 @@ st.markdown(SUPPORTED_BANKS)
 st.write("\n")
 
 st.markdown("# Usage")
-switch_page_button = st.button("Convert a bank statement")
-if switch_page_button:
-    st.switch_page("app.py")
+st.page_link("app.py", label="Convert a bank statement", icon=":material/arrow_forward:")
 
 st.markdown(
     """

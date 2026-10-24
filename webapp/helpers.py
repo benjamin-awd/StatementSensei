@@ -9,7 +9,9 @@ from monopoly.pipeline import Pipeline
 from monopoly.statements.base import SafetyCheckError
 from pydantic import SecretStr
 
-from webapp.models import ProcessedFile, TransactionMetadata
+from webapp.models import Notice, ProcessedFile, TransactionMetadata
+
+NOTICE_ICONS = {"error": "❗", "warning": "⚠️"}
 
 
 def build_pipeline(document: PdfDocument, password: str | None = None) -> tuple[Pipeline, PdfParser]:
@@ -42,26 +44,33 @@ def parse_bank_statement(document: PdfDocument, password: str | None = None) -> 
     statement = pipeline.extract(safety_check=False)
     bank_name = parser.bank.__name__
 
+    notices = []
     if statement.config.safety_check:
         try:
             statement.perform_safety_check()
         except SafetyCheckError:
-            st.error(
-                f"Safety check failed for {document.name}, transactions are incorrect or missing",
-                icon="❗",
+            notices.append(
+                Notice("error", f"Safety check failed for {document.name}, transactions are incorrect or missing")
             )
     if not statement.config.safety_check:
-        st.warning(
-            f"{bank_name} {statement.config.statement_type} statements have no safety check, "
-            "please review your transactions and proceed with caution",
-            icon="⚠️",
+        notices.append(
+            Notice(
+                "warning",
+                f"{bank_name} {statement.config.statement_type} statements have no safety check, "
+                "please review your transactions and proceed with caution",
+            )
         )
 
     if bank_name == "GenericBank":
-        st.warning("Unrecognized bank - using generic parser", icon="⚠️")
+        notices.append(Notice("warning", "Unrecognized bank - using generic parser"))
 
     metadata = TransactionMetadata(bank_name)
-    return ProcessedFile(pipeline.transform(statement), metadata)
+    return ProcessedFile(pipeline.transform(statement), metadata, notices)
+
+
+def show_notices(processed_file: ProcessedFile) -> None:
+    for notice in processed_file.notices:
+        getattr(st, notice.level)(notice.message, icon=NOTICE_ICONS[notice.level])
 
 
 def create_df(processed_files: list[ProcessedFile]) -> pd.DataFrame:
@@ -83,9 +92,9 @@ def show_df(df: pd.DataFrame) -> None:
     df = df[columns_to_use]
     df.columns = [col.title() for col in df.columns]
     st.dataframe(
-        df.style.format({"Amount": "{:,.2f}"}),
-        use_container_width=True,
+        df,
         hide_index=True,
+        column_config={"Amount": st.column_config.NumberColumn(format="localized", step=0.01)},
     )
     total_balance = df["Amount"].sum()
     st.write(f"Total Balance: ${total_balance:,.2f}")
@@ -94,4 +103,5 @@ def show_df(df: pd.DataFrame) -> None:
         label="Download CSV",
         data=csv,
         mime="text/csv",
+        on_click="ignore",
     )
