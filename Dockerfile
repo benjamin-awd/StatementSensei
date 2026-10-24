@@ -8,7 +8,9 @@ RUN apt-get update && \
 COPY --from=ghcr.io/astral-sh/uv:0.10.12 /uv /bin/uv
 
 ENV UV_CACHE_DIR=/tmp/uv-cache \
-    UV_PYTHON=/opt/venv/bin/python
+    UV_LINK_MODE=copy \
+    UV_PYTHON_DOWNLOADS=never \
+    VIRTUAL_ENV=/opt/venv
 
 WORKDIR /app
 
@@ -16,7 +18,7 @@ WORKDIR /app
 # reused when only the app code changes, then install the app itself
 COPY requirements.txt ./
 RUN --mount=type=cache,target=$UV_CACHE_DIR \
-    uv venv /opt/venv && \
+    uv venv "$VIRTUAL_ENV" && \
     grep -vx '\.' requirements.txt > /tmp/deps.txt && \
     uv pip install -r /tmp/deps.txt
 
