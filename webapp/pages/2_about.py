@@ -68,7 +68,6 @@ with faq_tab:
     ### What is monopoly?
     StatementSensei is a web interface for [monopoly](https://github.com/benjamin-awd/monopoly),
     an open-source Python library and CLI that does the actual PDF parsing.
-    The badge at the top of this page shows which version of it this app is running.
     If you'd rather not upload statements anywhere, you can run monopoly locally.
     """
     )
