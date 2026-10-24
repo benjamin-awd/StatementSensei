@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.10.8](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.7...v0.10.8) (2026-10-24)
+
+
+### Bug Fixes
+
+* **webapp:** keep parse warnings across reruns and tidy Streamlit usage ([7c741a4](https://github.com/benjamin-awd/StatementSensei/commit/7c741a45be40f0ca3e31e150d299003910a1bf0f))
+
+
+### Build System
+
+* install git in the Docker builder for pybadges ([71e8703](https://github.com/benjamin-awd/StatementSensei/commit/71e8703f816fadbfe8484388f3717ff4209d38c4))
+* point uv at the venv with VIRTUAL_ENV ([aeaa4a5](https://github.com/benjamin-awd/StatementSensei/commit/aeaa4a5035f779e69c4a02e0688c156b7e83107d))
+* slim the Docker image and drop the committed sdist from requirements ([f190618](https://github.com/benjamin-awd/StatementSensei/commit/f190618574f02b75a71decbe8a49404842ca94da))
+
 ## [0.10.7](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.6...v0.10.7) (2026-10-24)
 
 
