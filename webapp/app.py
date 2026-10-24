@@ -4,7 +4,7 @@ from monopoly.pdf import MissingPasswordError, PdfDocument
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 from webapp.constants import APP_DESCRIPTION
-from webapp.helpers import create_df, parse_bank_statement, show_df
+from webapp.helpers import create_df, parse_bank_statement, show_df, show_notices
 from webapp.logo import logo
 from webapp.models import ProcessedFile
 
@@ -41,27 +41,26 @@ def process_files(uploaded_files: list[UploadedFile]) -> list[ProcessedFile] | N
 
     pbar = st.progress(0, text="Processing PDFs") if show_pbar else None
 
+    # cache parsed files by upload id, dropping any that were removed from the uploader
+    cache: dict[str, ProcessedFile] = st.session_state.setdefault("processed_files", {})
+    current_ids = {file.file_id for file in uploaded_files}
+    for file_id in cache.keys() - current_ids:
+        del cache[file_id]
+
     processed_files = []
     for i, file in enumerate(uploaded_files):
         if pbar:
             pbar.progress(i / num_files, text=f"Processing {file.name}")
 
-        file_bytes = file.getvalue()
-        document = PdfDocument(file_bytes=file_bytes)
-        document._name = file.name
+        if file.file_id not in cache:
+            document = open_document(file)
+            if document is None:
+                continue
+            cache[file.file_id] = parse_bank_statement(document)
 
-        # attempt to use passwords stored in environment to unlock
-        # if no passwords in environment, then ask user for password
-        if document.is_encrypted:  # pylint: disable=no-member
-            try:
-                document = document.unlock_document()
-
-            except MissingPasswordError:
-                document = handle_encrypted_document(document)
-
-        if document:
-            processed_file = handle_file(document)
-            processed_files.append(processed_file)
+        processed_file = cache[file.file_id]
+        show_notices(processed_file)
+        processed_files.append(processed_file)
 
     if pbar:
         pbar.empty()
@@ -69,15 +68,19 @@ def process_files(uploaded_files: list[UploadedFile]) -> list[ProcessedFile] | N
     return processed_files
 
 
-def handle_file(document: PdfDocument) -> ProcessedFile | None:
-    document_id = document.xref_get_key(-1, "ID")[-1]
-    uuid = document.name + document_id
-    if uuid in st.session_state:
-        return st.session_state[uuid]
+def open_document(file: UploadedFile) -> PdfDocument | None:
+    document = PdfDocument(file_bytes=file.getvalue())
+    document._name = file.name
 
-    file = parse_bank_statement(document)
-    st.session_state[uuid] = file
-    return file
+    # attempt to use passwords stored in environment to unlock
+    # if no passwords in environment, then ask user for password
+    if document.is_encrypted:  # pylint: disable=no-member
+        try:
+            return document.unlock_document()
+        except MissingPasswordError:
+            return handle_encrypted_document(document)
+
+    return document
 
 
 def handle_encrypted_document(document: PdfDocument) -> PdfDocument | None:

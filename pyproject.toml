@@ -5,12 +5,13 @@ authors = [
 
 requires-python = "<3.14,>=3.10"
 dependencies = [
-    "streamlit>=1.45.1",
+    "streamlit>=1.51.0",
     "pybadges @ git+https://github.com/benjamin-awd/pybadges",
     "plotly>=6.1.2",
     "pdftotext>=3.0.0",
     "pymupdf>=1.26.0",
     "monopoly-core==0.23.4",
+    "pydantic-settings>=2.0.0",
 ]
 name = "statement-sensei"
 version = "0.10.7"
