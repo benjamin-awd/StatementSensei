@@ -13,10 +13,7 @@ app_version = version("statement_sensei")
 # plain-text app version, read by the smoke test to confirm which version is deployed
 st.caption(f"Version {app_version}")
 
-banks_tab, faq_tab, contact_tab = st.tabs(["Supported banks", "FAQ", "Contact"])
-
-with banks_tab:
-    st.markdown(SUPPORTED_BANKS)
+faq_tab, banks_tab, contact_tab = st.tabs(["FAQ", "Supported banks", "Contact"])
 
 with faq_tab:
     st.markdown(
@@ -57,6 +54,9 @@ with faq_tab:
     - Redact any sensitive information in transactions e.g. card numbers, names etc.
     """
     )
+
+with banks_tab:
+    st.markdown(SUPPORTED_BANKS)
 
 with contact_tab:
     st.markdown(
