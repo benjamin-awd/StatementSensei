@@ -1,8 +1,8 @@
 FROM python:3.12-slim-trixie AS builder
 
-# build dependencies for pdftotext
+# build dependencies for pdftotext, plus git for the pybadges git dependency
 RUN apt-get update && \
-    apt-get -y install --no-install-recommends build-essential libpoppler-cpp-dev pkg-config && \
+    apt-get -y install --no-install-recommends build-essential libpoppler-cpp-dev pkg-config git ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=ghcr.io/astral-sh/uv:0.10.12 /uv /bin/uv
