@@ -1,9 +1,6 @@
 name: docker-latest
 
-# The Dockerfile resolves dependencies at build time, so `latest` goes stale
-# until the next release. This rebuilds it whenever something the image is
-# built from changes on main, e.g. a merged monopoly-core bump. Release tags
-# are pushed by publish.yml and left untouched.
+# Rebuilds latest when the image's inputs change on main; release tags come from publish.yml.
 on:
   push:
     branches:
