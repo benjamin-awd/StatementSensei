@@ -10,17 +10,19 @@ from webapp.constants import SUPPORTED_BANKS
 st.markdown("# About")
 
 
-def badge_link(label: str, ver: str, url: str) -> str:
+def badge_link(label: str, ver: str, url: str, color: str) -> str:
     """Render a linked badge; the alt text carries the version, which the smoke test reads."""
-    svg = pybadges.badge(left_text=label, right_text=f"v{ver}", left_color="#555", right_color="#007ec6")
+    svg = pybadges.badge(left_text=label, right_text=f"v{ver}", left_color="#555", right_color=color)
     uri = f"data:image/svg+xml;base64,{base64.b64encode(svg.encode()).decode()}"
     return f"[![{label} v{ver}]({uri})]({url})"
 
 
 st.markdown(
-    badge_link("StatementSensei", version("statement_sensei"), "https://github.com/benjamin-awd/statementsensei")
-    + " "
-    + badge_link("monopoly", version("monopoly-core"), "https://github.com/benjamin-awd/monopoly")
+    badge_link(
+        "StatementSensei", version("statement_sensei"), "https://github.com/benjamin-awd/statementsensei", "#2ea44f"
+    )
+    + "&nbsp;&nbsp;&nbsp;"
+    + badge_link("monopoly", version("monopoly-core"), "https://github.com/benjamin-awd/monopoly", "#007ec6")
 )
 
 faq_tab, banks_tab, contact_tab = st.tabs(["FAQ", "Supported banks", "Contact"])
