@@ -12,10 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # refresh the package index first; the runner image's copy can point at
+      # versions the mirror no longer serves
       - name: Install pdftotext
-        uses: daaku/gh-action-apt-install@v4
-        with:
-          packages: build-essential libpoppler-cpp-dev pkg-config
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libpoppler-cpp-dev pkg-config
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
