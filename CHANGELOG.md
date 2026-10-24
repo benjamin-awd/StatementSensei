@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.7](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.6...v0.10.7) (2026-10-24)
+
+
+### Bug Fixes
+
+* **tauri:** move to stable tauri 2 to resolve mismatched tauri-utils in lockfile ([a9b8777](https://github.com/benjamin-awd/StatementSensei/commit/a9b87772ae4eab5438012c9ffa45af4ef0149193))
+* **tauri:** pin tauri-runtime to 2.9.2 to match tauri-runtime-wry 2.9.3 ([cb185fc](https://github.com/benjamin-awd/StatementSensei/commit/cb185fcb17e8b253dea547cb5fc66f36f3f3b88f))
+* **tauri:** use core: prefix for Tauri 2 capability permissions ([e6d8b85](https://github.com/benjamin-awd/StatementSensei/commit/e6d8b8557dcb912033df61784fb4d8062cfadb3c))
+
+
+### Build System
+
+* **deps:** bump the cargo group across 1 directory with 10 updates ([be2302e](https://github.com/benjamin-awd/StatementSensei/commit/be2302e4eda7dee2764708ab0a4086086d8fd7ea))
+* **deps:** bump the npm_and_yarn group across 1 directory with 7 updates ([de63c41](https://github.com/benjamin-awd/StatementSensei/commit/de63c41c5c3aba091bfaa45c4b120b4640e32118))
+* **deps:** update dependency monopoly-core to v0.23.4 ([524b814](https://github.com/benjamin-awd/StatementSensei/commit/524b814aad86e65e551ecde27905e7c2974060ba))
+
 ## [0.10.6](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.5...v0.10.6) (2026-09-24)
 
 
