@@ -8,8 +8,11 @@ on:
     paths:
       - Dockerfile
       - pyproject.toml
+      - requirements.txt
       - README.md
       - entrypoint.py
+      - tesseract.cfg
+      - .streamlit/**
       - webapp/**
       - .github/workflows/docker-latest.yml
   workflow_dispatch:

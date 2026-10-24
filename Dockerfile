@@ -1,32 +1,48 @@
-FROM python:3.12-slim AS base
+FROM python:3.12-slim-trixie AS builder
 
-# Install system dependencies for pdftotext
+# build dependencies for pdftotext
 RUN apt-get update && \
-    apt-get -y install build-essential libpoppler-cpp-dev pkg-config ocrmypdf \
-    # uv build dependencies
-    curl git
+    apt-get -y install --no-install-recommends build-essential libpoppler-cpp-dev pkg-config && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install uv (official binary)
-# Download the latest installer
-ADD https://astral.sh/uv/0.7.8/install.sh /uv-installer.sh
-
-# Run the installer then remove it
-RUN sh /uv-installer.sh && rm /uv-installer.sh
-
-# Ensure the installed binary is on the `PATH`
-ENV PATH="/root/.local/bin/:$PATH"
+COPY --from=ghcr.io/astral-sh/uv:0.10.12 /uv /bin/uv
 
 ENV UV_CACHE_DIR=/tmp/uv-cache \
-    PYTHONUNBUFFERED=1 \
-    PATH="/root/.cargo/bin:$PATH"
+    UV_PYTHON=/opt/venv/bin/python
 
 WORKDIR /app
 
-COPY pyproject.toml README.md entrypoint.py ./
+# requirements.txt pins every dependency; install those first so the layer is
+# reused when only the app code changes, then install the app itself
+COPY requirements.txt ./
+RUN --mount=type=cache,target=$UV_CACHE_DIR \
+    uv venv /opt/venv && \
+    grep -vx '\.' requirements.txt > /tmp/deps.txt && \
+    uv pip install -r /tmp/deps.txt
+
+COPY pyproject.toml README.md ./
+COPY webapp/ ./webapp
+RUN --mount=type=cache,target=$UV_CACHE_DIR \
+    uv pip install --no-deps .
+
+
+FROM python:3.12-slim-trixie
+
+# runtime libraries for pdftotext and ocrmypdf
+RUN apt-get update && \
+    apt-get -y install --no-install-recommends libpoppler-cpp2 tesseract-ocr ghostscript && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/opt/venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY --from=builder /opt/venv /opt/venv
+COPY .streamlit/ ./.streamlit
+COPY entrypoint.py tesseract.cfg ./
 COPY webapp/ ./webapp
 
-# Install Python dependencies
-RUN --mount=type=cache,target=$UV_CACHE_DIR \
-uv venv && uv sync --all-extras --group build
+EXPOSE 8501
 
-CMD ["uv", "run", "entrypoint.py"]
+CMD ["python", "entrypoint.py"]
