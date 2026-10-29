@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.10.10](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.9...v0.10.10) (2026-10-29)
+
+
+### Bug Fixes
+
+* **webapp:** drop custom theme so the light/dark switcher is available ([aed5d28](https://github.com/benjamin-awd/StatementSensei/commit/aed5d28def40df289bb73db7ebdbde23bc621ed0))
+
+
+### Build System
+
+* **deps:** update dependency monopoly-core to v0.23.5 ([85c11f6](https://github.com/benjamin-awd/StatementSensei/commit/85c11f635bc718a008ab6bc9009146e9876afbd2))
+* require Python 3.11 or newer ([d961b5f](https://github.com/benjamin-awd/StatementSensei/commit/d961b5f404c43ea2c20e887624178ce6d815796e))
+
 ## [0.10.9](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.8...v0.10.9) (2026-10-24)
 
 
