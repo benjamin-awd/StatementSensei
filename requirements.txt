@@ -39,7 +39,7 @@ filetype==1.2.0
     # via pybadges
 flatbuffers==25.12.19
     # via onnxruntime
-fonttools==4.67.0
+fonttools==4.68.0
     # via fpdf2
 fpdf2==2.8.9
     # via ocrmypdf
@@ -72,9 +72,9 @@ markupsafe==3.0.4
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-monopoly-core==0.23.4
+monopoly-core==0.23.5
     # via statement-sensei
-narwhals==2.27.1
+narwhals==2.28.0
     # via
     #   altair
     #   plotly
@@ -98,7 +98,7 @@ numpy==2.5.4 ; python_full_version >= '3.12'
     #   streamlit
 ocrmypdf==17.10.0
     # via statement-sensei
-onnxruntime==1.31.0
+onnxruntime==1.31.1
     # via pymupdf
 packaging==26.3
     # via
@@ -157,7 +157,7 @@ pydantic==2.14.1
     #   pydantic-settings
 pydantic-core==2.50.1
     # via pydantic
-pydantic-settings==2.16.1
+pydantic-settings==2.16.2
     # via
     #   monopoly-core
     #   statement-sensei
@@ -177,7 +177,7 @@ pymupdf4llm==2.0
     # via pymupdf
 pypdfium2==5.14.0
     # via ocrmypdf
-pytest==9.1.1
+pytest==9.2.0
 python-dateutil==3.0.0
     # via
     #   dateparser
@@ -208,7 +208,7 @@ rpds-py==2026.9.1
     #   referencing
 six==1.17.0
     # via python-dateutil
-starlette==1.9.0
+starlette==1.10.0
     # via streamlit
 streamlit==1.66.1
     # via statement-sensei
@@ -236,7 +236,7 @@ typing-inspection==0.4.4
     # via
     #   pydantic
     #   pydantic-settings
-tzdata==2026.5
+tzdata==2026.6
     # via
     #   pandas
     #   python-dateutil
