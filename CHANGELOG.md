@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.11](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.10...v0.10.11) (2026-11-02)
+
+
+### Build System
+
+* **deps:** update dependency monopoly-core to v0.23.6 ([6e49f0d](https://github.com/benjamin-awd/StatementSensei/commit/6e49f0dcf8b48cf55784bb0302f361ff982befe1))
+
 ## [0.10.10](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.9...v0.10.10) (2026-10-29)
 
 
