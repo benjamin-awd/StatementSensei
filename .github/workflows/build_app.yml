@@ -68,7 +68,7 @@ jobs:
 
       - name: Setup brew (mac)
         if: matrix.os-target.os == 'macos-latest'
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
 
       - name: Install pdftotext dependencies (mac)
         if: matrix.os-target.os == 'macos-latest'
