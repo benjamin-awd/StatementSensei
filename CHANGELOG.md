@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.12](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.11...v0.10.12) (2026-11-03)
+
+
+### Build System
+
+* **deps:** bump rustls ([c3dd460](https://github.com/benjamin-awd/StatementSensei/commit/c3dd460e054ac0ac48b97a199ff3302adcc78be7))
+
 ## [0.10.11](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.10...v0.10.11) (2026-11-02)
 
 
