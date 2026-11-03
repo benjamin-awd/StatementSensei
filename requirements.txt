@@ -165,14 +165,20 @@ pygments==2.21.0
     # via
     #   pytest
     #   rich
-pymupdf==2.0
+pymupdf==2.1
     # via
     #   monopoly-core
+    #   pymupdf-layout
+    #   pymupdf4llm
     #   statement-sensei
-pymupdf-layout==2.0
-    # via pymupdf
-pymupdf4llm==2.0
-    # via pymupdf
+pymupdf-layout==2.1
+    # via
+    #   pymupdf
+    #   pymupdf4llm
+pymupdf4llm==2.1
+    # via
+    #   pymupdf
+    #   pymupdf-layout
 pypdfium2==5.14.0
     # via ocrmypdf
 pytest==9.2.0
