@@ -121,7 +121,7 @@ pikepdf==10.17.0
     # via
     #   img2pdf
     #   ocrmypdf
-pillow==11.3.0
+pillow==13.0.0
     # via
     #   fpdf2
     #   img2pdf
