@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.12](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.11...v0.10.12) (2026-11-14)
+
+
+### Build System
+
+* **deps:** bump rustls ([c3dd460](https://github.com/benjamin-awd/StatementSensei/commit/c3dd460e054ac0ac48b97a199ff3302adcc78be7))
+* **deps:** update dependency monopoly-core to v0.23.7 ([1eea3db](https://github.com/benjamin-awd/StatementSensei/commit/1eea3db949d2dd368d473776ea6e1ca38b4f193b))
+
 ## [0.10.11](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.10...v0.10.11) (2026-11-02)
 
 
