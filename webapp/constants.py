@@ -16,6 +16,7 @@ SUPPORTED_BANKS = """Supported banks:
 | Chase                                  | ✅                 | ❌                   |
 | Citibank                               | ✅                 | ❌                   |
 | DBS/POSB                               | ✅                 | ✅                   |
+| HDFC Bank (India)                      | ✅                 | ❌                   |
 | HSBC                                   | ✅                 | ❌                   |
 | Maybank                                | ✅                 | ✅                   |
 | OCBC                                   | ✅                 | ✅                   |
