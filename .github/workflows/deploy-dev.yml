@@ -44,7 +44,16 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
 
+      # DEV_FORK_DEPLOY_KEY is the private half of a write-enabled deploy key on the dev fork
       - name: Push to the dev fork
         env:
-          TOKEN: ${{ secrets.DEV_FORK_TOKEN }}
-        run: git push --force "https://x-access-token:${TOKEN}@github.com/${DEV_REPO}" HEAD:refs/heads/main
+          DEPLOY_KEY: ${{ secrets.DEV_FORK_DEPLOY_KEY }}
+        run: |
+          key="$RUNNER_TEMP/dev_deploy_key"
+          printf '%s\n' "$DEPLOY_KEY" > "$key"
+          chmod 600 "$key"
+          # GitHub's published ed25519 host key
+          echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > "$RUNNER_TEMP/known_hosts"
+          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o UserKnownHostsFile=$RUNNER_TEMP/known_hosts"
+          git push --force "git@github.com:${DEV_REPO}.git" HEAD:refs/heads/main
+          rm -f "$key"
