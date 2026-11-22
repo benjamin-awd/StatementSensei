@@ -3,7 +3,6 @@ from PyInstaller.utils.hooks import collect_submodules
 
 hiddenimports = []
 hiddenimports += collect_submodules("webapp")
-hiddenimports += collect_submodules("pybadges")
 
 a = Analysis(
     ['entrypoint.py'],
