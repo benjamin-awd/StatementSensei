@@ -12,7 +12,7 @@ attrs==26.1.0
     # via
     #   jsonschema
     #   referencing
-certifi==2026.10.23
+certifi==2026.11.20
     # via requests
 cffi==2.1.1 ; platform_python_implementation != 'PyPy'
     # via cryptography
@@ -31,12 +31,14 @@ colorama==0.4.6 ; sys_platform == 'win32'
     #   tqdm
 cryptography==50.0.2
     # via pdfminer-six
-dateparser==1.5.0
+dateparser==1.5.1
     # via monopoly-core
 flatbuffers==25.12.19
     # via onnxruntime
 fonttools==4.68.0
-    # via fpdf2
+    # via
+    #   fpdf2
+    #   pikepdf
 fpdf2==2.9.0
     # via ocrmypdf
 h11==0.16.0
@@ -56,7 +58,9 @@ jinja2==3.1.6
     #   altair
     #   pydeck
 jsonschema==4.26.0
-    # via altair
+    # via
+    #   altair
+    #   pikepdf
 jsonschema-specifications==2025.9.1
     # via jsonschema
 lxml==6.1.3
@@ -69,7 +73,7 @@ mdurl==0.1.2
     # via markdown-it-py
 monopoly-core==0.23.7
     # via statement-sensei
-narwhals==2.28.0
+narwhals==2.29.0
     # via
     #   altair
     #   plotly
@@ -84,14 +88,14 @@ numpy==2.4.6 ; python_full_version < '3.12'
     #   pydeck
     #   pymupdf
     #   streamlit
-numpy==2.5.4 ; python_full_version >= '3.12'
+numpy==2.5.5 ; python_full_version >= '3.12'
     # via
     #   onnxruntime
     #   pandas
     #   pydeck
     #   pymupdf
     #   streamlit
-ocrmypdf==17.10.0
+ocrmypdf==17.14.2
     # via statement-sensei
 onnxruntime==1.32.0
     # via pymupdf
@@ -112,18 +116,15 @@ pdftotext==4.0.0
     # via
     #   monopoly-core
     #   statement-sensei
-pi-heif==1.4.0
-    # via ocrmypdf
-pikepdf==10.18.1
+pikepdf==10.18.2
     # via
     #   img2pdf
     #   ocrmypdf
-pillow==11.3.0
+pillow==13.0.0
     # via
     #   fpdf2
     #   img2pdf
     #   ocrmypdf
-    #   pi-heif
     #   pikepdf
     #   streamlit
 plotly==7.1.0
@@ -142,12 +143,12 @@ pyarrow==26.0.1
     # via streamlit
 pycparser==3.12 ; implementation_name != 'PyPy' and platform_python_implementation != 'PyPy'
     # via cffi
-pydantic==2.14.3
+pydantic==2.14.4
     # via
     #   monopoly-core
     #   ocrmypdf
     #   pydantic-settings
-pydantic-core==2.50.4
+pydantic-core==2.50.5
     # via pydantic
 pydantic-settings==2.16.3
     # via
@@ -182,17 +183,18 @@ python-dateutil==4.0.0
     #   pandas
 python-dotenv==1.2.4
     # via pydantic-settings
-python-multipart==0.0.33
+python-multipart==0.0.34
     # via streamlit
 pytz==2026.6
     # via dateparser
-pyyaml==6.0.3
+pyyaml==6.0.4
     # via pymupdf
 referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-regex==2026.11.9
+    #   pikepdf
+regex==2026.11.19
     # via dateparser
 requests==2.34.2
     # via streamlit
@@ -243,7 +245,7 @@ urllib3==2.8.0
     # via requests
 uvicorn==0.54.0
     # via streamlit
-watchdog==7.1.0 ; sys_platform != 'darwin'
+watchdog==7.1.1 ; sys_platform != 'darwin'
     # via streamlit
 websockets==17.4
     # via streamlit
