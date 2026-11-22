@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: dev
-      url: https://statementsensei-n268acwunugqx5gguyw6d8.streamlit.app/
+      url: https://statementsensei-dev.streamlit.app/
     steps:
       # the default pull_request ref is the PR already merged into main
       - name: Checkout
