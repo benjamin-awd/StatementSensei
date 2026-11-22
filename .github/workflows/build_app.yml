@@ -166,6 +166,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ./artifacts
+          pattern: statementsensei-*
           merge-multiple: true
 
       - name: Attach the bundles to the GitHub release
