@@ -1,0 +1,50 @@
+name: deploy-dev
+
+# Deploy every PR to the dev Streamlit app before it merges.
+# The dev app serves main of the benjaminawd-dev fork, so this rebuilds that branch as
+# (this PR merged into main) + dev-notes (DEV.md) and force-pushes it there.
+# Only one PR can be live at a time: the most recent push wins.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DEV_REPO: benjaminawd-dev/StatementSensei
+
+jobs:
+  deploy:
+    # PRs from outside forks can't read secrets; drafts aren't ready to show
+    if: github.event.pull_request.head.repo.full_name == github.repository && !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: https://statementsensei-n268acwunugqx5gguyw6d8.streamlit.app/
+    steps:
+      # the default pull_request ref is the PR already merged into main
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Add DEV.md from dev-notes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch "https://github.com/${DEV_REPO}" dev-notes
+          git merge --no-edit -m "Deploy #${PR_NUMBER} to dev" FETCH_HEAD
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+
+      - name: Push to the dev fork
+        env:
+          TOKEN: ${{ secrets.DEV_FORK_TOKEN }}
+        run: git push --force "https://x-access-token:${TOKEN}@github.com/${DEV_REPO}" HEAD:refs/heads/main
