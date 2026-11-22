@@ -33,8 +33,6 @@ cryptography==50.0.2
     # via pdfminer-six
 dateparser==1.5.0
     # via monopoly-core
-filetype==1.2.0
-    # via pybadges
 flatbuffers==25.12.19
     # via onnxruntime
 fonttools==4.68.0
@@ -56,7 +54,6 @@ itsdangerous==2.2.0
 jinja2==3.1.6
     # via
     #   altair
-    #   pybadges
     #   pydeck
 jsonschema==4.26.0
     # via altair
@@ -128,7 +125,6 @@ pillow==11.3.0
     #   ocrmypdf
     #   pi-heif
     #   pikepdf
-    #   pybadges
     #   streamlit
 plotly==7.1.0
     # via statement-sensei
@@ -144,8 +140,6 @@ psutil==7.2.2
     # via pymupdf
 pyarrow==26.0.1
     # via streamlit
-pybadges @ git+https://github.com/benjamin-awd/pybadges@3e58b80763b9b2b3945962f7a3884921b37be4d8
-    # via statement-sensei
 pycparser==3.12 ; implementation_name != 'PyPy' and platform_python_implementation != 'PyPy'
     # via cffi
 pydantic==2.14.3
@@ -201,9 +195,7 @@ referencing==0.37.0
 regex==2026.11.9
     # via dateparser
 requests==2.34.2
-    # via
-    #   pybadges
-    #   streamlit
+    # via streamlit
 rich==15.0.0
     # via ocrmypdf
 rpds-py==2026.9.1

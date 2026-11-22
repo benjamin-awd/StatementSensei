@@ -1,8 +1,8 @@
 # pylint: disable=line-too-long
 import base64
+from html import escape
 from importlib.metadata import version
 
-import pybadges
 import streamlit as st
 
 from webapp.constants import SUPPORTED_BANKS
@@ -10,9 +10,29 @@ from webapp.constants import SUPPORTED_BANKS
 st.markdown("# About")
 
 
+def _text_width(text: str) -> int:
+    # rough Verdana 11px advance; textLength below stretches the glyphs to fit exactly
+    return round(sum(4.0 if c in "ilj.:,;|!'" else 7.5 if c.isupper() or c in "mw" else 6.5 for c in text)) + 10
+
+
+def badge_svg(left: str, right: str, left_color: str, right_color: str) -> str:
+    """Flat two-part badge in the shields.io style."""
+    lw, rw = _text_width(left), _text_width(right)
+    w = lw + rw
+    left, right = escape(left), escape(right)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="20" role="img" aria-label="{left}: {right}">
+<linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
+<clipPath id="r"><rect width="{w}" height="20" rx="3" fill="#fff"/></clipPath>
+<g clip-path="url(#r)"><rect width="{lw}" height="20" fill="{left_color}"/><rect x="{lw}" width="{rw}" height="20" fill="{right_color}"/><rect width="{w}" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="{lw / 2}" y="15" fill="#010101" fill-opacity=".3" textLength="{lw - 10}">{left}</text><text x="{lw / 2}" y="14" textLength="{lw - 10}">{left}</text>
+<text x="{lw + rw / 2}" y="15" fill="#010101" fill-opacity=".3" textLength="{rw - 10}">{right}</text><text x="{lw + rw / 2}" y="14" textLength="{rw - 10}">{right}</text>
+</g></svg>"""
+
+
 def badge_link(label: str, ver: str, url: str, color: str) -> str:
     """Render a linked badge; the alt text carries the version, which the smoke test reads."""
-    svg = pybadges.badge(left_text=label, right_text=f"v{ver}", left_color="#555", right_color=color)
+    svg = badge_svg(label, f"v{ver}", "#555", color)
     uri = f"data:image/svg+xml;base64,{base64.b64encode(svg.encode()).decode()}"
     return f"[![{label} v{ver}]({uri})]({url})"
 
