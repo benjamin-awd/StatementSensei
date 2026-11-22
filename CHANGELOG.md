@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.13](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.12...v0.10.13) (2026-11-22)
+
+
+### Bug Fixes
+
+* replace pybadges with inline SVG badges ([1a399f0](https://github.com/benjamin-awd/StatementSensei/commit/1a399f0dd2e82512567a7e596aa1fe58a3cad795))
+
 ## [0.10.12](https://github.com/benjamin-awd/StatementSensei/compare/v0.10.11...v0.10.12) (2026-11-14)
 
 
